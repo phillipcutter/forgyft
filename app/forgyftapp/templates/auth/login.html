@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+	<h1>Login</h1>
+
+	<div class="ui two column middle aligned very relaxed stackable grid">
+		<div class="column">
+			{% url 'login' as url %}
+			{% include "form_template.html" with action=url action_text="Login" omit_end=True %}
+			<a class="ui blue basic button" href="{% url "forgyftapp:reset" %}">
+				<i class="icon redo alternate"></i>
+				Reset Password
+			</a>
+				</div>
+			</form>
+		</div>
+		<div class="divider-column">
+			<div class="ui vertical divider">
+				Or
+			</div>
+		</div>
+		<div class="center aligned column">
+			{% include "auth/social_template.html" with next=next %}
+		</div>
+	</div>
+{% endblock %}
