@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+
+	<link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/semantic.min.css" %}">
+	<link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/menu.min.css" %}">
+	<link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/container.min.css" %}">
+	{#	<link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/search.min.css" %}">#}
+	<link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/header.min.css" %}">
+	{#	<link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/site.min.css" %}">#}
+	<link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/form.min.css" %}">
+	<link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/grid.min.css" %}">
+{#	<link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/image.min.css" %}">#}
+	{#	<script src="{% load static %}{% static "semantic/components/search.min.js" %}"></script>#}
+	<script src="{% load static %}{% static "jquery-3.2.1.min.js" %}"></script>
+
+
+	<style type="text/css">
+		html, body {
+			height: auto;
+		}
+
+		.main.container {
+			margin-top: 7em;
+		}
+
+		.divider-column {
+			position: relative;
+			padding: 0 !important;
+		}
+
+		.icon.delete {
+			padding: 9px !important;
+		}
+	</style>
+
+	{% block extra_dependencies %}
+
+	{% endblock %}
+</head>
+<body>
+{% block navbar %}
+	<div class="ui fixed top menu">
+		<div class="ui container">
+			<a class="item" href="/"><b>Forgyft</b></a>
+			<a class="item" href="">----</a>
+			<a class="item" href="">----</a>
+			<a class="item">...</a>
+			<div class="right menu">
+				{% if not request.user.is_authenticated %}
+					<a class="item" href="{% url "forgyftapp:signup" %}">
+						{#				<div class="ui primary button">Sign Up</div>#}
+						Sign up
+					</a>
+					<a class="item" href="{% url "forgyftapp:login" %}">
+						{#				<div class="ui primary button">Sign Up</div>#}
+						Login
+					</a>
+				{% else %}
+					<div class="ui simple dropdown item">
+						{{ request.user.email }}
+						<i class="dropdown icon"></i>
+						<div class="menu">
+							<a class="item" href="{% url "forgyftapp:logout" %}">Sign out</a>
+							<a class="item" href="">Profile</a>
+							<a class="item" href="">Settings</a>
+						</div>
+					</div>
+				{% endif %}
+				<div class="ui right aligned category search item">
+					<div class="ui transparent icon input">
+						<input class="prompt" type="text" placeholder="Search products...">
+						<i class="search link icon"></i>
+					</div>
+					<div class="results"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+<div class="ui main container">
+	{% block content %}
+	{% endblock %}
+</div>
+<script>
+	$(document).ready(function () {
+		$('.ui.dropdown').dropdown();
+		{#		dropdown({#}
+		{#			onChange: function (value) {#}
+		{#				var target = $(this).dropdown();#}
+		{#				if (value) {#}
+		{#					target#}
+		{#						.find('.dropdown.icon')#}
+		{#						.removeClass('dropdown')#}
+		{#						.addClass('delete')#}
+		{#						.on('click', function () {#}
+		{#							target.dropdown('clear');#}
+		{#							$(this).removeClass('delete').addClass('dropdown');#}
+		{#							return false;#}
+		{#						});#}
+		{#				}#}
+		{#			}#}
+		{#		});#}
+		$('.ui.checkbox')
+			.checkbox()
+		;
+	});
+</script>
+<script src="{% load static %}{% static "semantic/semantic.min.js" %}"></script>
+<script src="{% load static %}{% static "semantic/components/site.min.js" %}"></script>
+<script src="{% load static %}{% static "semantic/components/form.min.js" %}"></script>
+{% block extra_js_dependencies %}
+{% endblock %}
+</body>
+</html>
