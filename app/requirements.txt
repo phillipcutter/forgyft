@@ -1,3 +1,0 @@
-Django==2.1.2
-social-auth-app-django==2.1.0
-django-anymail==4.3

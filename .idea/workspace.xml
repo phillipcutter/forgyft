@@ -108,8 +108,8 @@
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="673">
-              <caret line="107" column="9" selection-start-line="107" selection-start-column="9" selection-end-line="107" selection-end-column="9" />
+            <state relative-caret-position="268">
+              <caret line="104" column="6" lean-forward="true" selection-start-line="104" selection-start-column="6" selection-end-line="104" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -175,6 +175,7 @@
       <find>password_reset_done</find>
       <find>postgres</find>
       <find>postg</find>
+      <find>ide</find>
     </findStrings>
     <replaceStrings>
       <replace>forgyftapp</replace>
@@ -315,7 +316,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="4" y="22" width="1916" height="1178" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="11" />
       <window_info anchor="bottom" id="Event Log" order="0" side_tool="true" />
@@ -679,6 +679,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="das://68407f48-7aad-4a38-9a6e-e3834e1cfa5a/schema/main/table/forgyftapp_user">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/forgyftapp/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
@@ -690,17 +697,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://68407f48-7aad-4a38-9a6e-e3834e1cfa5a/schema/main/table/forgyftapp_user">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="673">
-          <caret line="107" column="9" selection-start-line="107" selection-start-column="9" selection-end-line="107" selection-end-column="9" />
+        <state relative-caret-position="268">
+          <caret line="104" column="6" lean-forward="true" selection-start-line="104" selection-start-column="6" selection-end-line="104" selection-end-column="6" />
         </state>
       </provider>
     </entry>
