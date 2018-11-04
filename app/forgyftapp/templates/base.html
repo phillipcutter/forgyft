@@ -14,7 +14,7 @@
 	<link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/grid.min.css" %}">
 {#	<link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/image.min.css" %}">#}
 	{#	<script src="{% load static %}{% static "semantic/components/search.min.js" %}"></script>#}
-	<script src="{% load static %}{% static "jquery-3.2.1.min.js" %}"></script>
+	<script src="{% load static %}{% static "jquery-3.3.1.min.js" %}"></script>
 
 
 	<style type="text/css">
@@ -45,7 +45,7 @@
 	<div class="ui fixed top menu">
 		<div class="ui container">
 			<a class="item" href="/"><b>Forgyft</b></a>
-			<a class="item" href="">----</a>
+			{% if user.is_staff %}<a class="item" href="{% url "forgyftapp:fulfill" %}">Fulfill Gift Requests</a>{% endif %}
 			<a class="item" href="">----</a>
 			<a class="item">...</a>
 			<div class="right menu">

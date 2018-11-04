@@ -23,10 +23,11 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = '***REMOVED***'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG", False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
+AWS_PRELOAD_METADATA = True
 
 # Application definition
 
@@ -36,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'collectfast',
     'django.contrib.staticfiles',
     'forgyftapp',
     'social_django',
@@ -43,15 +45,12 @@ INSTALLED_APPS = [
 ]
 
 ANYMAIL = {
-    "***REMOVED***",
-    "MAILGUN_SENDER_DOMAIN": "forgyft.mrfleap.com"
+    "MAILGUN_API_KEY": os.getenv("MAILGUN_API_KEY"),
+    "MAILGUN_SENDER_DOMAIN": "forgyft.com"
 }
 
 EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
 DEFAULT_FROM_EMAIL = "forgyft@mrfleap.com"
-
-# Use if using postgresql V
-# SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -87,13 +86,37 @@ WSGI_APPLICATION = 'forgyft.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
+    COLLECTFAST_ENABLED = False
+else:
+    # DATABASES = {
+    #     'default': {
+    #         'ENGINE': 'django.db.backends.postgresql',
+    #         'NAME': os.getenv("DB_NAME"),
+    #         'USER': os.getenv("DB_USER"),
+    #         'PASSWORD': os.getenv("DB_PASSWORD"),
+    #         'HOST': os.getenv("DB_HOST"),
+    #         'PORT': os.getenv("DB_PORT", 5432)
+    #     }
+    # }
 
+    DATABASES = {  # Docker-compose configuration
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': "postgres",
+            'USER': "postgres",
+            'HOST': "db",
+            'PORT': 5432
+        }
+    }
+
+    SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -145,3 +168,23 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+
+AWS_STORAGE_BUCKET_NAME = 'forgyft-media'
+AWS_S3_REGION_NAME = 'us-west-2'  # e.g. us-east-2
+AWS_AUTO_CREATE_BUCKET = True
+AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
+
+# Tell django-storages the domain to use to refer to static files.
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+if not DEBUG:
+    STATICFILES_STORAGE = 'forgyft.custom_storages.StaticStorage'
+
+if DEBUG:
+    MEDIAFILES_LOCATION = "media-debug"
+    STATICFILES_LOCATION = "static-debug"
+else:
+    MEDIAFILES_LOCATION = "media"
+    STATICFILES_LOCATION = "static"
+DEFAULT_FILE_STORAGE = "forgyft.custom_storages.MediaStorage"

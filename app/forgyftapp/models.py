@@ -7,6 +7,7 @@ from django.db.models import Model
 from django.dispatch import receiver
 from django.http import Http404
 
+from forgyftapp.messaging import broadcast_to_slack
 from forgyftapp.py_utils import django_utils
 
 
@@ -58,12 +59,17 @@ class User(AbstractUser, Slug):
 		self.paypal_email = self.email
 		self.save()
 
-class GifteeProfile(models.Model):
+class GifteeProfile(models.Model, OnCreate):
 	interests = models.TextField()
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	fulfilled = models.BooleanField(default=False)
 
 	def __str__(self):
 		return f"Giftee Profile {self.pk}: {self.interests}"
+
+	def onCreate(self):
+		super().onCreate()
+		broadcast_to_slack(f"Hey <!channel>, there was a new gift request created by {str(self.user)}. Login to the website to give gift suggestions.")
 
 @receiver(models.signals.post_save)
 def execute_after_save(sender, instance, created, *args, **kwargs):

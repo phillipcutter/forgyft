@@ -1,0 +1,44 @@
+version: '3.6'
+
+services:
+  web:
+    environment:
+      - VIRTUAL_HOST=www.esprza.com
+      - LETSENCRYPT_HOST=www.esprza.com
+      - LETSENCRYPT_EMAIL=mrfleap@gmail.com
+      - DJANGO_SSL=0
+
+
+  nginx-proxy:
+    restart: always
+#    image: jwilder/nginx-proxy
+    build:
+      context: ./
+      dockerfile: nginx-proxy.Dockerfile
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - certs:/etc/nginx/certs:ro
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+  letsencrypt:
+    restart: always
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    volumes:
+      - vhost:/etc/nginx/vhost.d:rw
+      - html:/usr/share/nginx/html:rw
+      - certs:/etc/nginx/certs:rw
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+
+
+volumes:
+  conf:
+  vhost:
+  html:
+  certs:

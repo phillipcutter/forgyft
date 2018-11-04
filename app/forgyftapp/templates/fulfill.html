@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+	<div class="ui three column center stackable grid">
+		<div class="three wide column"></div>
+		<div class="ten wide column">
+			<p style="text-align: center; padding-bottom: 4px; font-size: 16px">Fulfill Gift Ideas</p>
+			<div>
+				<div style="margin-left:auto;margin-right:auto;">
+					<div class="ui two cards">
+						{% for giftee_profile in giftee_profiles %}
+							<div class="ui fluid card">
+								<div class="content">
+									<div class="header">
+										{{ giftee_profile.user.email }}
+									</div>
+									<div class="meta">
+										{{ giftee_profile.user.full_name }}
+									</div>
+									<div class="description">
+										{{ giftee_profile.interests }}
+									</div>
+								</div>
+								<div class="extra content">
+									<div class="ui two buttons">
+										<a class="ui basic button" href="{% url "forgyftapp:fulfill" profile=giftee_profile.pk %}">Fulfill</a>
+									</div>
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="three wide column"></div>
+	</div>
+
+	<div class="ui hidden divider"></div>
+{% endblock %}
