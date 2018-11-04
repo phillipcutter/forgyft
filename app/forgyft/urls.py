@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path, include
+
+from forgyft import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,3 +27,6 @@ urlpatterns = [
 
     url('', include('social_django.urls', namespace='social'))
 ]
+
+if settings.DEBUG:
+    urlpatterns += staticfiles_urlpatterns()

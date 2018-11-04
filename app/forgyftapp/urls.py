@@ -6,6 +6,8 @@ app_name = "forgyftapp"
 
 urlpatterns = [
 	url(r'^$', basic_views.index, name="index"),
+	url(r'^fulfill/?$', basic_views.fulfill, name='fulfill'),
+	url(r'^fulfill/(?P<profile>[0-9]+)/?$', basic_views.fulfill, name='fulfill'),
 
 	# Auth views
 	url(r'^signup/?$', auth_views.signup, name='signup'),

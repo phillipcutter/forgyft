@@ -1,3 +1,9 @@
 Django==2.1.2
 social-auth-app-django==2.1.0
 django-anymail==4.3
+gunicorn==19.9.0
+psycopg2==2.7.5
+django-storages==1.7.1
+boto3==1.9.37
+collectfast==0.6.2
+requests==2.20.0
