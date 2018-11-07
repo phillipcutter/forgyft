@@ -17,7 +17,7 @@ def index(request):
 	else:
 		form = GifteeProfileForm()
 
-	return render(request, "index.html", {"form": form})
+	return render(request, "cover.html", {"form": form})
 
 @staff_member_required
 def fulfill(request, profile=None):
