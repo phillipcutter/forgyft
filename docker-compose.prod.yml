@@ -3,12 +3,9 @@ version: '3.6'
 services:
   web:
     environment:
-      - VIRTUAL_HOST=www.esprza.com
-      - LETSENCRYPT_HOST=www.esprza.com
-      - LETSENCRYPT_EMAIL=mrfleap@gmail.com
-      - DJANGO_SSL=0
-
-
+      - VIRTUAL_HOST=www.forgyft.com
+      - LETSENCRYPT_HOST=www.forgyft.com
+      - LETSENCRYPT_EMAIL=letsencrypt@forgyft.com
   nginx-proxy:
     restart: always
 #    image: jwilder/nginx-proxy

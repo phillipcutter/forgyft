@@ -8,7 +8,9 @@ from forgyftapp.models import GifteeProfile, User
 
 class GiftIdeaForm(ModelForm):
 
-	pass
+	class Meta:
+		model = GiftIdea
+		fields = ("")
 
 class GifteeProfileForm(ModelForm):
 

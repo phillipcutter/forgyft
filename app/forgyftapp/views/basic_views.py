@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
 # Create your views here.
-from forgyftapp.forms import GifteeProfileForm
+from forgyftapp.forms import GifteeProfileForm, GiftIdeaForm
 from forgyftapp.messaging import broadcast_to_slack
 from forgyftapp.models import GifteeProfile
 
@@ -17,7 +17,7 @@ def index(request):
 	else:
 		form = GifteeProfileForm()
 
-	return render(request, "cover.html", {"form": form})
+	return render(request, "homepage.html", {"form": form})
 
 @staff_member_required
 def fulfill(request, profile=None):

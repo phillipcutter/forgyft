@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd app
 
 # Migrate DB changes
 echo Attempting to migrate DB changes
