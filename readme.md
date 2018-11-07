@@ -7,10 +7,10 @@ Optional environment variables can be passed too:
 - DJANGO_DEBUG : "1"
 
 Example docker run command:
-`docker run -p 80:80 mrfleap/esprza`
+`docker run -p 80:80 forgyft/web`
 
 Example docker build command:
-`docker build -t mrfleap/esprza .`
+`docker build -t forgyft/web .`
 
 
 

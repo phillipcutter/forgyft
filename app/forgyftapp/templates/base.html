@@ -12,137 +12,75 @@
     {#	<link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/site.min.css" %}">#}
     <link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/form.min.css" %}">
     <link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/grid.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% load static %}{% static "stylesheets/default.css" %}">
     {#	<link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/image.min.css" %}">#}
     {#	<script src="{% load static %}{% static "semantic/components/search.min.js" %}"></script>#}
     <script src="{% load static %}{% static "jquery-3.3.1.min.js" %}"></script>
 
-    <meta charset="utf-8"/>
-    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
-    <meta content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=no" name="viewport"/>
-    <meta content="Semantic-UI-Forest, collection of design, themes and templates for Semantic-UI." name="description"/>
-    <meta content="Semantic-UI, Theme, Design, Template" name="keywords"/>
-    <meta content="PPType" name="author"/>
-    <meta content="#ffffff" name="theme-color"/>
-    <title>Semantic-UI-Forest, collection of design, themes and templates for Semantic-UI.</title>
+
+	<meta charset="utf-8"/>
+	<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta content="Semantic-UI-Forest, collection of design, themes and templates for Semantic-UI."
+	      name="description"/>
+	<meta content="Semantic-UI, Theme, Design, Template" name="keywords"/>
+	<meta content="PPType" name="author"/>
+	<meta content="#ffffff" name="theme-color"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Semantic-UI-Forest, collection of design, themes and templates for Semantic-UI.</title>
     {#    <link href="../../static/stylesheets/pandoc-code-highlight.css" rel="stylesheet" type="text/css" />#}
 
-    <style type="text/css">
-        .menu.transition, .dropdown.menu {
-            margin-top: 0 !important;
-        }
-
-        .ui.inverted.vertical.segment {
-            height: 100vh;
-        }
-
-        .ui.inverted.vertical.segment h1.header.item {
-            font-size: 2em;
-        }
-
-        {#.ui.inverted.vertical.segment a.item, div.item {#}
-        {#    font-size: 1.2em;#}
-        {#}#}
-
-        .ui.inverted.vertical.segment .ui.text.container {
-            height: 300px;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            margin: auto;
-        }
-
-        .ui.inverted.vertical.segment .ui.text.container h1.header {
-            font-size: 3em;
-        }
-
-        .ui.inverted.vertical.segment .ui.text.container p {
-            font-size: 1.6em;
-            line-height: 1.6;
-        }
-
-        .ui.inverted.vertical.segment .ui.footer.segment {
-            height: 80px;
-            width: 100%;
-            position: absolute;
-            bottom: 0;
-            font-size: 1.2em;
-            color: gray;
-        }
-
-        .ui.inverted.vertical.segment .ui.footer.segment a {
-            color: white;
-        }
-    </style>
-
-    <style type="text/css">
-        html, body {
-            height: auto;
-        }
-
-        .main.container {
-            margin-top: 7em;
-        }
-
-        .divider-column {
-            position: relative;
-            padding: 0 !important;
-        }
-
-        .icon.delete {
-            padding: 9px !important;
-        }
-    </style>
 
     {% block extra_dependencies %}
 
     {% endblock %}
 </head>
 
-<body>
-<div class="ui inverted vertical center aligned segment">
+<body class="template pushable" style="height: auto">
+{#<div class="ui inverted vertical center aligned segment">#}
 
     {% block navbar %}
-        <div class="ui container">
-            <div class="ui massive borderless inverted menu">
-                <h1 class="header item">
-                    Forgyft
-                </h1>
-                <div class="right item">
-                    <div class="ui massive secondary inverted pointing menu">
-                        {% if user.is_staff %}
-                            <a class="item" href="{% url "forgyftapp:fulfill" %}">Fulfill Gift Requests</a>{% endif %}
-                        <a class="active item" href="/">Home</a>
-                        {% if not request.user.is_authenticated %}
-                            <a class="item" href="{% url "forgyftapp:signup" %}">
-                                {#				<div class="ui primary button">Sign Up</div>#}
-                                Sign up
-                            </a>
-                            <a class="item" href="{% url "forgyftapp:login" %}">
-                                {#				<div class="ui primary button">Sign Up</div>#}
-                                Login
-                            </a>
-                        {% else %}
-                            <div class="ui simple dropdown item">
-                                {{ request.user.email }}
-                                <i class="dropdown icon"></i>
-                                <div class="dropdown menu">
-                                    <a class="item" href="{% url "forgyftapp:logout" %}">Sign out</a>
-                                    <a class="item" href="">Profile</a>
-                                    <a class="item" href="">Settings</a>
-                                </div>
-                            </div>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-        </div>
+	    <div class="ui large top fixed menu">
+		    <div class="ui container">
+			    <a class="active item" href="/">Home</a>
+			    {% if user.is_staff %}
+				    <a class="item" href="{% url "forgyftapp:fulfill" %}">Fulfill</a>
+			    {% endif %}
+			    <a class="item">Request</a>
+			    <a class="item">About Us</a>
+			    <div class="right menu">
+				    {% if not request.user.is_authenticated %}
+					    <div class="item">
+						    <a class="ui primary button" href="{% url "forgyftapp:login" %}">Login</a>
+					    </div>
+					    <div class="item">
+						    <a class="ui primary button" href="{% url "forgyftapp:signup" %}">Sign up</a>
 
+					    </div>
+				    {% else %}
+					    <div class="ui simple dropdown item">
+						    {{ request.user.email }}
+						    <i class="dropdown icon"></i>
+						    <div class="dropdown menu">
+							    <a class="item" href="{% url "forgyftapp:logout" %}">Sign out</a>
+							    <a class="item" href="">Profile</a>
+							    <a class="item" href="">Settings</a>
+						    </div>
+					    </div>
+				    {% endif %}
+			    </div>
+		    </div>
+	    </div>
+	    <!--Sidebar Menu-->
+	    <div class="ui vertical inverted sidebar menu">
+		    <a class="active item">Home</a><a class="item">Work</a><a class="item">Company</a><a
+			    class="item">Careers</a><a
+			    class="item">Login</a><a class="item">Signup</a>
+	    </div>
     {% endblock %}
     {% block content %}
     {% endblock %}
-</div>
+{#</div>#}
 </body>
 <script>
     $(document).ready(function () {
@@ -168,6 +106,13 @@
         ;
     });
 </script>
+
+<style type="text/css">
+	div.ui.main.container {
+		margin-top: 7em;
+	}
+</style>
+
 <script src="{% load static %}{% static "semantic/semantic.min.js" %}"></script>
 <script src="{% load static %}{% static "semantic/components/site.min.js" %}"></script>
 <script src="{% load static %}{% static "semantic/components/form.min.js" %}"></script>

@@ -64,12 +64,20 @@ class GifteeProfile(models.Model, OnCreate):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	fulfilled = models.BooleanField(default=False)
 
+
 	def __str__(self):
 		return f"Giftee Profile {self.pk}: {self.interests}"
 
 	def onCreate(self):
 		super().onCreate()
 		broadcast_to_slack(f"Hey <!channel>, there was a new gift request created by {str(self.user)}. Login to the website to give gift suggestions.")
+
+
+class GiftIdea(models.Model):
+	idea = models.TextField()
+	link = models.URLField()
+	giftee_profile = models.ForeignKey(GifteeProfile, related_name="ideas")
+
 
 @receiver(models.signals.post_save)
 def execute_after_save(sender, instance, created, *args, **kwargs):
