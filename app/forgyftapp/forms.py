@@ -6,6 +6,10 @@ from django import forms
 from forgyftapp.models import GifteeProfile, User
 
 
+class GiftIdeaForm(ModelForm):
+
+	pass
+
 class GifteeProfileForm(ModelForm):
 
 	def save(self, user=None, commit=True):
