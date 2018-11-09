@@ -23,5 +23,7 @@ urlpatterns = [
 	    auth_views.reset_confirm, name='password_reset_confirm'),
 	url(r'^reset/success/$', auth_views.reset_success, name='reset_success'),
 	url(r'^reset/finished/$', auth_views.reset_finished, name='reset_finished'),
+	url(r'list/?$', basic_views.GifteeList.as_view(), name='giftee-list'),
+	url(r'idea/add/?$', basic_views.GiftIdeaCreate.as_view(), name='giftee-add'),
 
 ]
