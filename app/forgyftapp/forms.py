@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import SetPasswordForm
 from django.core.exceptions import ValidationError
-from django.forms import ModelForm
+from django.forms import ModelForm, inlineformset_factory
 from django import forms
 
 from forgyftapp.models import GifteeProfile, User, GiftIdea
@@ -10,7 +10,9 @@ class GiftIdeaForm(ModelForm):
 
 	class Meta:
 		model = GiftIdea
-		fields = ("idea",)
+		fields = ("idea", "link")
+
+GiftIdeaFormSet = inlineformset_factory(GifteeProfile, GiftIdea, form=GiftIdeaForm, extra=1)
 
 class GifteeProfileForm(ModelForm):
 
