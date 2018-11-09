@@ -76,7 +76,7 @@ class GifteeProfile(models.Model, OnCreate):
 class GiftIdea(models.Model):
 	idea = models.TextField()
 	link = models.URLField()
-	giftee_profile = models.ForeignKey(GifteeProfile, related_name="ideas")
+	giftee_profile = models.ForeignKey(GifteeProfile, related_name="ideas", on_delete=models.PROTECT)
 
 
 @receiver(models.signals.post_save)
