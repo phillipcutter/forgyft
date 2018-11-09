@@ -3,14 +3,14 @@ from django.core.exceptions import ValidationError
 from django.forms import ModelForm
 from django import forms
 
-from forgyftapp.models import GifteeProfile, User
+from forgyftapp.models import GifteeProfile, User, GiftIdea
 
 
 class GiftIdeaForm(ModelForm):
 
 	class Meta:
 		model = GiftIdea
-		fields = ("")
+		fields = ("idea",)
 
 class GifteeProfileForm(ModelForm):
 
