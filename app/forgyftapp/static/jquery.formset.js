@@ -49,7 +49,7 @@
                     // last child element of the form's container:
                     row.append('<a class="' + options.deleteCssClass + '" href="javascript:void(0)">' + options.deleteText +'</a>');
                 }
-                row.find('a.' + options.deleteCssClass).click(function() {
+                row.find('a.' + replaceAll(options.deleteCssClass, " ", ".")).click(function() {
                     var row = $(this).parents('.' + options.formCssClass),
                         del = row.find('input:hidden[id $= "-DELETE"]');
                     if (del.length) {
@@ -168,3 +168,7 @@
         removed: null                    // Function called each time a form is deleted
     };
 })(jQuery)
+
+function replaceAll(str, find, replace) {
+	return str.replace(new RegExp(find, 'g'), replace);
+}

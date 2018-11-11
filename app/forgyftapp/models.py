@@ -59,10 +59,53 @@ class User(AbstractUser, Slug):
 		self.paypal_email = self.email
 		self.save()
 
+class gender:
+	MALE = "MALE"
+	FEMALE = "FEMALE"
+	OTHER = "OTHER"
+
+	GENDERS = ["Male", "Female", "Other"]
+	GENDER_CHOICES = ((MALE, "Male"),
+	                  (FEMALE, "Female"),
+	                  (OTHER, "Other"))
+
 class GifteeProfile(models.Model, OnCreate):
-	interests = models.TextField()
+	name = models.TextField(max_length=150)
+	gender = models.CharField(max_length=80, choices=gender.GENDER_CHOICES)
+	age = models.IntegerField()
+	relationship = models.TextField(max_length=6000)
+	price_upper = models.IntegerField()
+	interests = models.TextField(max_length=6000)
+	existing_related_items = models.TextField(max_length=6000)
+	extra_info = models.TextField(max_length=6000)
+
+	published = models.BooleanField(default=False)
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
-	fulfilled = models.BooleanField(default=False)
+
+	@property
+	def status(self):
+		if self.published:
+			return "Your gift ideas are ready, click on the button below to view them."
+		else:
+			return "We're still deciding on the perfect gifts, please check back soon."
+
+	def submit(self):
+		print("SUBMITTING IDEAS")
+		self.published = True
+		self.save()
+
+	def unsubmit(self):
+		print("UNSUBMITTING IDEAS")
+		self.published = False
+		self.save()
+
+	def gender_string(self):
+		choices = {}
+
+		for choice in gender.GENDER_CHOICES:
+			choices[choice[0]] = choice[1]
+
+		return choices.get(self.gender)
 
 
 	def __str__(self):
@@ -75,7 +118,8 @@ class GifteeProfile(models.Model, OnCreate):
 
 class GiftIdea(models.Model):
 	idea = models.TextField()
-	link = models.URLField()
+	link = models.URLField(max_length=600)
+	published = models.BooleanField(default=False)
 	giftee_profile = models.ForeignKey(GifteeProfile, related_name="ideas", on_delete=models.PROTECT)
 
 

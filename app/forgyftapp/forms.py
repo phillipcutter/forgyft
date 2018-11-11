@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 from django.forms import ModelForm, inlineformset_factory
 from django import forms
 
+from forgyftapp import models
 from forgyftapp.models import GifteeProfile, User, GiftIdea
 
 
@@ -10,11 +11,28 @@ class GiftIdeaForm(ModelForm):
 
 	class Meta:
 		model = GiftIdea
-		fields = ("idea", "link")
+		fields = ("idea", "link", "published")
 
 GiftIdeaFormSet = inlineformset_factory(GifteeProfile, GiftIdea, form=GiftIdeaForm, extra=1)
 
 class GifteeProfileForm(ModelForm):
+
+	name = forms.CharField(max_length=150, help_text="What is the receiver's name?", required=True)
+	gender = forms.ChoiceField(choices=models.gender.GENDER_CHOICES, help_text="What is the gender of the receiver?",
+	                           required=True)
+	age = forms.IntegerField(max_value=125, help_text="How old is the receiver of the gift?", required=True)
+	relationship = forms.CharField(help_text="What is your relationship to the receiver, "
+	                                         "please be as specific as possible?", required=True)
+	price_upper = forms.IntegerField(max_value=10000, label="Max Price", help_text="What is the most you are willing to spend on a gift?", min_value=5)
+	interests = forms.CharField(help_text="What are their main interests/hobbies, please be as specific as possible?",
+	                            required=True, widget=forms.TextInput)
+	existing_related_items = forms.CharField(label="Items They Own",
+	                                         help_text="What items do they already have that are"
+	                                                   " related to their main interests/hobbies?")
+	extra_info = forms.CharField(label="Special Information", help_text="Is their any other information you would like "
+	                                                                    "us to know while finding the perfect gift?",
+	                             required=False)
+
 
 	def save(self, user=None, commit=True):
 		if not user:
@@ -27,7 +45,8 @@ class GifteeProfileForm(ModelForm):
 
 	class Meta:
 		model = GifteeProfile
-		fields = ("interests", )
+		fields = ("gender", "age", "relationship", "price_upper",
+		          "interests", "existing_related_items", "extra_info", "name")
 
 
 class LoginForm(ModelForm):

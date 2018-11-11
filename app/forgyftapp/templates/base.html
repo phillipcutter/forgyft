@@ -17,6 +17,9 @@
     {#	<script src="{% load static %}{% static "semantic/components/search.min.js" %}"></script>#}
     <script src="{% load static %}{% static "jquery-3.3.1.min.js" %}"></script>
 
+	{# Fonts #}
+	<link href="https://fonts.googleapis.com/css?family=Expletus+Sans" rel="stylesheet">
+
 
 	<meta charset="utf-8"/>
 	<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
@@ -41,35 +44,9 @@
 
     {% block navbar %}
 	    <div class="ui large top fixed menu">
-		    <div class="ui container">
-			    <a class="active item" href="/">Home</a>
-			    {% if user.is_staff %}
-				    <a class="item" href="{% url "forgyftapp:fulfill" %}">Fulfill</a>
-			    {% endif %}
-			    <a class="item">Request</a>
-			    <a class="item">About Us</a>
-			    <div class="right menu">
-				    {% if not request.user.is_authenticated %}
-					    <div class="item">
-						    <a class="ui primary button" href="{% url "forgyftapp:login" %}">Login</a>
-					    </div>
-					    <div class="item">
-						    <a class="ui primary button" href="{% url "forgyftapp:signup" %}">Sign up</a>
-
-					    </div>
-				    {% else %}
-					    <div class="ui simple dropdown item">
-						    {{ request.user.email }}
-						    <i class="dropdown icon"></i>
-						    <div class="dropdown menu">
-							    <a class="item" href="{% url "forgyftapp:logout" %}">Sign out</a>
-							    <a class="item" href="">Profile</a>
-							    <a class="item" href="">Settings</a>
-						    </div>
-					    </div>
-				    {% endif %}
-			    </div>
-		    </div>
+	        <div class="ui container">
+		        {% include "navbar.html" %}
+	        </div>
 	    </div>
 	    <!--Sidebar Menu-->
 	    <div class="ui vertical inverted sidebar menu">
@@ -104,6 +81,12 @@
         $('.ui.checkbox')
             .checkbox()
         ;
+        try {
+        	setup();
+        }
+        catch (e) {
+
+        }
     });
 </script>
 

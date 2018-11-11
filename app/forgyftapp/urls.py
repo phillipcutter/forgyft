@@ -6,6 +6,9 @@ app_name = "forgyftapp"
 
 urlpatterns = [
 	url(r'^$', basic_views.index, name="index"),
+	url(r'^gift/form/?$', basic_views.gift_form, name='gift_form'),
+	url(r'^request/?$', basic_views.gift_request, name='request'),
+	url(r'^request/(?P<profile>[0-9]+)/?$', basic_views.gift_request, name='request'),
 	url(r'^fulfill/?$', basic_views.fulfill, name='fulfill'),
 	url(r'^fulfill/(?P<profile>[0-9]+)/?$', basic_views.fulfill, name='fulfill'),
 
@@ -23,7 +26,5 @@ urlpatterns = [
 	    auth_views.reset_confirm, name='password_reset_confirm'),
 	url(r'^reset/success/$', auth_views.reset_success, name='reset_success'),
 	url(r'^reset/finished/$', auth_views.reset_finished, name='reset_finished'),
-	url(r'list/?$', basic_views.GifteeList.as_view(), name='giftee-list'),
-	url(r'idea/add/?$', basic_views.GiftIdeaCreate.as_view(), name='giftee-add'),
 
 ]

@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block content %}
+	<div class="ui main container">
+		{% if not giftee_profile %}
+			<h1 style="text-align: center; padding-bottom: 16px">Your Gift Requests</h1>
+			<div class="ui two column stackable grid">
+				{#				<div class="eleven wide column">#}
+				<div style="margin-left:auto;margin-right:auto;">
+					<div class="ui three cards">
+						<div class="ui fluid card">
+							<div class="content">
+								<div class="header">
+									New Gift Request
+								</div>
+								<div class="meta"> Anyone
+								</div>
+								<div class="description">
+									Create a new gift request to get ideas for what to get someone for that
+									upcoming special event.
+								</div>
+							</div>
+							<div class="extra content">
+								<a class="ui labeled icon fluid primary button" href="{% url "forgyftapp:gift_form" %}">
+									<i class="ui icon add"></i>
+									New Gift Request
+								</a>
+							</div>
+						</div>
+						{% for giftee_profile in giftee_profiles %}
+							<div class="ui fluid card">
+								<div class="content">
+									<div class="header">
+										Gift Ideas for {{ giftee_profile.name }}
+									</div>
+									<div class="meta">
+										{{ giftee_profile.relationship }}
+									</div>
+									<div class="description">
+										{{ giftee_profile.status }}
+									</div>
+								</div>
+								<div class="extra content">
+									<a class="ui {% if not giftee_profile.published %}disabled {% endif %}fluid primary button"
+									   href="{% url "forgyftapp:request" profile=giftee_profile.pk %}">View Gift
+										Ideas</a>
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+					{#					</div>#}
+				</div>
+				{#				<div class="five wide column">#}
+				{#					<div style="display:flex;align-items:center;height: 100%">#}
+				{#						#}
+				{#					</div>#}
+				{#					#}
+				{#				</div>#}
+			</div>
+		{% else %}
+			<h1 style="text-align: center; padding-bottom: 4px">Results for {{ giftee_profile.name }}</h1>
+			<div style="margin-left:auto;margin-right:auto;">
+				<div class="ui two column stackable grid">
+					<div class="column">
+						<div class="ui text container segment" style="width: 100%">
+							<h2 class="ui dividing header">Gift Ideas</h2>
+							{% for idea in ideas %}
+								<div class="ui list">
+									<div class="item"><a href="{{ idea.link }}">{{ idea.idea }}</a></div>
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+					<div class="column">
+						<div class="ui text container segment" style="width: 100%">
+
+							<h2 class="ui header">Gift Receiver Profile</h2>
+
+							<div class="ui dividing sub header">Gender</div>
+							<p>{{ giftee_profile.gender_string }}</p>
+
+							<div class="ui dividing sub header">Age</div>
+							<p>{{ giftee_profile.age }}</p>
+
+							<div class="ui dividing sub header">Relationship</div>
+							<p>{{ giftee_profile.relationship }}</p>
+
+							<div class="ui dividing sub header">Maximum Price</div>
+							<p>{{ giftee_profile.price_upper }}</p>
+
+							<div class="ui dividing sub header">Interests</div>
+							<p>{{ giftee_profile.interests }}</p>
+
+							{% if giftee_profile.existing_related_items %}
+								<div class="ui dividing sub header">Items They Already Have</div>
+								<p>{{ giftee_profile.existing_related_items }}</p>
+							{% endif %}
+
+							{% if giftee_profile.extra_info %}
+								<div class="ui dividing sub header">Extra Info</div>
+								<p>{{ giftee_profile.extra_info }}</p>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+
+			</div>
+			</div>
+		{% endif %}
+	</div>
+{% endblock %}
