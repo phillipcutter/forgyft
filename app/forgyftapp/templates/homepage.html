@@ -2,43 +2,17 @@
 
 
 {% block navbar %}
-<div class="ui large top fixed hidden menu">
-	<div class="ui container">
-		<a class="active item">Home</a>
-		{% if user.is_staff %}
-			<a class="item" href="{% url "forgyftapp:fulfill" %}">Fulfill</a>
-		{% endif %}
-		<a class="item">Request</a>
-		<a class="item">About Us</a>
-		<div class="right menu">
-			{% if not request.user.is_authenticated %}
-				<div class="item">
-					<a class="ui primary button" href="{% url "forgyftapp:login" %}">Login</a>
-				</div>
-				<div class="item">
-					<a class="ui primary button" href="{% url "forgyftapp:signup" %}">Sign up</a>
-
-				</div>
-			{% else %}
-				<div class="ui simple dropdown item">
-					{{ request.user.email }}
-					<i class="dropdown icon"></i>
-					<div class="dropdown menu">
-						<a class="item" href="{% url "forgyftapp:logout" %}">Sign out</a>
-						<a class="item" href="">Profile</a>
-						<a class="item" href="">Settings</a>
-					</div>
-				</div>
-			{% endif %}
+	<div class="ui large top fixed hidden menu">
+		<div class="ui container">
+			{% include "navbar.html" %}
 		</div>
 	</div>
-</div>
-<!--Sidebar Menu-->
-<div class="ui vertical inverted sidebar menu">
-	<a class="active item">Home</a><a class="item">Work</a><a class="item">Company</a><a
-		class="item">Careers</a><a
-		class="item">Login</a><a class="item">Signup</a>
-</div>
+	<!--Sidebar Menu-->
+	<div class="ui vertical inverted sidebar menu">
+		<a class="active item">Home</a><a class="item">Work</a><a class="item">Company</a><a
+			class="item">Careers</a><a
+			class="item">Login</a><a class="item">Signup</a>
+	</div>
 {% endblock %}
 
 
@@ -51,45 +25,25 @@
 					<a class="toc item">
 						<i class="sidebar icon"></i>
 					</a>
-					<a class="active item">Home</a>
-					{% if user.is_staff %}
-						<a class="item" href="{% url "forgyftapp:fulfill" %}">Fulfill</a>
-					{% endif %}
-					<a class="item">Request</a>
-					<a class="item">About Us</a>
-					<div class="right menu">
-						{% if not request.user.is_authenticated %}
-							<div class="item">
-								<a class="ui primary button" href="{% url "forgyftapp:login" %}">Login</a>
-							</div>
-							<div class="item">
-								<a class="ui primary button" href="{% url "forgyftapp:signup" %}">Sign up</a>
-
-							</div>
-						{% else %}
-							<div class="ui simple dropdown item">
-								{{ request.user.email }}
-								<i class="dropdown icon"></i>
-								<div class="dropdown menu" style="margin-top: 0;">
-									<a class="item" href="{% url "forgyftapp:logout" %}">Sign out</a>
-									<a class="item" href="">Profile</a>
-									<a class="item" href="">Settings</a>
-								</div>
-							</div>
-						{% endif %}
-					</div>
+					{% include "navbar.html" %}
 				</div>
 			</div>
 			<div class="ui text container">
-				<h1 class="ui inverted header">
+				<h1 style="font-family: 'Expletus Sans', cursive; color: #C0392B;" class="ui inverted header">
 					Forgyft
 				</h1>
+
+
 				<h2>
-					The gift they'll never forget.
+					You need a gift for one of your friends but you don't know what to get them? Fill out a two minute
+					quiz about your friend - and we'll present you will gift Ideas that will surely blow them away!
+
 				</h2>
-				<div class="ui huge primary button">
-					Find the perfect gift
-					<i class="right arrow icon"></i>
+				<div class="ui big animated button" tabindex="0">
+					<div class="visible content">Quiz Now!</div>
+					<div class="hidden content">
+						<i class="fas fa-arrow-right icon-5x"></i>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -98,28 +52,69 @@
 				<div class="row">
 					<div class="eight wide column">
 						<h3 class="ui header">
-							We Help Companies and Companions
+							Three Ideas - Completly Free!
 						</h3>
 						<p>
-							We can give your company superpowers to do things that they never thought possible. Let us
-							delight your customers and empower your needs...through pure data analytics.
+							Just fill out a quick quiz about your friend and we'll give you three amazing gift ideas
+							completly free!
 						</p>
 						<h3 class="ui header">
-							We Make Bananas That Can Dance
+							Sign Up for an Account
 						</h3>
 						<p>
-							Yes that's right, you thought it was the stuff of dreams, but even bananas can be
-							bioengineered.
+							Want to save your gyft ideas? Just sign up for an account and they will always be saved in
+							your account!
 						</p>
 					</div>
 					<div class="six wide right floated column">
 						<img class="ui large bordered rounded image"
-						     src="../../static/images/templates/semantic-ui/wireframe/white-image.png"/>
+						     src="{% load static %}{% static "images/gift.jpg" %}"/>
 					</div>
 				</div>
 				<div class="row">
-					<div class="center aligned column">
-						<a class="ui huge button">Check Them Out</a>
+					<div class="ui big animated button" tabindex="0">
+						<div class="visible content">Quiz Now</div>
+						<div class="hidden content">
+							<i class="fas fa-gift icon-5x"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="ui vertical stripe segment">
+			<div class="ui text container">
+				<h3 style="font-family:sans-serif;" class="ui green header">
+					Christmas Gifts? Family Renunion?
+				</h3>
+				<h3 style="font-family:sans-serif; color:#C0392B" class="ui header">
+					How to throw an amazing Christmas Party!
+				</h3>
+				<p>
+					You've wanted to throw that amazing holiday party - but each year you just don't know how to do it.
+					We have amazing tips and tricks on Christmas Party tactics - people will be talking about it for
+					years to come!
+				</p>
+				<div class="ui big animated button" tabindex="0">
+					<div class="visible content">Read More!</div>
+					<div class="hidden content">
+						<i class="fab fa-readme icon-2x"></i>
+					</div>
+				</div>
+				<h4 class="ui horizontal header divider">
+					<a href="homepage.html#"> Blog</a>
+				</h4>
+				<h3 style="font-family:sans-serif;" class="ui header">
+					Did We Tell You About Our Satisfaction Guarantee?
+				</h3>
+				<p>
+					If you don't like any of the ideas we present to you. Just send us another email and we'll have our
+					experts come up with the perfect ideas for you!
+				</p>
+				<div class="ui big animated button" tabindex="0">
+					<div class="visible content">Quiz Now!</div>
+					<div class="hidden content">
+						<i class="fas fa-star"></i>
 					</div>
 				</div>
 			</div>
@@ -129,56 +124,27 @@
 				<div class="center aligned row">
 					<div class="column">
 						<h3>
-							"What a Company"
+							"Amazing Gift Ideas!"
 						</h3>
 						<p>
-							That is what they all say about us
+							Everyone loves the ideas at Forgyft.
 						</p>
 					</div>
 					<div class="column">
 						<h3>
-							"I shouldn't have gone with their competitor."
+							"First time I used Forgyft, I loved how the well the gift represented my friend's
+							personality, and how easy it was!"
 						</h3>
 						<p>
-							<img class="ui avatar image"
-							     src="../../static/images/templates/semantic-ui/avatar/nan.jpg"/><b>Nan</b>Chief
-							Fun Officer Acme Toys
+							<b>Ian Sloan</b> A Forgyft User
 						</p>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="ui vertical stripe segment">
-			<div class="ui text container">
-				<h3 class="ui header">
-					Breaking The Grid, Grabs Your Attention
-				</h3>
-				<p>
-					Instead of focusing on content creation and hard work, we have learned how to master the art of
-					doing
-					nothing by providing massive amounts of whitespace and generic content that can seem massive,
-					monolithic
-					and worth your attention.
-				</p>
-				<a class="ui large button">Read More</a>
-				<h4 class="ui horizontal header divider">
-					<a href="homepage.html#"> Case Studies</a>
-				</h4>
-				<h3 class="ui header">
-					Did We Tell You About Our Bananas?
-				</h3>
-				<p>
-					Yes I know you probably disregarded the earlier boasts as non-sequitur filler content, but its
-					really
-					true. It took years of gene splicing and combinatory DNA research, but our bananas can really dance.
-				</p>
-				<a class="ui large button">I'm Still Quite Interested</a>
-			</div>
-		</div>
-     <div>
-     <!---    <iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=en.usa%23holiday%40group.v.calendar.google.com&amp;color=%2329527A&amp;ctz=America%2FLos_Angeles" style="border-width:0" width="2000" height="600" frameborder="0" scrolling="no"></iframe> --->
-
-     </div>
+		<!-- <div>
+	   <iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=en.usa%23holiday%40group.v.calendar.google.com&amp;color=%23125A12&amp;ctz=America%2FLos_Angeles" style="border-width:0" width="1500" height="600" frameborder="0" scrolling="no"></iframe>
+	   </div> -->
 		<div class="ui inverted vertical footer segment">
 			<div class="ui container">
 				<div class="ui stackable inverted divided equal height stackable grid">
@@ -187,11 +153,9 @@
 							About
 						</h4>
 						<div class="ui inverted link list">
-							<a class="item" href="homepage.html#"> Sitemap</a><a class="item" href="homepage.html#">
-							Contact
-							Us</a><a class="item" href="homepage.html#"> Religious Ceremonies</a><a class="item"
-							                                                                        href="homepage.html#">
-							Gazebo Plans</a>
+							<a class="item" href="homepage.html#"> About Us</a><a class="item" href="homepage.html#">
+							Contact Us</a><a class="item" href="homepage.html#">Quiz Now!</a><a class="item"
+							                                                                    href="homepage.html#">Sitemap</a>
 						</div>
 					</div>
 					<div class="three wide column">
@@ -199,21 +163,23 @@
 							Services
 						</h4>
 						<div class="ui inverted link list">
-							<a class="item" href="homepage.html#"> Banana Pre-Order</a><a class="item"
-							                                                              href="homepage.html#"> DNA
-							FAQ</a><a
-								class="item" href="homepage.html#"> How To Access</a><a class="item"
-							                                                            href="homepage.html#">
-							Favorite X-Men</a>
+							<a class="item" href="homepage.html#">Quiz!</a><a class="item" href="homepage.html#">Recommendations?</a><a
+								class="item" href="homepage.html#"> How-To Tips</a><a class="item"
+							                                                          href="homepage.html#">Blog</a>
 						</div>
 					</div>
 					<div class="seven wide column">
 						<h4 class="ui inverted header">
-							Footer Header
+							Check us out on Social Media!
 						</h4>
-						<p>
-							Extra space for a call to action inside the footer that could help re-engage users.
-						</p>
+						<h1 class="ui header">
+							<a href="www.facebook.com/forgyft" class="fa fab fa-facebook-f"></a>
+							<a href="www.twitter.com/forgyft" class="fa fab fa-twitter"></a>
+							<a href="www.youtube.com/forgyft" class="fa fab fa-youtube"></a>
+							<a href="www.instagram.com/forgyft" class="fa fab fa-instagram"></a>
+							<a href="www.snapchat.com/forgyft" class="fa fab fa-snapchat-ghost"></a>
+							<a href="www.pinterest.com/forgyft" class="fa fab fa-pinterest"></a>
+						</h1>
 					</div>
 				</div>
 			</div>
@@ -239,7 +205,6 @@
 						}
 					})
 				;
-
 				// create sidebar and attach to menu open
 				$('.ui.sidebar')
 					.sidebar('attach events', '.toc.item')

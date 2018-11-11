@@ -1,0 +1,27 @@
+<a class="{% if page == "home" %}active {% endif %}item" href="{% url "forgyftapp:index" %}">Home</a>
+{% if user.is_staff %}
+	<a class="{% if page == "fulfill" %}active {% endif %}item" href="{% url "forgyftapp:fulfill" %}">Fulfill</a>
+{% endif %}
+<a class="{% if page == "request" %}active {% endif %}item" href="{% url "forgyftapp:request" %}">Requests</a>
+<a class="{% if page == "about" %}active {% endif %}item">About Us</a>
+<div class="right menu">
+	{% if not request.user.is_authenticated %}
+		<div class="item">
+			<a class="ui primary button" href="{% url "forgyftapp:login" %}">Login</a>
+		</div>
+		<div class="item">
+			<a class="ui primary button" href="{% url "forgyftapp:signup" %}">Sign up</a>
+
+		</div>
+	{% else %}
+		<div class="ui simple dropdown item">
+			{{ request.user.email }}
+			<i class="dropdown icon"></i>
+			<div class="dropdown menu">
+				<a class="item" href="{% url "forgyftapp:logout" %}">Sign out</a>
+				<a class="item" href="">Profile</a>
+				<a class="item" href="">Settings</a>
+			</div>
+		</div>
+	{% endif %}
+</div>
