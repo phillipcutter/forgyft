@@ -6,10 +6,10 @@
 <a class="{% if page == "about" %}active {% endif %}item">About Us</a>
 <div class="right menu">
 	{% if not request.user.is_authenticated %}
-		<div class="item">
-			<a class="ui primary button" href="{% url "forgyftapp:login" %}">Login</a>
+		<div class="item" style="padding: 0;">
+			<a class="ui button" href="{% url "forgyftapp:login" %}">Login</a>
 		</div>
-		<div class="item">
+		<div class="item" style="padding: 0">
 			<a class="ui primary button" href="{% url "forgyftapp:signup" %}">Sign up</a>
 
 		</div>
@@ -17,7 +17,7 @@
 		<div class="ui simple dropdown item">
 			{{ request.user.email }}
 			<i class="dropdown icon"></i>
-			<div class="dropdown menu">
+			<div class="dropdown menu" style="margin-top: 0">
 				<a class="item" href="{% url "forgyftapp:logout" %}">Sign out</a>
 				<a class="item" href="">Profile</a>
 				<a class="item" href="">Settings</a>
