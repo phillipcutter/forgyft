@@ -50,7 +50,7 @@ ANYMAIL = {
 }
 
 EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
-DEFAULT_FROM_EMAIL = "forgyft@mrfleap.com"
+DEFAULT_FROM_EMAIL = "support@forgyft.com"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -180,6 +180,7 @@ AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
 if not DEBUG:
     STATICFILES_STORAGE = 'forgyft.custom_storages.StaticStorage'
+    AWS_S3_CUSTOM_DOMAIN = "***REMOVED***"
 
 if DEBUG:
     MEDIAFILES_LOCATION = "media-debug"

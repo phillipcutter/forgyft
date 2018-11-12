@@ -1,11 +1,13 @@
 from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import MultipleObjectsReturned
+from django.core.mail import send_mail
 from django.db import models
 
 # Create your models here.
 from django.db.models import Model
 from django.dispatch import receiver
 from django.http import Http404
+from django.urls import reverse
 
 from forgyftapp.messaging import broadcast_to_slack
 from forgyftapp.py_utils import django_utils
@@ -89,8 +91,13 @@ class GifteeProfile(models.Model, OnCreate):
 		else:
 			return "We're still deciding on the perfect gifts, please check back soon."
 
-	def submit(self):
-		print("SUBMITTING IDEAS")
+	def submit(self, request):
+		view_url = request.build_absolute_uri(reverse("forgyftapp:request", kwargs={"profile": self.pk}))
+		send_mail(f"Your gift ideas for {self.name} are ready",
+		          f"To view your gift ideas click this link: {view_url}",
+		          "noreply@forgyft.com",
+		          [self.user.email],
+		          html_message=f"To view your gift ideas click <a href=\"{view_url}\">here</a>")
 		self.published = True
 		self.save()
 
