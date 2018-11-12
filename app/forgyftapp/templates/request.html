@@ -40,7 +40,7 @@
 									</div>
 								</div>
 								<div class="extra content">
-									<a class="ui {% if not giftee_profile.published %}disabled {% endif %}fluid primary button"
+									<a class="ui {% if not giftee_profile.published %}disabled grey {% else %}primary {% endif %}fluid  button"
 									   href="{% url "forgyftapp:request" profile=giftee_profile.pk %}">View Gift
 										Ideas</a>
 								</div>

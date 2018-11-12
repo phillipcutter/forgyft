@@ -22,6 +22,9 @@ def gift_request(request, profile=None):
 	if profile:
 		giftee_profile = get_object_or_404(GifteeProfile, pk=profile)
 
+		if not giftee_profile.published:
+			return redirect("forgyftapp:request")
+
 		return render(request, "request.html", {"giftee_profile": giftee_profile,
 		                                        "ideas": GiftIdea.objects.filter(giftee_profile=giftee_profile),
 		                                        "page": "request"})
@@ -47,26 +50,7 @@ def fulfill(request, profile=None):
 	if profile:
 		giftee_profile = get_object_or_404(GifteeProfile, pk=profile)
 
-		# if request.method == "POST":
-		# 	form = GiftIdeaForm(request.POST)
-		# 	if form.is_valid():
-		# 		form.save()
-		# 		return redirect("forgyftapp:index")
-		# else:
-		# 	form = GiftIdeaForm()
-
 		if request.method == "POST":
-			# data = dict(request.POST)
-			# for element in data:
-			# 	data[element] = data[element][0]
-			#
-			# for key in iter(data):
-			# 	if key.endswith("published"):
-			# 		if data[key] == "on":
-			# 			data[key] = "true"
-			# 		else:
-			# 			data[key] = "false"
-
 			gift_ideas = GiftIdeaFormSet(request.POST, instance=giftee_profile)
 			i = 0
 			for form in gift_ideas:
@@ -82,7 +66,7 @@ def fulfill(request, profile=None):
 						published = True
 
 				if published:
-					giftee_profile.submit()
+					giftee_profile.submit(request)
 				else:
 					giftee_profile.unsubmit()
 		else:
