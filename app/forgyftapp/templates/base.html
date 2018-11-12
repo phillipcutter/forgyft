@@ -4,6 +4,52 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
+    <!-- Start of Async Drift Code -->
+    <script>
+        "use strict";
+
+        !function () {
+            var t = window.driftt = window.drift = window.driftt || [];
+            if (!t.init) {
+                if (t.invoked) return void (window.console && console.error && console.error("Drift snippet included twice."));
+                t.invoked = !0, t.methods = ["identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on"],
+                    t.factory = function (e) {
+                        return function () {
+                            var n = Array.prototype.slice.call(arguments);
+                            return n.unshift(e), t.push(n), t;
+                        };
+                    }, t.methods.forEach(function (e) {
+                    t[e] = t.factory(e);
+                }), t.load = function (t) {
+                    var e = 3e5, n = Math.ceil(new Date() / e) * e, o = document.createElement("script");
+                    o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous", o.src = "https://js.driftt.com/include/" + n + "/" + t + ".js";
+                    var i = document.getElementsByTagName("script")[0];
+                    i.parentNode.insertBefore(o, i);
+                };
+            }
+        }();
+        drift.SNIPPET_VERSION = '0.3.1';
+        drift.load('na3vedaychix');
+    </script>
+    <!-- End of Async Drift Code -->
+
+    <!-- Start of Fullstory -->
+    <script> window['_fs_debug'] = false; window['_fs_host'] = 'fullstory.com'; window['_fs_org'] = 'GBY13'; window['_fs_namespace'] = 'FS'; (function(m,n,e,t,l,o,g,y){ if (e in m) {if(m.console && m.console.log) { m.console.log('FullStory namespace conflict. Please set window["_fs_namespace"].');} return;} g=m[e]=function(a,b,s){g.q?g.q.push([a,b,s]):g._api(a,b,s);};g.q=[]; o=n.createElement(t);o.async=1;o.src='https://'+_fs_host+'/s/fs.js'; y=n.getElementsByTagName(t)[0];y.parentNode.insertBefore(o,y); g.identify=function(i,v,s){g(l,{uid:i},s);if(v)g(l,v,s)};g.setUserVars=function(v,s){g(l,v,s)};g.event=function(i,v,s){g('event',{n:i,p:v},s)}; g.shutdown=function(){g("rec",!1)};g.restart=function(){g("rec",!0)}; g.consent=function(a){g("consent",!arguments.length||a)}; g.identifyAccount=function(i,v){o='account';v=v||{};v.acctId=i;g(o,v)}; g.clearUserCookie=function(){}; })(window,document,window['_fs_namespace'],'script','user'); </script>
+    <!-- End of Fullstory -->
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129120112-1"></script>
+    <script>
+     window.dataLayer = window.dataLayer || [];
+     function gtag(){dataLayer.push(arguments);}
+     gtag('js', new Date());
+
+     gtag('config', 'UA-129120112-1');
+    </script>
+
+
+
+
     <link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/semantic.min.css" %}">
     <link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/menu.min.css" %}">
     <link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/container.min.css" %}">
@@ -13,24 +59,29 @@
     <link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/form.min.css" %}">
     <link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/grid.min.css" %}">
     <link rel="stylesheet" type="text/css" href="{% load static %}{% static "stylesheets/default.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% load static %}{% static "fontawesome/css/all.css" %}">
+    <link rel="stylesheet" href="{% load static %}{% static "fontawesome/css/brands.css" %}">
+    <link rel="stylesheet" href="{% load static %}{% static "fontawesome/css/fontawesome.css" %}">
+
+
     {#	<link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/image.min.css" %}">#}
     {#	<script src="{% load static %}{% static "semantic/components/search.min.js" %}"></script>#}
     <script src="{% load static %}{% static "jquery-3.3.1.min.js" %}"></script>
 
-	{# Fonts #}
-	<link href="https://fonts.googleapis.com/css?family=Expletus+Sans" rel="stylesheet">
+    {# Fonts #}
+    <link href="https://fonts.googleapis.com/css?family=Expletus+Sans" rel="stylesheet">
 
 
-	<meta charset="utf-8"/>
-	<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta content="Semantic-UI-Forest, collection of design, themes and templates for Semantic-UI."
-	      name="description"/>
-	<meta content="Semantic-UI, Theme, Design, Template" name="keywords"/>
-	<meta content="PPType" name="author"/>
-	<meta content="#ffffff" name="theme-color"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Semantic-UI-Forest, collection of design, themes and templates for Semantic-UI.</title>
+    <meta charset="utf-8"/>
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="Semantic-UI-Forest, collection of design, themes and templates for Semantic-UI."
+          name="description"/>
+    <meta content="Semantic-UI, Theme, Design, Template" name="keywords"/>
+    <meta content="PPType" name="author"/>
+    <meta content="#ffffff" name="theme-color"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Semantic-UI-Forest, collection of design, themes and templates for Semantic-UI.</title>
     {#    <link href="../../static/stylesheets/pandoc-code-highlight.css" rel="stylesheet" type="text/css" />#}
 
 
@@ -42,21 +93,21 @@
 <body class="template pushable" style="height: auto">
 {#<div class="ui inverted vertical center aligned segment">#}
 
-    {% block navbar %}
-	    <div class="ui large top fixed menu">
-	        <div class="ui container">
-		        {% include "navbar.html" %}
-	        </div>
-	    </div>
-	    <!--Sidebar Menu-->
-	    <div class="ui vertical inverted sidebar menu">
-		    <a class="active item">Home</a><a class="item">Work</a><a class="item">Company</a><a
-			    class="item">Careers</a><a
-			    class="item">Login</a><a class="item">Signup</a>
-	    </div>
-    {% endblock %}
-    {% block content %}
-    {% endblock %}
+{% block navbar %}
+    <div class="ui large top fixed menu">
+        <div class="ui container">
+            {% include "navbar.html" %}
+        </div>
+    </div>
+    <!--Sidebar Menu-->
+    <div class="ui vertical inverted sidebar menu">
+        <a class="active item">Home</a><a class="item">Work</a><a class="item">Company</a><a
+            class="item">Careers</a><a
+            class="item">Login</a><a class="item">Signup</a>
+    </div>
+{% endblock %}
+{% block content %}
+{% endblock %}
 {#</div>#}
 </body>
 <script>
@@ -82,7 +133,7 @@
             .checkbox()
         ;
         try {
-        	setup();
+            setup();
         }
         catch (e) {
 
@@ -91,9 +142,9 @@
 </script>
 
 <style type="text/css">
-	div.ui.main.container {
-		margin-top: 7em;
-	}
+    div.ui.main.container {
+        margin-top: 7em;
+    }
 </style>
 
 <script src="{% load static %}{% static "semantic/semantic.min.js" %}"></script>
