@@ -3,9 +3,9 @@ version: '3.6'
 services:
   web:
     environment:
-      - VIRTUAL_HOST=www.forgyft.com
-      - LETSENCRYPT_HOST=www.forgyft.com
-      - LETSENCRYPT_EMAIL=letsencrypt@forgyft.com
+      - VIRTUAL_HOST=www.forgift.org
+      - LETSENCRYPT_HOST=www.forgift.org
+      - LETSENCRYPT_EMAIL=letsencrypt@forgift.org
   nginx-proxy:
     restart: always
 #    image: jwilder/nginx-proxy
