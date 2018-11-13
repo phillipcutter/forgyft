@@ -18,11 +18,10 @@ div.ui.large.inverted.secondary.menu > a.item {
     font-weight: 900 !important;
 }
 
-/*div.ui.large.inverted.secondary.menu > div.right.menu > div.item >  a.ui.basic.button {*/
-    /*font-weight: 900 !important;*/
-    /*text-shadow: 1px 0px 8px #000 !important;*/
-    /*color: #FFFFFF;*/
-/*}*/
+div.ui.large.inverted.secondary.menu > a.item {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
 
 body.default .ui.menu {
     background: none;

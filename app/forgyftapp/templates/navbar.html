@@ -6,10 +6,10 @@
 <a class="{% if page == "about" %}active {% endif %}item">About Us</a>
 <div class="right menu">
 	{% if not request.user.is_authenticated %}
-		<div class="item" style="padding: 0;">
+		<div class="item">
 			<a class="ui button" href="{% url "forgyftapp:login" %}">Login</a>
 		</div>
-		<div class="item" style="padding: 0">
+		<div class="item">
 			<a class="ui primary button" href="{% url "forgyftapp:signup" %}">Sign up</a>
 
 		</div>

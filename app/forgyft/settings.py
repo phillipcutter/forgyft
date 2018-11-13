@@ -50,7 +50,7 @@ ANYMAIL = {
 }
 
 EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
-DEFAULT_FROM_EMAIL = "support@forgyft.com"
+DEFAULT_FROM_EMAIL = "support@forgift.org"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
