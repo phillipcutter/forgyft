@@ -46,7 +46,7 @@ INSTALLED_APPS = [
 
 ANYMAIL = {
     "MAILGUN_API_KEY": os.getenv("MAILGUN_API_KEY"),
-    "MAILGUN_SENDER_DOMAIN": "forgyft.com"
+    "MAILGUN_SENDER_DOMAIN": "forgift.org"
 }
 
 EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
