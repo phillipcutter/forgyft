@@ -1,237 +1,236 @@
 {% extends "base.html" %}
 
 {% block navbar %}
-    <div class="ui large top fixed hidden menu">
-        <div class="ui container">
-            {% include "navbar.html" %}
-        </div>
-    </div>
-    <!--Sidebar Menu-->
-    <div class="ui vertical inverted sidebar menu">
-        <a class="active item">Home</a><a class="item">Work</a><a class="item">Company</a><a
-            class="item">Careers</a><a
-            class="item">Login</a><a class="item">Signup</a>
-    </div>
+	<div class="ui large top fixed hidden menu">
+		<div class="ui container">
+			{% include "navbar.html" %}
+		</div>
+	</div>
+	<!--Sidebar Menu-->
+	<div class="ui vertical inverted sidebar menu">
+		<a class="active item">Home</a><a class="item">Work</a><a class="item">Company</a><a
+			class="item">Careers</a><a
+			class="item">Login</a><a class="item">Signup</a>
+	</div>
 {% endblock %}
 
 
 {% block content %}
-    <!--Page Contents-->
-    <div class="pusher">
-        <div class="ui inverted vertical masthead center aligned segment"
-             style="background-image: url('{% load static %}{% static "images/miroslava-456983-unsplash.jpg" %}');
-                     background-position: center center;
-                     background-size: cover">
-            <div class="ui container">
-                <div class="ui large inverted secondary menu" style="text-shadow: 1px 0px 8px #000;">
-{#                    <a class="toc item">#}
-{#                        <i class="sidebar icon"></i>#}
-{#                    </a>#}
-                    {% include "navbar.html" %}
-                </div>
-            </div>
-            <div class="ui text container">
-                <h1 style="font-family: 'Expletus Sans', cursive; color: #C0392B;
+	<!--Page Contents-->
+	<div class="pusher">
+		<div class="ui inverted vertical masthead center aligned segment"
+		     style="background-image: url('{% load static %}{% static "images/miroslava-456983-unsplash.jpg" %}');
+				     background-position: center center;
+				     background-size: cover">
+			<div class="ui container">
+				<div class="ui large inverted secondary menu" style="text-shadow: 1px 0px 8px #000;">
+					{#                    <a class="toc item">#}
+					{#                        <i class="sidebar icon"></i>#}
+					{#                    </a>#}
+					{% include "navbar.html" %}
+				</div>
+			</div>
+			<div class="ui text container">
+				<h1 style="font-family: 'Expletus Sans', cursive; color: #C0392B;
 font-weight: 900;
 			text-shadow: 1px 0px 8px #000000;" class="ui inverted header">
-                    Forgift
-                </h1>
+					Forgift
+				</h1>
 
 
-                <h2 style="font-weight: 900;
+				<h2 style="font-weight: 900;
 			text-shadow: 1px 0px 8px #000;">
-                    Do you need a gift for one of your friends but you don't know what to get them? Fill out a two minute
-                    quiz about your friend - and we'll present you will gift ideas that will surely blow them away!
+					Do you need a gift for one of your friends but you don't know what to get them? Fill out a two
+					minute
+					quiz about your friend - and we'll present you will gift ideas that will surely blow them away!
 
-                </h2>
-                <div class="ui big animated button" tabindex="0">
-                    <div class="visible content">Quiz Now!</div>
-                    <div class="hidden content">
-                        <i class="fas fa-arrow-right icon-5x"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="ui vertical stripe segment">
-            <div class="ui middle aligned stackable grid container">
-                <div class="row">
-                    <div class="eight wide column">
-                        <div>
-                            <h3 class="ui header">
-                                Sign Up for an Account
-                            </h3>
-                            <p>
-                                Want to save your gyft ideas? Just sign up for an account and they will always be saved
-                                in
-                                your account!
-                            </p>
-                            <div class="ui big animated button" tabindex="0">
-                                <div class="visible content">Sign Up</div>
-                                <div class="hidden content">
-                                    <i class="fas fa-pen icon-5x"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="margin-top: 32px">
-                            <h3 class="ui header">
-                                Take the quiz - Completely free!
-                            </h3>
-                            <p>
-                                Just fill out a quick quiz about your friend and we'll give you three amazing gift ideas
-                                completly free!
-                            </p>
-                        </div>
+				</h2>
+				<a class="ui big animated button" href="{% url "forgyftapp:request" %}" tabindex="0">
+					<div class="visible content">Quiz Now</div>
+					<div class="hidden content">
+						<i class="fas fa-arrow-right icon-5x"></i>
+					</div>
+				</a>
+			</div>
+		</div>
+		<div class="ui vertical stripe segment">
+			<div class="ui middle aligned stackable grid container">
+				<div class="row">
+					<div class="eight wide column">
+						<div>
+							<h3 class="ui header">
+								Sign Up for an Account
+							</h3>
+							<p>
+								Want to save your gyft ideas? Just sign up for an account and they will always be saved
+								in
+								your account!
+							</p>
+							<a class="ui big animated button" href="{% url "forgyftapp:signup" %}" tabindex="0">
+								<div class="visible content">Sign Up</div>
+								<div class="hidden content">
+									<i class="fas fa-pen icon-5x"></i>
+								</div>
+							</a>
+						</div>
+						<div style="margin-top: 32px">
+							<h3 class="ui header">
+								Take the quiz - Completely free!
+							</h3>
+							<p>
+								Just fill out a quick quiz about your friend and we'll give you three amazing gift ideas
+								completly free!
+							</p>
+						</div>
 
 
-                    </div>
-                    <div class="six wide right floated column">
-                        <img class="ui large bordered rounded image"
-                             src="{% load static %}{% static "images/gift.jpg" %}"/>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="ui big animated button" tabindex="0">
-                        <div class="visible content">Quiz Now</div>
-                        <div class="hidden content">
-                            <i class="fas fa-gift icon-5x"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+					</div>
+					<div class="six wide right floated column">
+						<img class="ui large bordered rounded image"
+						     src="{% load static %}{% static "images/gift.jpg" %}"/>
+					</div>
+				</div>
+				<div class="row" style="padding-left: 14px">
+					<a class="ui big animated button" href="{% url "forgyftapp:request" %}" tabindex="0">
+						<div class="visible content">Quiz Now</div>
+						<div class="hidden content">
+							<i class="fas fa-gift icon-5x"></i>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
 
-        <div class="ui vertical stripe segment">
-            <div class="ui text container">
-                <h3 style="font-family:sans-serif;" class="ui header">
-                    <span style="color: #db2828!important">Christmas Gifts? Family Renunion?</span><br>
-                    How to throw an amazing Christmas Party!
-                </h3>
-                <h3 style="font-family:sans-serif" class="ui header">
+		<div class="ui vertical stripe segment">
+			<div class="ui text container">
+				<h3 style="font-family:sans-serif;" class="ui header">
+					<span style="color: #db2828!important">Christmas Gifts? Family Renunion?</span><br>
+					How to throw an amazing Christmas Party!
+				</h3>
+				<h3 style="font-family:sans-serif" class="ui header">
 
-                </h3>
-                <p>
-                    You've wanted to throw that amazing holiday party - but each year you just don't know how to do it.
-                    We have amazing tips and tricks on Christmas Party tactics - people will be talking about it for
-                    years to come!
-                </p>
-                <div class="ui big animated button" tabindex="0">
-                    <div class="visible content">Read More!</div>
-                    <div class="hidden content">
-                        <i class="fab fa-readme icon-2x"></i>
-                    </div>
-                </div>
-                <h4 class="ui horizontal header divider">
-                    <a href="homepage.html#"> Blog</a>
-                </h4>
-                <h3 style="font-family:sans-serif;" class="ui header">
-                    Did We Tell You About Our Satisfaction Guarantee?
-                </h3>
-                <p>
-                    If you don't like any of the ideas we present to you. Just send us another email and we'll have our
-                    experts come up with the perfect ideas for you!
-                </p>
-                <div class="ui big animated button" tabindex="0">
-                    <div class="visible content">Quiz Now!</div>
-                    <div class="hidden content">
-                        <i class="fas fa-star"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="ui vertical stripe quote segment">
-            <div class="ui equal width stackable internally celled grid">
-                <div class="center aligned row">
-                    <div class="column">
-                        <h3>
-                            "Amazing Gift Ideas!"
-                        </h3>
-                        <p>
-                            Everyone loves the ideas at Forgift.
-                        </p>
-                    </div>
-                    <div class="column">
-                        <h3>
-                            "First time I used Forgift, I loved how the well the gift represented my friend's
-                            personality, and how easy it was!"
-                        </h3>
-                        <p>
-                            <b>Ian Sloan</b> A Forgift User
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- <div>
-       <iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=en.usa%23holiday%40group.v.calendar.google.com&amp;color=%23125A12&amp;ctz=America%2FLos_Angeles" style="border-width:0" width="1500" height="600" frameborder="0" scrolling="no"></iframe>
-       </div> -->
-        <div class="ui inverted vertical footer segment">
-            <div class="ui container">
-                <div class="ui stackable inverted divided equal height stackable grid">
-                    <div class="three wide column">
-                        <h4 class="ui inverted header">
-                            About
-                        </h4>
-                        <div class="ui inverted link list">
-                            <a class="item" href="homepage.html#"> About Us</a><a class="item" href="homepage.html#">
-                            Contact Us</a><a class="item" href="homepage.html#">Quiz Now!</a><a class="item"
-                                                                                                href="homepage.html#">Privacy
-                            Policy</a>
-                        </div>
-                    </div>
-                    <div class="three wide column">
-                        <h4 class="ui inverted header">
-                            Services
-                        </h4>
-                        <div class="ui inverted link list">
-                            <a class="item" href="homepage.html#">Recommendations?</a><a class="item"
-                                                                                         href="homepage.html#">How-to
-                            Tips</a><a
-                                class="item" href="homepage.html#"> Blog </a><a class="item"
-                                                                                href="homepage.html#">Terms &
-                            Services </a>
-                        </div>
-                    </div>
-                    <div class="seven wide column">
-                        <h4 class="ui inverted header">
-                            Check us out on Social Media!
-                        </h4>
-                        <h1 class="ui header">
-                            <a href="https://www.facebook.com/forgyft" class="fa fab fa-facebook-f"></a>
-                            <a href="https://www.twitter.com/forgyft" class="fa fab fa-twitter"></a>
-                            <a href="https://www.youtube.com/forgyft" class="fa fab fa-youtube"></a>
-                            <a href="https://www.instagram.com/forgyft" class="fa fab fa-instagram"></a>
-                            <a href="https://www.snapchat.com/forgyft" class="fa fab fa-snapchat-ghost"></a>
-                            <a href="https://www.pinterest.com/forgyft" class="fa fab fa-pinterest"></a>
-                        </h1>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <style type="text/css">
-        body.pushable {
-            background: #545454 !important;
-        }
-    </style>
-    <script>
-        $(document)
-            .ready(function () {
-                // fix menu when passed
-                $('.masthead')
-                    .visibility({
-                        once: false,
-                        onBottomPassed: function () {
-                            $('.fixed.menu').transition('fade in');
-                        },
-                        onBottomPassedReverse: function () {
-                            $('.fixed.menu').transition('fade out');
-                        }
-                    })
-                ;
-                // create sidebar and attach to menu open
-                $('.ui.sidebar')
-                    .sidebar('attach events', '.toc.item')
-                ;
-            });
-    </script>
+				</h3>
+				<p>
+					You've wanted to throw that amazing holiday party - but each year you just don't know how to do it.
+					We have amazing tips and tricks on Christmas Party tactics - people will be talking about it for
+					years to come!
+				</p>
+				<div class="ui big animated button" tabindex="0">
+					<div class="visible content">Read More!</div>
+					<div class="hidden content">
+						<i class="fab fa-readme icon-2x"></i>
+					</div>
+				</div>
+				<h4 class="ui horizontal header divider">
+					<a href="homepage.html#"> Blog</a>
+				</h4>
+				<h3 style="font-family:sans-serif;" class="ui header">
+					Did We Tell You About Our Satisfaction Guarantee?
+				</h3>
+				<p>
+					If you don't like any of the ideas we present to you. Just send us another email and we'll have our
+					experts come up with the perfect ideas for you!
+				</p>
+				<a class="ui big animated button" href="{% url "forgyftapp:request" %}" tabindex="0">
+					<div class="visible content">Quiz Now!</div>
+					<div class="hidden content">
+						<i class="fas fa-star"></i>
+					</div>
+				</a>
+			</div>
+		</div>
+		<div class="ui vertical stripe quote segment">
+			<div class="ui equal width stackable internally celled grid">
+				<div class="center aligned row">
+					<div class="column">
+						<h3>
+							"Amazing Gift Ideas!"
+						</h3>
+						<p>
+							Everyone loves the ideas at Forgift.
+						</p>
+					</div>
+					<div class="column">
+						<h3>
+							"First time I used Forgift, I loved how the well the gift represented my friend's
+							personality, and how easy it was!"
+						</h3>
+						<p>
+							<b>Ian Sloan</b> A Forgift User
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- <div>
+	   <iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=en.usa%23holiday%40group.v.calendar.google.com&amp;color=%23125A12&amp;ctz=America%2FLos_Angeles" style="border-width:0" width="1500" height="600" frameborder="0" scrolling="no"></iframe>
+	   </div> -->
+		<div class="ui inverted vertical footer segment">
+			<div class="ui container">
+				<div class="ui stackable inverted divided equal height stackable grid">
+					<div class="three wide column">
+						<h4 class="ui inverted header">
+							About
+						</h4>
+						<div class="ui inverted link list">
+							<a class="item" href="homepage.html#"> About Us</a>
+							<a class="item" href="homepage.html#">Contact Us</a>
+							<a class="item" href="{% url "forgyftapp:privacy" %}">Privacy
+							Policy</a>
+						</div>
+					</div>
+					<div class="three wide column">
+						<h4 class="ui inverted header">
+							Services
+						</h4>
+						<div class="ui inverted link list">
+{#							<a class="item" href="homepage.html#">Recommendations?</a>#}
+							<a class="item" href="{% url "forgyftapp:request" %}">Request Gift Ideas</a>
+							<a class="item" href="homepage.html#">Blog</a>
+							<a class="item" href="{% url "forgyftapp:terms" %}">Terms of Service </a>
+						</div>
+					</div>
+					<div class="seven wide column">
+						<h4 class="ui inverted header">
+							Check us out on Social Media!
+						</h4>
+						<h1 class="ui header">
+							<a href="https://www.facebook.com/forgyft" class="fa fab fa-facebook-f"></a>
+							<a href="https://www.twitter.com/forgyft" class="fa fab fa-twitter"></a>
+							<a href="https://www.youtube.com/forgyft" class="fa fab fa-youtube"></a>
+							<a href="https://www.instagram.com/forgyft" class="fa fab fa-instagram"></a>
+							<a href="https://www.snapchat.com/forgyft" class="fa fab fa-snapchat-ghost"></a>
+							<a href="https://www.pinterest.com/forgyft" class="fa fab fa-pinterest"></a>
+						</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<style type="text/css">
+		body.pushable {
+			background: #545454 !important;
+		}
+	</style>
+	<script>
+		$(document)
+			.ready(function () {
+				// fix menu when passed
+				$('.masthead')
+					.visibility({
+						once: false,
+						onBottomPassed: function () {
+							$('.fixed.menu').transition('fade in');
+						},
+						onBottomPassedReverse: function () {
+							$('.fixed.menu').transition('fade out');
+						}
+					})
+				;
+				// create sidebar and attach to menu open
+				$('.ui.sidebar')
+					.sidebar('attach events', '.toc.item')
+				;
+			});
+	</script>
 {% endblock %}

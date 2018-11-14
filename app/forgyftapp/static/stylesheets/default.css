@@ -153,6 +153,12 @@ div.pusher {
     font-feature-settings: "smcp" 0, "onum" 0;
 }
 
+.divider-column {
+    position: relative;
+    padding: 0 !important;
+}
+
+
 .ui.main.container {
     background: #ffffff;
 }

@@ -17,6 +17,13 @@ from forgyftapp.models import GifteeProfile, GiftIdea
 def index(request):
 	return render(request, "homepage.html", {"page": "home"})
 
+def terms(request):
+	return render(request, "legal/terms.html")
+
+
+def privacy(request):
+	return render(request, "legal/privacy.html")
+
 @login_required
 def gift_request(request, profile=None):
 	if profile:

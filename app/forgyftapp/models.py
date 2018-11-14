@@ -120,7 +120,9 @@ class GifteeProfile(models.Model, OnCreate):
 
 	def onCreate(self):
 		super().onCreate()
-		broadcast_to_slack(f"Hey <!channel>, there was a new gift request created by {str(self.user)}. Login to the website to give gift suggestions.")
+		fulfillUrl = reverse("forgyftapp:fulfill", kwargs={"profile": self.pk})
+		broadcast_to_slack(f"Hey <!channel>, there was a new gift request created by {str(self.user)}. "
+		                   f"Enter gift ideas <{fulfillUrl}|here>")
 
 
 class GiftIdea(models.Model):
