@@ -7,8 +7,8 @@ echo Attempting to migrate DB changes
 python manage.py migrate
 
 # Collectstatic
-echo Collecting Staticfiles
-python manage.py collectstatic --no-input
+#echo Collecting Staticfiles
+#python manage.py collectstatic --no-input
 
 
 # Start Gunicorn processes
