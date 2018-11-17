@@ -18,11 +18,13 @@ def index(request):
 	return render(request, "homepage.html", {"page": "home"})
 
 def terms(request):
-	return render(request, "legal/terms.html")
+	return render(request, "static/terms.html")
 
+def about(request):
+	return render(request, "static/about.html")
 
 def privacy(request):
-	return render(request, "legal/privacy.html")
+	return render(request, "static/privacy.html")
 
 @login_required
 def gift_request(request, profile=None):

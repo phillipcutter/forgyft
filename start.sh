@@ -7,8 +7,10 @@ echo Attempting to migrate DB changes
 python manage.py migrate
 
 # Collectstatic
-if ["$COLLECT_STATIC" == "1"]
-then
+if [ "$COLLECT_STATIC" == "1" ]; then
+	echo Collecting Staticfiles
+	echo Collecting Staticfiles
+	echo Collecting Staticfiles
 	echo Collecting Staticfiles
 	python manage.py collectstatic --no-input
 fi
