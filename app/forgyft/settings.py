@@ -143,12 +143,13 @@ AUTH_PASSWORD_VALIDATORS = [
 AUTH_USER_MODEL = "forgyftapp.User"
 
 AUTHENTICATION_BACKENDS = (
-    'social_core.backends.github.GithubOAuth2',  # Github
+    # 'social_core.backends.github.GithubOAuth2',  # Github
+    'social_core.backends.amazon.AmazonOAuth2', # Amazon
     'social_core.backends.twitter.TwitterOAuth',  # Twitter
     'social_core.backends.open_id.OpenIdAuth',  # Google
     'social_core.backends.google.GoogleOpenId',  # Google
     'social_core.backends.google.GoogleOAuth2',  # Google
-    'social_core.backends.slack.SlackOAuth2',  # Slack
+    # 'social_core.backends.slack.SlackOAuth2',  # Slack
 
     'django.contrib.auth.backends.AllowAllUsersModelBackend',
 )

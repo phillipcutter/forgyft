@@ -887,7 +887,7 @@ balance-scale:
     terms:
       - balanced
       - justice
-      - legal
+      - static
       - measure
       - weight
   styles:
@@ -4946,7 +4946,7 @@ file-contract:
       - agreement
       - binding
       - document
-      - legal
+      - static
       - signature
   styles:
     - solid

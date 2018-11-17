@@ -12,9 +12,10 @@ urlpatterns = [
 	url(r'^fulfill/?$', basic_views.fulfill, name='fulfill'),
 	url(r'^fulfill/(?P<profile>[0-9]+)/?$', basic_views.fulfill, name='fulfill'),
 
-	# Boilerplate
+	# Static pages
 	url(r'^terms/?$', basic_views.terms, name='terms'),
 	url(r'^privacy/?$', basic_views.privacy, name='privacy'),
+	url(r'^about/?$', basic_views.about, name='about'),
 
 	# Auth views
 	url(r'^signup/?$', auth_views.signup, name='signup'),

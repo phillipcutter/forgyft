@@ -1,9 +1,11 @@
 <div class="ui fluid container">
 	<div class="ui segments" style="border: none; box-shadow: none">
 		<div class="ui segment" style="border-top: none; margin: 0 auto">
-			<a class="ui grey button" href="{% url 'social:begin' 'github' %}{% if next %}?next={{ next }}{% endif %}" style="width: 220px;">
-				<i class="github icon"></i>
-				Login with GitHub
+			<a class="ui light orange amazon button"
+			   href="{% url 'social:begin' 'amazon' %}{% if next %}?next={{ next }}{% endif %}"
+			   style="width: 220px;">
+				<i class="amazon icon"></i>
+				Login with Amazon
 			</a>
 		</div>
 		<div class="ui segment" style="border-top: none; margin: 0 auto">
@@ -19,9 +21,9 @@
 			</a>
 		</div>
 		<div class="ui segment" style="border-top: none; margin: 0 auto">
-			<a class="ui teal button" href="{% url 'social:begin' 'slack' %}{% if next %}?next={{ next }}{% endif %}" style="width: 220px;">
-				<i class="slack icon"></i>
-				Login with Slack
+			<a class="ui facebook button" href="{% url 'social:begin' 'facebook' %}{% if next %}?next={{ next }}{% endif %}" style="width: 220px;">
+				<i class="facebook icon"></i>
+				Login with Facebook
 			</a>
 		</div>
 	</div>
