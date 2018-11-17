@@ -7,9 +7,11 @@ echo Attempting to migrate DB changes
 python manage.py migrate
 
 # Collectstatic
-#echo Collecting Staticfiles
-#python manage.py collectstatic --no-input
-
+if ["$COLLECT_STATIC" == "1"]
+then
+	echo Collecting Staticfiles
+	python manage.py collectstatic --no-input
+fi
 
 # Start Gunicorn processes
 echo Starting Gunicorn.
