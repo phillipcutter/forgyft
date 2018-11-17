@@ -1,9 +1,9 @@
-{% extends "base.html" %}
+{% extends "base/base.html" %}
 
 {% block navbar %}
 	<div class="ui large top fixed hidden menu">
 		<div class="ui container">
-			{% include "navbar.html" %}
+			{% include "base/navbar.html" %}
 		</div>
 	</div>
 	<!--Sidebar Menu-->
@@ -27,11 +27,11 @@
 					{#                    <a class="toc item">#}
 					{#                        <i class="sidebar icon"></i>#}
 					{#                    </a>#}
-					{% include "navbar.html" %}
+					{% include "base/navbar.html" %}
 				</div>
 			</div>
 			<div class="ui text container">
-				<h1 style="font-family: 'Expletus Sans', cursive; color: #C0392B;
+				<h1 style="font-family: 'Expletus Sans', cursive; color: #FFFFFF;
 font-weight: 900;
 			text-shadow: 1px 0px 8px #000000;" class="ui inverted header">
 					Forgift
@@ -39,8 +39,8 @@ font-weight: 900;
 
 
 				<h2 style="font-weight: 900;
-			text-shadow: 1px 0px 8px #000;">
-					Do you need a gift for one of your friends but you don't know what to get them? Fill out a two
+			text-shadow: 1px 0px 8px #000; color: #FFFFFF;">
+					Do you need a gift for one of your friends but don't know what to get them? Fill out a two
 					minute
 					quiz about your friend - and we'll present you will gift ideas that will surely blow them away!
 
@@ -122,7 +122,7 @@ font-weight: 900;
 					</div>
 				</div>
 				<h4 class="ui horizontal header divider">
-					<a href="homepage.html#"> Blog</a>
+					<a href="/blog"> Blog</a>
 				</h4>
 				<h3 style="font-family:sans-serif;" class="ui header">
 					Did We Tell You About Our Satisfaction Guarantee?

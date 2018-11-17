@@ -31,6 +31,8 @@ ALLOWED_HOSTS = ["*"]
 
 AWS_PRELOAD_METADATA = True
 
+WAGTAIL_SITE_NAME = 'Forgift Blog'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -44,6 +46,23 @@ INSTALLED_APPS = [
     'forgyftapp',
     'social_django',
     'anymail',
+    'blog',
+
+    # Wagtail stuff below V
+    'wagtail.contrib.forms',
+    'wagtail.contrib.redirects',
+    'wagtail.embeds',
+    'wagtail.sites',
+    'wagtail.users',
+    'wagtail.snippets',
+    'wagtail.documents',
+    'wagtail.images',
+    'wagtail.search',
+    'wagtail.admin',
+    'wagtail.core',
+
+    'modelcluster',
+    'taggit',
 ]
 
 ANYMAIL = {
@@ -64,6 +83,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # Wagtail V
+    'wagtail.core.middleware.SiteMiddleware',
+    'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
 
 ROOT_URLCONF = 'forgyft.urls'
