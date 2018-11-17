@@ -21,7 +21,7 @@ def terms(request):
 	return render(request, "static/terms.html")
 
 def about(request):
-	return render(request, "static/about.html")
+	return render(request, "static/about.html", {"page": "about"})
 
 def privacy(request):
 	return render(request, "static/privacy.html")

@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base/base.html" %}
 {% block content %}
 
 	<div class="ui main container">
@@ -7,7 +7,7 @@
 		<div class="ui two column middle aligned very relaxed stackable grid">
 			<div class="column">
 				{% url 'login' as url %}
-				{% include "form_template.html" with action=url action_text="Login" omit_end=True %}
+				{% include "base/form_template.html" with action=url action_text="Login" omit_end=True %}
 				<a class="ui blue basic button" href="{% url "forgyftapp:reset" %}">
 					<i class="icon redo alternate"></i>
 					Reset Password

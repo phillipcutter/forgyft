@@ -18,6 +18,9 @@ class OnCreate:
 		pass
 
 
+
+
+
 class Slug(OnCreate, models.Model):
 	_slug = models.SlugField(max_length=7, blank=True)
 
@@ -102,7 +105,6 @@ class GifteeProfile(models.Model, OnCreate):
 		self.save()
 
 	def unsubmit(self):
-		print("UNSUBMITTING IDEAS")
 		self.published = False
 		self.save()
 

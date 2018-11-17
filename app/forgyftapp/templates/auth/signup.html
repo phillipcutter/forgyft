@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base/base.html" %}
 {% block content %}
 	<div class="ui main container">
 		<h1>Sign up</h1>
@@ -6,7 +6,7 @@
 		<div class="ui two column middle aligned very relaxed stackable grid">
 			<div class="column">
 				{% url 'signup' as url %}
-				{% include "form_template.html" with action=url action_text="Signup" %}
+				{% include "base/form_template.html" with action=url action_text="Signup" %}
 				<br>
 				<p>Already have an account? <a href="{% url "forgyftapp:login" %}">Login here</a></p>
 			</div>
