@@ -16,7 +16,6 @@ from forgyftapp.models import GifteeProfile, GiftIdea
 
 
 def index(request):
-	bugsnag.notify(Exception('Test error'))
 	return render(request, "homepage.html", {"page": "home"})
 
 def terms(request):
