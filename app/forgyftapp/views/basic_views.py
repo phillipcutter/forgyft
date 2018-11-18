@@ -1,3 +1,4 @@
+import bugsnag as bugsnag
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
@@ -15,6 +16,7 @@ from forgyftapp.models import GifteeProfile, GiftIdea
 
 
 def index(request):
+	bugsnag.notify(Exception('Test error'))
 	return render(request, "homepage.html", {"page": "home"})
 
 def terms(request):
