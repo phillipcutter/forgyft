@@ -76,6 +76,7 @@ EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
 DEFAULT_FROM_EMAIL = "support@forgift.org"
 
 MIDDLEWARE = [
+    'bugsnag.django.middleware.BugsnagMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -190,6 +191,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+BUGSNAG = {
+    'api_key': '***REMOVED***',
+}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
