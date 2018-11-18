@@ -25,7 +25,7 @@ body.default {
     /* Needed for children to be absolutely positioned relative to the parent. */
     position: relative;
     /* The height of the container. Must be set, but it doesn't really matter what the value is. */
-    height: 50vh;
+    height: 640px;
 }
 
 .parallax::after {
@@ -40,9 +40,10 @@ body.default {
     /* Move the pseudo-element back away from the camera,
 	 * then scale it back up to fill the viewport.
 	 * Because the pseudo-element is further away, it appears to move more slowly, like in real life. */
-    transform: translateZ(-1px) scale(1.6) translateY(-80px);
+    transform: translateZ(-1px) scale(1.75) translateY(-80px);
     /* Force the background image to fill the whole element. */
     background-size: cover;
+    background-position: center;
     /* Keep the image from overlapping sibling elements. */
     z-index: -1;
 }
