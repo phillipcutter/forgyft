@@ -6,8 +6,8 @@ services:
     restart: always
     volumes:
       - /postgres-data:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_PASSWORD=5oPlSmMgE*VMWkM8d76$%3xZ$D^Tq02r
+#    environment:
+#      - POSTGRES_PASSWORD="***REMOVED***"
     ports:
       - "5432:5432"
     healthcheck:

@@ -7,7 +7,7 @@ services:
       - LETSENCRYPT_HOST=www.forgift.org
       - LETSENCRYPT_EMAIL=letsencrypt@forgift.org
       - COLLECT_STATIC=${COLLECT_STATIC}
-      - POSTGRES_PASSWORD=5oPlSmMgE*VMWkM8d76$%3xZ$D^Tq02r
+#      - POSTGRES_PASSWORD="***REMOVED***"
   nginx-proxy:
     restart: always
 #    image: jwilder/nginx-proxy
