@@ -43,12 +43,15 @@ def gift_request(request, profile=None):
 
 		return render(request, "request.html", {"giftee_profiles": giftee_profiles, "page": "request"})
 
+def gift_form_submitted(request):
+	return render(request, "gift_form_submitted.html", {"page": "request"})
+
 def gift_form(request):
 	if request.method == "POST":
 		form = GifteeProfileForm(request.POST)
 		if form.is_valid():
 			form.save(user=request.user)
-			return redirect("forgyftapp:index")
+			return redirect("forgyftapp:gift_form_submitted")
 	else:
 		form = GifteeProfileForm()
 
