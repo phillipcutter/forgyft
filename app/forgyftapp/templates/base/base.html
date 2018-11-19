@@ -93,7 +93,7 @@
     {% endblock %}
 </head>
 
-<body class="template pushable" style="height: auto">
+<body style="height: auto">
 {#<div class="ui inverted vertical center aligned segment">#}
 
 {% block navbar %}
@@ -104,9 +104,7 @@
     </div>
     <!--Sidebar Menu-->
     <div class="ui vertical inverted sidebar menu">
-        <a class="active item">Home</a><a class="item">Work</a><a class="item">Company</a><a
-            class="item">Careers</a><a
-            class="item">Login</a><a class="item">Signup</a>
+        {% include "base/navbar.html" with sidebar=True pointing=True %}
     </div>
 {% endblock %}
 {% block content %}
@@ -135,6 +133,10 @@
         $('.ui.checkbox')
             .checkbox()
         ;
+	    // create sidebar and attach to menu open
+	    $('.ui.sidebar')
+		    .sidebar('attach events', '.toc.item')
+	    ;
         try {
             setup();
         }

@@ -1,16 +1,14 @@
 {% extends "base/base.html" %}
 
 {% block navbar %}
-	<div class="ui large top fixed hidden menu">
+	<div class="ui large top fixed hidden menu homepage" id="fixedMenu">
 		<div class="ui container">
-			{% include "base/navbar.html" with pointing=True %}
+			{% include "base/navbar.html" with pointing=True sidebar=True %}
 		</div>
 	</div>
 	<!--Sidebar Menu-->
 	<div class="ui vertical inverted sidebar menu">
-		<a class="active item">Home</a><a class="item">Work</a><a class="item">Company</a><a
-			class="item">Careers</a><a
-			class="item">Login</a><a class="item">Signup</a>
+		{% include "base/navbar.html" with sidebar=True pointing=True%}
 	</div>
 {% endblock %}
 
@@ -242,10 +240,6 @@ font-weight: 900;
 						}
 					})
 				;
-				{#// create sidebar and attach to menu open#}
-				{#$('.ui.sidebar')#}
-				{#	.sidebar('attach events', '.toc.item')#}
-				{#;#}
 			});
 	</script>
 {% endblock %}

@@ -1,5 +1,8 @@
-
-
+{% if not sidebar %}
+<a class="toc item">
+	<i class="sidebar icon"></i>
+</a>
+{% endif %}
 <a class="{% if page == "home" %}active {% endif %}item" href="{% url "forgyftapp:index" %}">
 {% if not pointing %}
 	<img src="{% load static %}{% static "favicon/favicon-32x32.png" %}" style="width: 18px; margin-right: 4px"/>
@@ -15,10 +18,10 @@
 {% endif %}
 <div class="right menu">
 	{% if not request.user.is_authenticated %}
-		<div class="item">
+		<div class="item button">
 			<a class="ui button" href="{% url "forgyftapp:login" %}">Login</a>
 		</div>
-		<div class="item">
+		<div class="item button">
 			<a class="ui primary button" href="{% url "forgyftapp:signup" %}">Sign up</a>
 		</div>
 	{% else %}

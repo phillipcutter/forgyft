@@ -424,31 +424,53 @@ body.pushable {
     display: none;
 }
 
-/*@media only screen and (max-width: 700px) {*/
-    /*.ui.fixed.menu {*/
-        /*display: none !important;*/
-    /*}*/
-
-    /*.secondary.pointing.menu .item,*/
-    /*.secondary.pointing.menu .menu {*/
-        /*display: none;*/
-    /*}*/
-
-    /*.secondary.pointing.menu .toc.item {*/
-        /*display: block;*/
-    /*}*/
-
-    /*.masthead.segment {*/
-        /*min-height: 350px;*/
-    /*}*/
-
-    /*.masthead h1.ui.header {*/
-        /*font-size: 2em;*/
-        /*margin-top: 1.5em;*/
-    /*}*/
-
-    /*.masthead h2 {*/
-        /*margin-top: 0.5em;*/
-        /*font-size: 1.5em;*/
-    /*}*/
+/*div.menu > div.ui.container > .toc.item {*/
+    /*display: none;*/
 /*}*/
+
+.secondary.pointing.menu .item.button {
+    padding-left: 4px !important;
+    padding-right: 4px !important;
+}
+
+.sidebar.menu .right.menu .item.button {
+    display: none !important;
+}
+
+@media only screen and (max-width: 700px) {
+    .ui.fixed.menu.homepage {
+        display: none !important;
+    }
+
+    #fixedMenu {
+        display: none !important;
+    }
+
+    .secondary.pointing.menu .item:not(.button),
+    .secondary.pointing.menu .menu,
+    .fixed.top.menu .item:not(.button),
+    .fixed.top.menu .menu {
+        display: none;
+    }
+
+    .secondary.pointing.menu .toc.item,
+    .fixed.top.menu .toc.item {
+        display: block;
+    }
+
+    .masthead.segment {
+        min-height: 350px;
+    }
+
+    .masthead h1.ui.header {
+        font-size: 2em;
+        margin-top: 1.5em;
+    }
+
+    .masthead h2 {
+        margin-top: 0.5em;
+        font-size: 1.5em;
+    }
+
+
+}

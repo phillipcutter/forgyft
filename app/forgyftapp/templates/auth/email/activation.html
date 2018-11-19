@@ -1,7 +1,10 @@
 {% autoescape off %}
 	Hello {{ user.first_name }},
 
-	Please click on the link below to confirm your registration:
+	Please click on the link below to confirm your account registration:
 
 	http://{{ domain }}{% url 'forgyftapp:activate' uidb64=uid token=token %}
+
+	Best Regards,
+	The Forgift Team
 {% endautoescape %}
