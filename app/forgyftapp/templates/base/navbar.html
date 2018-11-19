@@ -1,7 +1,9 @@
 
 
 <a class="{% if page == "home" %}active {% endif %}item" href="{% url "forgyftapp:index" %}">
-	<img src="{% load static %}{% static "favicon/favicon-32x32.png" %}"/>
+{% if not pointing %}
+	<img src="{% load static %}{% static "favicon/favicon-32x32.png" %}" style="width: 18px; margin-right: 4px"/>
+{% endif %}
 	Home
 </a>
 {#<a class="{% if page == "blog" %}active {% endif %}item" href="/blog">Blog</a>#}
