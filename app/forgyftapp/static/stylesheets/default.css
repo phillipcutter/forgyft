@@ -420,8 +420,13 @@ body.pushable {
     padding: 5em 0em;
 }
 
-.secondary.pointing.menu .toc.item {
+.secondary.pointing.menu .toc.item,
+.fixed.top.menu .toc.item{
     display: none;
+}
+
+.fixed.top.menu .item:nth-child(2) {
+    border-left: 1px solid rgba(34, 36, 38, .1);
 }
 
 /*div.menu > div.ui.container > .toc.item {*/
@@ -433,7 +438,7 @@ body.pushable {
     padding-right: 4px !important;
 }
 
-.sidebar.menu .right.menu .item.button {
+.sidebar.menu .right.menu  {
     display: none !important;
 }
 
@@ -448,9 +453,15 @@ body.pushable {
 
     .secondary.pointing.menu .item:not(.button),
     .secondary.pointing.menu .menu,
-    .fixed.top.menu .item:not(.button),
-    .fixed.top.menu .menu {
+    .fixed.top.menu .item:not(.button)
+    /*.fixed.top.menu :not(.right.menu)*/
+    /*.fixed.top.menu .menu*/
+    {
         display: none;
+    }
+
+    .fixed.top.menu .simple.dropdown {
+        display: initial !important;
     }
 
     .secondary.pointing.menu .toc.item,
