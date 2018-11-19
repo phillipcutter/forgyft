@@ -118,7 +118,7 @@ class GifteeProfile(models.Model, OnCreate):
 
 
 	def __str__(self):
-		return f"Giftee Profile {self.pk}: {self.interests}"
+		return f"Giftee Profile {self.pk} for {self.name} from {self.user.get_full_name()}"
 
 	def onCreate(self):
 		super().onCreate()

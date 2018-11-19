@@ -70,7 +70,7 @@ ANYMAIL = {
     "MAILGUN_SENDER_DOMAIN": "forgift.org"
 }
 
-LOGIN_URL = reverse_lazy("forgyftapp:login")
+LOGIN_URL = reverse_lazy("forgyftapp:signup")
 
 EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
 DEFAULT_FROM_EMAIL = "support@forgift.org"
