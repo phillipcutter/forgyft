@@ -1,5 +1,10 @@
-<a class="{% if page == "home" %}active {% endif %}item" href="{% url "forgyftapp:index" %}">Home</a>
-<a class="{% if page == "blog" %}active {% endif %}item" href="/blog">Blog</a>
+
+
+<a class="{% if page == "home" %}active {% endif %}item" href="{% url "forgyftapp:index" %}">
+	<img src="{% load static %}{% static "favicon/favicon-32x32.png" %}"/>
+	Home
+</a>
+{#<a class="{% if page == "blog" %}active {% endif %}item" href="/blog">Blog</a>#}
 <a class="{% if page == "request" %}active {% endif %}item" href="{% url "forgyftapp:request" %}">Quiz</a>
 {#<a class="{% if page == "how_it_works" %}active {% endif %}item">How it Works</a>#}
 <a class="{% if page == "about" %}active {% endif %}item" href="{% url "forgyftapp:about" %}">About Us</a>
