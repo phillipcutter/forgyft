@@ -5,9 +5,12 @@
 {% endif %}
 <a class="{% if page == "home" %}active {% endif %}item" href="{% url "forgyftapp:index" %}">
 {% if not pointing %}
-	<img src="{% load static %}{% static "favicon/favicon-32x32.png" %}" style="width: 18px; margin-right: 4px"/>
-{% endif %}
+	<img class="logo" src="{% load static %}{% static "favicon/favicon-32x32.png" %}"
+	     style="width: 18px; margin-right: 4px"> Forgift </a>
+{% else %}
 	Home
+{% endif %}
+
 </a>
 {#<a class="{% if page == "blog" %}active {% endif %}item" href="/blog">Blog</a>#}
 <a class="{% if page == "request" %}active {% endif %}item" href="{% url "forgyftapp:request" %}">Quiz</a>
