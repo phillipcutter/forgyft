@@ -1,7 +1,10 @@
 {% extends "base/base.html" %}
 {% block content %}
-	<div class="center">
-		<h1>Your Password Has Been Reset</h1>
-		<p>You should now be able to login in to your account with your new password <a href="{% url "forgyftapp:login" %}">here</a>.</p>
+	<div class="ui main container">
+		<div style="text-align: center">
+			<h1>Your Password Has Been Reset</h1>
+			<p>You should now be able to login in to your account with your new password <a
+					href="{% url "forgyftapp:login" %}">here</a>.</p>
+		</div>
 	</div>
 {% endblock %}

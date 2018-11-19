@@ -1,11 +1,9 @@
 {% extends "blog/blog_base.html" %}
 
 {% block content %}
-	<div class="ui main container">
-		{% load wagtailcore_tags %}
+	{% load wagtailcore_tags %}
 
-		{% block blog_content %}
-			{{ page.body|richtext }}
-		{% endblock %}
-	</div>
+	{% block blog_content %}
+		{{ page.body|richtext }}
+	{% endblock %}
 {% endblock %}
