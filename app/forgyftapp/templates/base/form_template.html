@@ -47,6 +47,9 @@
 						<label style="font-weight: 100; font-size: 13px; display: inline"> - {% autoescape off %}{{ field.help_text }}{% endautoescape %}</label>
 					{% endif %}
 					<div class="ui input">
+{#                        {% if field.label == "Max Price" %}#}
+{#                            <div style="margin-top: auto; margin-bottom: auto; margin-right: 4px; margin-left: 2px">$</div>#}
+{#                        {% endif %}#}
 						{{ field }}
 					</div>
 				</div>

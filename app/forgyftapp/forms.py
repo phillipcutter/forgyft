@@ -23,9 +23,9 @@ class GifteeProfileForm(ModelForm):
 	age = forms.IntegerField(max_value=125, help_text="How old is the receiver of the gift?", required=True)
 	relationship = forms.CharField(help_text="What is your relationship to the receiver, "
 	                                         "please be as specific as possible?", required=True)
-	price_upper = forms.IntegerField(max_value=10000, label="Max Price", help_text="What is the most you are willing to spend on a gift? Please enter a number.", min_value=5)
+	price_upper = forms.IntegerField(max_value=10000, label="Max Price (Dollars)", help_text="What is the most you are willing to spend on a gift? Please enter a number.", min_value=5)
 	interests = forms.CharField(help_text="What are their main interests/hobbies, please be as specific as possible?",
-	                            required=True, widget=forms.TextInput)
+	                            required=True, widget=forms.Textarea(attrs={"rows": "2"}))
 	existing_related_items = forms.CharField(label="Items They Own",
 	                                         help_text="What items do they already have that are"
 	                                                   " related to their main interests/hobbies?")
@@ -45,8 +45,8 @@ class GifteeProfileForm(ModelForm):
 
 	class Meta:
 		model = GifteeProfile
-		fields = ("gender", "age", "relationship", "price_upper",
-		          "interests", "existing_related_items", "extra_info", "name")
+		fields = ("name", "age", "gender", "relationship", "price_upper",
+		          "interests", "existing_related_items", "extra_info")
 
 
 class LoginForm(ModelForm):
