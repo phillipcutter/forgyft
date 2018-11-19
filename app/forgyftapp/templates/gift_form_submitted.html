@@ -1,0 +1,16 @@
+{% extends "base/base.html" %}
+{% block content %}
+	<div class="ui main container">
+
+		<h1 style="text-align: center; padding-bottom: 16px">Your Gift Idea Request Has Been Submitted</h1>
+		<p>Thanks for filling out the quiz! We'll get back to you with an email when your gift ideas are finished,
+		make sure to check back regularly so you don't miss them.</p>
+		<div style="text-align: center">
+			<a class="ui primary button" href="{% url "forgyftapp:request" %}">
+				Back to My Requests
+			</a>
+		</div>
+
+
+	</div>
+{% endblock %}
