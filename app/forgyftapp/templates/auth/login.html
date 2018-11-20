@@ -4,7 +4,8 @@
 	<div class="ui main container">
 		<h1>Login</h1>
 
-		<div class="ui two column middle aligned very relaxed stackable grid">
+{#		<div class="ui two column middle aligned very relaxed stackable grid">#}
+		<div class="ui column middle aligned very relaxed stackable grid">
 			<div class="column">
 				{% url 'login' as url %}
 				{% include "base/form_template.html" with action=url action_text="Login" omit_end=True %}
@@ -16,14 +17,14 @@
 			</div>
 			</form>
 		</div>
-		<div class="divider-column">
-			<div class="ui vertical divider">
-				Or
-			</div>
-		</div>
-		<div class="center aligned column">
-			{% include "auth/social_template.html" with next=next %}
-		</div>
+{#		<div class="divider-column">#}
+{#			<div class="ui vertical divider">#}
+{#				Or#}
+{#			</div>#}
+{#		</div>#}
+{#		<div class="center aligned column">#}
+{#			{% include "auth/social_template.html" with next=next %}#}
+{#		</div>#}
 	</div>
 
 {% endblock %}
