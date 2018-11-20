@@ -95,16 +95,18 @@ class GifteeProfile(models.Model, OnCreate):
 			return "We're still deciding on the perfect gifts, please check back soon."
 
 	def submit(self, request):
-		view_url = request.build_absolute_uri(reverse("forgyftapp:request", kwargs={"profile": self.pk}))
-		send_mail(f"Your gift ideas for {self.name} are ready",
-		          f"To view your gift ideas click this link: {view_url}",
-		          "noreply@forgyft.com",
-		          [self.user.email],
-		          html_message=f"To view your gift ideas click <a href=\"{view_url}\">here</a>")
+		print("SUBMIT")
+		# view_url = request.build_absolute_uri(reverse("forgyftapp:request", kwargs={"profile": self.pk}))
+		# send_mail(f"Your gift ideas for {self.name} are ready",
+		#           f"To view your gift ideas click this link: {view_url}",
+		#           "noreply@forgyft.com",
+		#           [self.user.email],
+		#           html_message=f"To view your gift ideas click <a href=\"{view_url}\">here</a>")
 		self.published = True
 		self.save()
 
 	def unsubmit(self):
+		print("UNSUBMIT")
 		self.published = False
 		self.save()
 
@@ -130,6 +132,7 @@ class GifteeProfile(models.Model, OnCreate):
 class GiftIdea(models.Model):
 	idea = models.TextField()
 	link = models.URLField(max_length=600)
+	explanation = models.TextField()
 	published = models.BooleanField(default=False)
 	giftee_profile = models.ForeignKey(GifteeProfile, related_name="ideas", on_delete=models.PROTECT)
 
