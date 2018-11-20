@@ -8,6 +8,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 # Create your views here.
 from django.template.response import TemplateResponse
 from django.urls import reverse_lazy, reverse
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView, ListView
 
 from forgyftapp.forms import GifteeProfileForm, GiftIdeaForm, GiftIdeaFormSet
@@ -82,6 +83,8 @@ def fulfill(request, profile=None):
 					giftee_profile.submit(request)
 				else:
 					giftee_profile.unsubmit()
+
+				return redirect("forgyftapp:fulfill", profile=profile)
 		else:
 			gift_ideas = GiftIdeaFormSet(instance=giftee_profile)
 

@@ -29,152 +29,186 @@
 		{% if gift_ideas %}
 			<h1 style="text-align: center; padding-bottom: 4px">Enter Gift Ideas
 				for {{ giftee_profile.user.first_name }}'s Gift Request</h1>
-			<div class="ui two column stackable grid">
-				<div class="six wide column">
-					<div class="ui text container segment" style="width: 100%">
-						<h3 class="ui header">Giftee Profile</h3>
+			<div>
+				<form action="" method="post" id="ideaForm">{% csrf_token %}
+					{{ form.as_p }}
 
-						<div class="ui dividing sub header">Gender</div>
-						<p>{{ giftee_profile.gender_string }}</p>
-
-						<div class="ui dividing sub header">Age</div>
-						<p>{{ giftee_profile.age }}</p>
-
-						<div class="ui dividing sub header">Relationship</div>
-						<p>{{ giftee_profile.relationship }}</p>
-
-						<div class="ui dividing sub header">Maximum Price</div>
-						<p>{{ giftee_profile.price_upper }}</p>
-
-						<div class="ui dividing sub header">Interests</div>
-						<p>{{ giftee_profile.interests }}</p>
-
-						{% if giftee_profile.existing_related_items %}
-						<div class="ui dividing sub header">Items They Already Have</div>
-						<p>{{ giftee_profile.existing_related_items }}</p>
-						{% endif %}
-
-						{% if giftee_profile.extra_info %}
-						<div class="ui dividing sub header">Extra Info</div>
-						<p>{{ giftee_profile.extra_info }}</p>
-						{% endif %}
-					</div>
-				</div>
-				<div class="ten wide column">
-					<form action="" method="post" id="ideaForm">{% csrf_token %}
-						{{ form.as_p }}
-
-						<table class="ui table" style="margin-top: 0">
-							{{ gift_ideas.management_form }}
-							<!-- After management form -->
-							{% for form in gift_ideas.forms %}
-								{% if forloop.first %}
-									<thead>
-									<tr>
-										{% for field in form.visible_fields %}
-											<th>{{ field.label|capfirst }}</th>
-										{% endfor %}
-									</tr>
-									</thead>
-								{% endif %}
-								<tbody>
-								<tr class="{% cycle row1 row2 %} formset_row">
+					<table class="ui table" style="margin-top: 0">
+						{{ gift_ideas.management_form }}
+						<!-- After management form -->
+						{% for form in gift_ideas.forms %}
+							{% if forloop.first %}
+								<thead>
+								<tr>
 									{% for field in form.visible_fields %}
-										<td>
-											{# Include the hidden fields in the form #}
-											{% if forloop.first %}
-												{% for hidden in form.hidden_fields %}
-													{{ hidden }}
-												{% endfor %}
-											{% endif %}
-											{% if field.errors %}
-												<div class="ui list">
-													{% for error in field.errors %}
-														<div class="item">
-															<div class="ui negative message">
-																<p>
-																	{{ error }}
-																</p>
-															</div>
+										<th>{{ field.label|capfirst }}</th>
+									{% endfor %}
+								</tr>
+								</thead>
+							{% endif %}
+							<tbody>
+							<tr class="{% cycle row1 row2 %} formset_row">
+								{% for field in form.visible_fields %}
+									<td>
+										{% if forloop.first %}
+											{% if form.instance.pk %}{{ form.DELETE }}{% endif %}
+											{% for hidden in form.hidden_fields %}
+												{{ hidden }}
+											{% endfor %}
+										{% endif %}
+										{% if field.errors %}
+											<div class="ui list">
+												{% for error in field.errors %}
+													<div class="item">
+														<div class="ui negative message">
+															<p>
+																{{ error }}
+															</p>
 														</div>
-													{% endfor %}
+													</div>
+												{% endfor %}
+											</div>
+										{% endif %}
+										{% if "textarea" in field.field.widget.template_name %}
+											<div class="field">
+												{% if field.help_text %}
+													<label style="font-weight: 100; font-size: 13px; display: inline">
+														-
+														{% autoescape off %}
+															{{ field.help_text }}
+														{% endautoescape %}
+													</label>
+												{% endif %}
+												<textarea rows="1" name="{{ field.html_name }}"
+												          id="{{ field.id_for_label }}"
+												          style="width: 100%">{% if field.value %}{{ field.value }}{% endif %}</textarea>
+											</div>
+										{% elif field.field.widget.input_type == "checkbox" and field.label != "Delete" %}
+											<div class="inline field">
+												<div class="ui toggle checkbox">
+													<input {% if field.value == True %}checked{% endif %}
+													       type="checkbox" tabindex="0" class="hidden toggle"
+													       style="display: inline"
+													       name="{{ field.html_name }}"
+													       id="{{ field.id_for_label }}">
+													{% if field.help_text %}
+														<p style="font-weight: 100; display: inline"> -
+															{% autoescape off %}
+																{{ field.help_text }}{% endautoescape %}</p>
+													{% endif %}
 												</div>
-											{% endif %}
-											{% if "textarea" in field.field.widget.template_name %}
+											</div>
+										{% else %}
+											{% if field.label != "Delete" %}
 												<div class="field">
 													{% if field.help_text %}
 														<label style="font-weight: 100; font-size: 13px; display: inline">
-															-
 															{% autoescape off %}
-																{{ field.help_text }}
+																- {{ field.help_text }}
 															{% endautoescape %}
 														</label>
 													{% endif %}
-													<textarea rows="1" name="{{ field.html_name }}"
-													          id="{{ field.id_for_label }}"
-													          style="width: 100%">{% if field.value %}{{ field.value }}{% endif %}</textarea>
+													<div class="ui input" style="width: 100%">{{ field }}</div>
 												</div>
-											{% elif field.field.widget.input_type == "checkbox" and field.label != "Delete" %}
-												<div class="inline field">
-													<div class="ui toggle checkbox">
-														<input {% if field.value == True %}checked{% endif %}
-														       type="checkbox" tabindex="0" class="hidden toggle"
-														       style="display: inline"
-														       name="{{ field.html_name }}"
-														       id="{{ field.id_for_label }}">
-														{% if field.help_text %}
-															<p style="font-weight: 100; display: inline"> -
-																{% autoescape off %}
-																	{{ field.help_text }}{% endautoescape %}</p>
-														{% endif %}
-													</div>
-												</div>
-											{% else %}
-												{% if field.label != "Delete" %}
-													<div class="field">
-														{% if field.help_text %}
-															<label style="font-weight: 100; font-size: 13px; display: inline">
-																{% autoescape off %}
-																	- {{ field.help_text }}
-																{% endautoescape %}
-															</label>
-														{% endif %}
-														<div class="ui input" style="width: 100%">
-															{{ field }}
-														</div>
-													</div>
-												{% endif %}
 											{% endif %}
-										</td>
-									{% endfor %}
-								</tr>
-								</tbody>
+										{% endif %}
+									</td>
+								{% endfor %}
+							</tr>
+							</tbody>
 
-							{% endfor %}
-						</table>
-						<div class="ui one column stackable center aligned page grid">
-							<div class="column twelve wide">
-								<div class="ui buttons">
-									<input class="ui positive button" type="submit" value="Save"/>
-									<div class="or"></div>
-									<a class="ui negative button" href="{% url 'forgyftapp:fulfill' %}">Back</a>
-								</div>
+						{% endfor %}
+					</table>
+					<div class="ui one column stackable center aligned page grid">
+						<div class="column sixteen wide">
+							<div class="ui fluid buttons">
+								<input class="ui positive button" type="submit" value="Save"/>
+								<div class="or"></div>
+								<a class="ui negative button" href="{% url 'forgyftapp:fulfill' %}">Back</a>
 							</div>
 						</div>
+					</div>
 
-					</form>
+				</form>
+
+
+{#				<form id="myForm" method="post" action="">#}
+{#					{% csrf_token %}#}
+{#					<table border="0" cellpadding="0" cellspacing="0">#}
+{#						<tbody>#}
+{#						{% for form in gift_ideas.forms %}#}
+{#							<tr>#}
+{#								{% for field in form.visible_fields %}#}
+{#									{% if forloop.first %}#}
+{#										<td>#}
+{#											{% for hidden in form.hidden_fields %}#}
+{#												{{ hidden }}#}
+{#											{% endfor %}#}
+{#											{% if form.instance.pk %}{{ form.DELETE }}{% endif %}#}
+{#											{{ field }}#}
+{#										</td>#}
+{#									{% else %}#}
+{#										<td>{{ field }}</td>#}
+{#									{% endif %}#}
+{#								{% endfor %}#}
+{#							</tr>#}
+{#						{% endfor %}#}
+{#						</tbody>#}
+{#					</table>#}
+{#					{{ gift_ideas.management_form }}#}
+{#					<div class="ui one column stackable center aligned page grid">#}
+{#						<div class="column sixteen wide">#}
+{#							<div class="ui fluid buttons">#}
+{#								<input class="ui positive button" type="submit" value="Save"/>#}
+{#								<div class="or"></div>#}
+{#								<a class="ui negative button" href="{% url 'forgyftapp:fulfill' %}">Back</a>#}
+{#							</div>#}
+{#						</div>#}
+{#					</div>#}
+{##}
+{#				</form>#}
+			</div>
+			<div style="padding-top: 16px">
+				<div class="ui container segment" style="width: 100%">
+					<h3 class="ui header">Giftee Profile</h3>
+
+					<div class="ui dividing sub header">Gender</div>
+					<p>{{ giftee_profile.gender_string }}</p>
+
+					<div class="ui dividing sub header">Age</div>
+					<p>{{ giftee_profile.age }}</p>
+
+					<div class="ui dividing sub header">Relationship</div>
+					<p>{{ giftee_profile.relationship }}</p>
+
+					<div class="ui dividing sub header">Maximum Price</div>
+					<p>{{ giftee_profile.price_upper }}</p>
+
+					<div class="ui dividing sub header">Interests</div>
+					<p>{{ giftee_profile.interests }}</p>
+
+					{% if giftee_profile.existing_related_items %}
+						<div class="ui dividing sub header">Items They Already Have</div>
+						<p>{{ giftee_profile.existing_related_items }}</p>
+					{% endif %}
+
+					{% if giftee_profile.extra_info %}
+						<div class="ui dividing sub header">Extra Info</div>
+						<p>{{ giftee_profile.extra_info }}</p>
+					{% endif %}
 				</div>
 			</div>
+
 		{% else %}
 			<h1 style="text-align: center; padding-bottom: 4px">Unfulfilled Gift Requests</h1>
 			<div class="ui divider"></div>
 			<div style="margin-left:auto;margin-right:auto;">
-				<div class="ui cards">
+				<div {% if giftee_profiles_unpublished %}class="ui cards"{% endif %}>
 					{% for giftee_profile in giftee_profiles_unpublished %}
 						<div class="u card">
 							<div class="content">
 								<div class="header">
-									Gift Ideas for {{ giftee_profile.name}}
+									Gift Ideas for {{ giftee_profile.name }}
 								</div>
 								<div class="meta">
 									From {{ giftee_profile.user.email }}
@@ -191,7 +225,9 @@
 							</div>
 						</div>
 					{% empty %}
-						<div class="ui disabled header" style="text-align: center; width: 100%; margin-top: 32px;">There are currently no unfulfilled gift requests.</div>
+						<div class="ui disabled header" style="text-align: center; width: 100%; margin-top: 32px;">There
+							are currently no unfulfilled gift requests.
+						</div>
 					{% endfor %}
 				</div>
 			</div>
@@ -221,7 +257,9 @@
 							</div>
 						</div>
 					{% empty %}
-						<div class="ui disabled header" style="text-align: center; width: 100%; margin-top: 32px;">There are currently no fulfilled gift requests.</div>
+						<div class="ui disabled header" style="text-align: center; width: 100%; margin-top: 32px;">There
+							are currently no fulfilled gift requests.
+						</div>
 					{% endfor %}
 				</div>
 			</div>
@@ -234,8 +272,9 @@
 
 		checked = {% if published %}true{% else %}false{% endif %};
 
-		$(document).ready(function() {
+		$(document).ready(function () {
 			$('.formset_row').formset({
+			{#$('#myForm tbody tr').formset({#}
 				addText: 'Add an Idea',
 				addCssClass: 'primary ui button add add-row',
 				deleteText: 'Remove',
@@ -243,7 +282,7 @@
 				added: function (row) {
 					setup();
 				},
-				prefix: 'familymember_set'
+				prefix: '{{ gift_ideas.prefix }}'
 			});
 		});
 

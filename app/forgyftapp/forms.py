@@ -11,9 +11,9 @@ class GiftIdeaForm(ModelForm):
 
 	class Meta:
 		model = GiftIdea
-		fields = ("idea", "link", "published")
+		fields = ("idea", "explanation", "link", "published")
 
-GiftIdeaFormSet = inlineformset_factory(GifteeProfile, GiftIdea, form=GiftIdeaForm, extra=1)
+GiftIdeaFormSet = inlineformset_factory(GifteeProfile, GiftIdea, form=GiftIdeaForm, extra=1, can_delete=True)
 
 class GifteeProfileForm(ModelForm):
 
