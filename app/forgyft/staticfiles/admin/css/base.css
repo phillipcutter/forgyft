@@ -13,6 +13,25 @@ body {
     background: #fff;
 }
 
+/*  Scrolling on IOS  */
+
+body {
+  padding: 20px;
+}
+
+div {
+  width: 200px;
+  height: 200px;
+  margin-right: 20px;
+  overflow-y: scroll; /* has to be scroll, not auto */
+  float: left;
+}
+
+.touch {
+  -webkit-overflow-scrolling: touch;
+}
+
+
 /* LINKS */
 
 a:link, a:visited {
