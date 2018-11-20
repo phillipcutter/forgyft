@@ -67,13 +67,14 @@ class UserForm(ModelForm):
 	first_name = forms.CharField(label="First Name", widget=forms.TextInput, required=True)
 	last_name = forms.CharField(label="Last Name", widget=forms.TextInput, required=True)
 	password = forms.CharField(label="Password", widget=forms.PasswordInput, min_length=6, strip=False)
-
+	confirm_password = forms.CharField(label="Confirm Password", widget=forms.PasswordInput(), min_length=6,
+	                                   strip=False)
 	class Meta:
 		model = User
-		fields = ("email", "password", "first_name", "last_name")
+		fields = ("email", "password", "confirm_password", "first_name", "last_name")
 
 	def save(self, commit=True, **kwargs):
-		user = User(**{k: self.cleaned_data[k] for k in self.cleaned_data if k != "password"},
+		user = User(**{k: self.cleaned_data[k] for k in self.cleaned_data if k != "password" and k != "confirm_password"},
 		            username=self.cleaned_data["email"])
 		user.set_password(self.cleaned_data["password"])
 
@@ -81,6 +82,13 @@ class UserForm(ModelForm):
 			user.save()
 
 		return user
+
+	def clean_confirm_password(self):
+		password1 = self.cleaned_data.get("password")
+		password2 = self.cleaned_data.get("confirm_password")
+		if password1 and password2 and password1 != password2:
+			raise ValidationError("Both passwords do not match.")
+		return password2
 
 	def clean_email(self):
 		email = self.cleaned_data["email"]

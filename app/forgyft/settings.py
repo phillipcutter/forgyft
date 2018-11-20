@@ -75,6 +75,9 @@ LOGIN_URL = reverse_lazy("forgyftapp:signup")
 EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
 DEFAULT_FROM_EMAIL = "support@forgift.org"
 
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 ABSOLUTE_URI = "https://www.forgift.org"
 
 MIDDLEWARE = [

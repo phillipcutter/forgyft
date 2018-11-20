@@ -112,9 +112,10 @@ class GifteeProfile(models.Model, OnCreate):
 		self.save()
 
 	def unsubmit(self):
-		debug_log(f"Unsubmitted gift ideas for {self.name}, as requested by {self.user.get_full_name()}")
-		self.published = False
-		self.save()
+		if self.published:
+			debug_log(f"Unsubmitted gift ideas for {self.name}, as requested by {self.user.get_full_name()}")
+			self.published = False
+			self.save()
 
 	def gender_string(self):
 		choices = {}
