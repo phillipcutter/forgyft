@@ -25,10 +25,10 @@
 			margin-left: 12px;
 		}
 	</style>
-	<div class="ui main container">
+	<div class="ui main container" style="padding-bottom: 48px">
 		{% if gift_ideas %}
 			<h1 style="text-align: center; padding-bottom: 4px">Enter Gift Ideas
-				for {{ giftee_profile.user.first_name }}'s Gift Request</h1>
+				for {{ giftee_profile.name }} by {{ giftee_profile.user.first_name }}'s request</h1>
 			<div>
 				<form action="" method="post" id="ideaForm">{% csrf_token %}
 					{{ form.as_p }}
@@ -170,7 +170,7 @@
 			</div>
 			<div style="padding-top: 16px">
 				<div class="ui container segment" style="width: 100%">
-					<h3 class="ui header">Giftee Profile</h3>
+					<h3 class="ui header">{{ giftee_profile.name }}'s Profile</h3>
 
 					<div class="ui dividing sub header">Gender</div>
 					<p>{{ giftee_profile.gender_string }}</p>
