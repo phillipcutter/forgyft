@@ -63,17 +63,29 @@
 					<div class="column">
 						<div class="ui text container segment" style="width: 100%">
 							<h2 class="ui dividing header">Gift Ideas</h2>
-							{% for idea in ideas %}
-								<div class="ui list">
-									<div class="item"><a href="{{ idea.link }}">{{ idea.idea }}</a></div>
-								</div>
-							{% endfor %}
+							<div class="ui one stackable cards">
+								{% for idea in ideas %}
+									<div class="ui fluid card">
+										<div class="content">
+											<div class="header">
+												{{ idea.idea }}
+											</div>
+											<div class="description">
+												{{ idea.explanation }}
+											</div>
+										</div>
+										<div class="extra content">
+											<a class="ui primary fluid button" href="{{ idea.link }}">View Gift</a>
+										</div>
+									</div>
+								{% endfor %}
+							</div>
 						</div>
 					</div>
 					<div class="column">
 						<div class="ui text container segment" style="width: 100%">
 
-							<h2 class="ui header">Gift Receiver Profile</h2>
+							<h2 class="ui header">{{ giftee_profile.name }}'s Profile</h2>
 
 							<div class="ui dividing sub header">Gender</div>
 							<p>{{ giftee_profile.gender_string }}</p>

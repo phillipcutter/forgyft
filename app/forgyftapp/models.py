@@ -9,8 +9,9 @@ from django.dispatch import receiver
 from django.http import Http404
 from django.urls import reverse
 
-from forgyftapp.messaging import broadcast_to_slack
-from forgyftapp.py_utils import django_utils
+from forgyft import settings
+from forgyftapp.messaging import broadcast_to_slack, debug_log
+from forgyftapp.util import django_utils
 
 
 class OnCreate:
@@ -85,6 +86,9 @@ class GifteeProfile(models.Model, OnCreate):
 	extra_info = models.TextField(max_length=6000)
 
 	published = models.BooleanField(default=False)
+
+	emailed_about_publish = models.BooleanField(default=False)
+
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 	@property
@@ -95,18 +99,20 @@ class GifteeProfile(models.Model, OnCreate):
 			return "We're still deciding on the perfect gifts, please check back soon."
 
 	def submit(self, request):
-		print("SUBMIT")
-		# view_url = request.build_absolute_uri(reverse("forgyftapp:request", kwargs={"profile": self.pk}))
-		# send_mail(f"Your gift ideas for {self.name} are ready",
-		#           f"To view your gift ideas click this link: {view_url}",
-		#           "noreply@forgyft.com",
-		#           [self.user.email],
-		#           html_message=f"To view your gift ideas click <a href=\"{view_url}\">here</a>")
+		debug_log(f"Submitted gift ideas for {self.name}, as requested by {self.user.get_full_name()}")
+		if not self.emailed_about_publish:
+			view_url = request.build_absolute_uri(reverse("forgyftapp:request", kwargs={"profile": self.pk}))
+			send_mail(f"Your gift ideas for {self.name} are ready",
+			          f"To view your gift ideas click this link: {view_url}",
+			          "noreply@forgyft.com",
+			          [self.user.email],
+			          html_message=f"To view your gift ideas click <a href=\"{view_url}\">here</a>")
+			self.emailed_about_publish = True
 		self.published = True
 		self.save()
 
 	def unsubmit(self):
-		print("UNSUBMIT")
+		debug_log(f"Unsubmitted gift ideas for {self.name}, as requested by {self.user.get_full_name()}")
 		self.published = False
 		self.save()
 
@@ -124,9 +130,10 @@ class GifteeProfile(models.Model, OnCreate):
 
 	def onCreate(self):
 		super().onCreate()
-		fulfillUrl = reverse("forgyftapp:fulfill", kwargs={"profile": self.pk})
-		broadcast_to_slack(f"Hey <!channel>, there was a new gift request created by {str(self.user)}. "
-		                   f"Enter gift ideas <{fulfillUrl}|here>")
+		if not settings.DEBUG:
+			fulfillUrl = settings.ABSOLUTE_URI + "/" + reverse("forgyftapp:fulfill", kwargs={"profile": self.pk})
+			broadcast_to_slack(f"Hey <!channel>, there was a new gift request created by {str(self.user)}. "
+			                   f"Enter gift ideas <{fulfillUrl}|here>")
 
 
 class GiftIdea(models.Model):
