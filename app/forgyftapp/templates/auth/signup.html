@@ -3,21 +3,22 @@
 	<div class="ui main container">
 		<h1>Sign up</h1>
 
-		<div class="ui two column middle aligned very relaxed stackable grid">
+{#		<div class="ui two column middle aligned very relaxed stackable grid">#}
+		<div class="ui column middle aligned very relaxed stackable grid">
 			<div class="column">
 				{% url 'signup' as url %}
 				{% include "base/form_template.html" with action=url action_text="Signup" %}
 				<br>
 				<p>Already have an account? <a href="{% url "forgyftapp:login" %}">Login here</a></p>
 			</div>
-			<div class="divider-column">
-				<div class="ui vertical divider">
-					Or
-				</div>
-			</div>
-			<div class="center aligned column">
-				{% include "auth/social_template.html" %}
-			</div>
+{#			<div class="divider-column">#}
+{#				<div class="ui vertical divider">#}
+{#					Or#}
+{#				</div>#}
+{#			</div>#}
+{#			<div class="center aligned column">#}
+{#				{% include "auth/social_template.html" %}#}
+{#			</div>#}
 		</div>
 	</div>
 {% endblock %}
