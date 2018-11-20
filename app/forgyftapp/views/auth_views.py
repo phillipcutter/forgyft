@@ -16,6 +16,7 @@ from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 
 from forgyftapp.forms import UserForm, LoginForm, ResetPasswordForm
+from forgyftapp.messaging import debug_log
 from forgyftapp.tokens import account_activation_token
 
 from forgyftapp.models import User
@@ -41,6 +42,8 @@ def signup(request):
 				"token": account_activation_token.make_token(user),
 			})
 			user.email_user(subject, message)
+
+			debug_log(f"New user signed up with email address \"{user.email}\", sent email to confirm address.")
 
 			# new_user = authenticate(request, username=form.cleaned_data["email"], password=form.cleaned_data["password"])
 			# login(request, new_user)
@@ -81,29 +84,6 @@ def login_view(request):
 
 	return render(request, "auth/login.html", {"form": form, "next": redirectUrl})
 
-def profile(request, slug):
-	slug = slug.upper()
-
-	user = User.objects.filter(_slug=slug)
-
-	if user.count() == 0:
-		raise Http404("No profile found with the ID " + slug)
-	elif user.count() > 1:
-		raise MultipleObjectsReturned("Multiple profiles found with ID " + slug)
-	else:
-		user = user.first()
-
-	if request.user.is_authenticated and request.user.slug == slug:
-		listings = user.listing_set.all().order_by("creation_date")
-	else:
-		listings = sorted(chain(user.listing_set.filter(stage="o"), user.listing_set.filter(stage="d")),
-		                  key=attrgetter("creation_date"))
-
-	reviews = user.reviews
-
-	return render(request, "auth/profile.html", {"user": user, "listings": listings, "reviews": reviews})
-
-
 def account_activation_sent(request):
 	return render(request, "auth/activation_sent.html")
 
@@ -120,6 +100,7 @@ def activate(request, uidb64, token):
 		user.email_confirmed = True
 		user.save()
 		login(request, user, backend="django.contrib.auth.backends.ModelBackend")
+		debug_log(f"User with email address \"{user.email}\" confirmed their email address.")
 		return HttpResponseRedirect(reverse("forgyftapp:index"))
 	else:
 		return render(request, 'auth/activation_invalid.html')
