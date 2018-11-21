@@ -133,7 +133,7 @@ class GifteeProfile(models.Model, OnCreate):
 		super().onCreate()
 		if not settings.DEBUG:
 			fulfillUrl = settings.ABSOLUTE_URI + "/" + reverse("forgyftapp:fulfill", kwargs={"profile": self.pk})
-			debug_log(f"User with email address \"{user.email}\" submitted new gift request.")
+			debug_log(f"User with email address \"{self.user.email}\" submitted new gift request.")
 			broadcast_to_slack(f"Hey <!channel>, there was a new gift request created by {str(self.user)}. "
 			                   f"Enter gift ideas <{fulfillUrl}|here>")
 
