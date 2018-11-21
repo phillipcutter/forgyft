@@ -21,6 +21,7 @@ urlpatterns = [
 	url(r'^terms/?$', basic_views.terms, name='terms'),
 	url(r'^privacy/?$', basic_views.privacy, name='privacy'),
 	url(r'^about/?$', basic_views.about, name='about'),
+	url(r'^contact/?$', basic_views.contact, name='contact'),
 
 	# Auth views
 	url(r'^signup/?$', auth_views.signup, name='signup'),
