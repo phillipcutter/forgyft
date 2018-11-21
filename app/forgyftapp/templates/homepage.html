@@ -17,7 +17,7 @@
 	<!--Page Contents-->
 
 
-	<div class="pusher">
+	<div class="pusher touch" >
 		<div class="parallax-wrapper">
 			<div class="ui inverted vertical center aligned segment section parallax bg1 masthead"
 			     style="background: none">
@@ -184,8 +184,8 @@ font-weight: 900;
 									About
 								</h4>
 								<div class="ui inverted link list">
-									<a class="item" href="homepage.html#"> About Us</a>
-									<a class="item" href="homepage.html#">Contact Us</a>
+									<a class="item" href="{% url "forgyftapp:about" %}"> About Us</a>
+									<a class="item" href="{% url "forgyftapp:contact" %}">Contact Us</a>
 									<a class="item" href="{% url "forgyftapp:privacy" %}">Privacy
 										Policy</a>
 								</div>
