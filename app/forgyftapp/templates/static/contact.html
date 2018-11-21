@@ -1,31 +1,43 @@
-{ADD SOMETHING HERE}
+{% include "base/base.html" %}
+{% block content %}
+	<div class="ui main container">
 
-<div class="ui form success">
-<form class="ui form">
-  <div class="field">
-    <label>First Name</label>
-    <input type="text" name="first-name" placeholder="First Name">
-  </div>
-    <div class="field">
-    <label>E-mail</label>
-    <input type="email" placeholder="sam@forgift.org">
-  </div>
-  <div class="ui form">
-  <div class="field">
-    <label>Message</label>
-    <textarea></textarea>
-  </div>
-  <div class="field">
-    <div class="ui checkbox">
-      <input type="checkbox" tabindex="0" class="hidden">
-      <label>I agree to receiving help from Forgift</label>
-    </div>
-  </div>
-  <button class="ui button" type="submit">Submit</button>
-</form>
- <div class="ui success message">
- <div class="header">Form Completed</div>
- <p>We'll get back to you within 24 hours.</p>
-</div>
- <div class="ui submit button">Submit</div>
-</div>
+{#		<div class="ui form success">#}
+{#			<form class="ui form">#}
+{#				<div class="field">#}
+{#					<label>First Name</label>#}
+{#					<input type="text" name="first-name" placeholder="First Name">#}
+{#				</div>#}
+{#				<div class="field">#}
+{#					<label>E-mail</label>#}
+{#					<input type="email" placeholder="sam@forgift.org">#}
+{#				</div>#}
+{#				<div class="ui form">#}
+{#					<div class="field">#}
+{#						<label>Message</label>#}
+{#						<textarea></textarea>#}
+{#					</div>#}
+{#					<div class="field">#}
+{#						<div class="ui checkbox">#}
+{#							<input type="checkbox" tabindex="0" class="hidden">#}
+{#							<label>I agree to receiving help from Forgift</label>#}
+{#						</div>#}
+{#					</div>#}
+{#					<button class="ui button" type="submit">Submit</button>#}
+{#			</form>#}
+{#			<div class="ui success message">#}
+{#				<div class="header">Form Completed</div>#}
+{#				<p>We'll get back to you within 24 hours.</p>#}
+{#			</div>#}
+{#			<div class="ui submit button">Submit</div>#}
+{#		</div>#}
+
+		<div style="text-align: center">
+			<h1>Contact Us</h1>
+			<p>If you wish to contact us for any reason, you can send us
+				an email at <a href="mailto:support@forgift.org">support@forgift.org</a> or click the chat icon in the
+			bottom right to start a live chat session.</p>
+		</div>
+
+	</div>
+{% endblock %}

@@ -25,6 +25,9 @@ def terms(request):
 def about(request):
 	return render(request, "static/about.html", {"page": "about"})
 
+def contact(request):
+	return render(request, "static/contact.html")
+
 def privacy(request):
 	return render(request, "static/privacy.html")
 
