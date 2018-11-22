@@ -62,7 +62,6 @@ class User(AbstractUser, Slug):
 
 	def onCreate(self):
 		super().onCreate()
-		self.paypal_email = self.email
 		self.save()
 
 class gender:
