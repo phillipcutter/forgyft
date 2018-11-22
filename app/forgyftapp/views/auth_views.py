@@ -29,25 +29,29 @@ def signup(request):
 		form = UserForm(request.POST)
 
 		if form.is_valid():
-			user = form.save(commit=False)
-			user.is_active = False
-			user.save()
+			user = form.save()
+			# user = form.save(commit=False)
+			# user.is_active = False
+			# user.save()
+			#
+			# current_site = get_current_site(request)
+			# subject = "Activate your Forgyft Account"
+			# message = render_to_string("auth/email/activation.html", {
+			# 	"user": user,
+			# 	"domain": current_site.domain,
+			# 	"uid": force_text(urlsafe_base64_encode(force_bytes(user.pk))),
+			# 	"token": account_activation_token.make_token(user),
+			# })
+			# user.email_user(subject, message)
+			#
+			# debug_log(f"New user signed up with email address \"{user.email}\", sent email to confirm address.")
 
-			current_site = get_current_site(request)
-			subject = "Activate your Forgyft Account"
-			message = render_to_string("auth/email/activation.html", {
-				"user": user,
-				"domain": current_site.domain,
-				"uid": force_text(urlsafe_base64_encode(force_bytes(user.pk))),
-				"token": account_activation_token.make_token(user),
-			})
-			user.email_user(subject, message)
-
-			debug_log(f"New user signed up with email address \"{user.email}\", sent email to confirm address.")
-
-			# new_user = authenticate(request, username=form.cleaned_data["email"], password=form.cleaned_data["password"])
-			# login(request, new_user)
-			return HttpResponseRedirect(reverse("forgyftapp:account_activation_sent"))
+			new_user = authenticate(request, username=form.cleaned_data["email"], password=form.cleaned_data["password"])
+			login(request, new_user)
+			if redirectUrl:
+				return HttpResponseRedirect(redirectUrl)
+			else:
+				return HttpResponseRedirect(reverse("forgyftapp:index"))
 	else:
 		form = UserForm()
 
