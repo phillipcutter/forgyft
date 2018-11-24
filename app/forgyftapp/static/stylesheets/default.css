@@ -447,6 +447,10 @@ body.pushable {
     display: none !important;
 }
 
+.secondary.pointing.menu .item.dropdown {
+    display: initial !important;
+}
+
 @media only screen and (max-width: 700px) {
     .ui.fixed.menu.homepage {
         display: none !important;
