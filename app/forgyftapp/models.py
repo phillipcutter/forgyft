@@ -83,6 +83,7 @@ class GifteeProfile(models.Model, OnCreate):
 	interests = models.TextField(max_length=6000)
 	existing_related_items = models.TextField(max_length=6000)
 	extra_info = models.TextField(max_length=6000)
+	occasion = models.TextField(max_length=6000)
 
 	published = models.BooleanField(default=False)
 
