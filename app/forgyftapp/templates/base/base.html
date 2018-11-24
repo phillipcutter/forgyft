@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Forgift - The gift they'll never forget</title>
-	<link rel='shortcut icon' type='image/x-icon' href='{% load static %}{%  static "favicon/favicon.ico" %}'/>
+    <link rel='shortcut icon' type='image/x-icon' href='{% load static %}{% static "favicon/favicon.ico" %}'/>
 
     <!-- Start of Async Drift Code -->
     <script>
@@ -35,32 +35,80 @@
     <!-- End of Async Drift Code -->
 
     <!-- Start of Fullstory -->
-    <script> window['_fs_debug'] = false; window['_fs_host'] = 'fullstory.com'; window['_fs_org'] = 'GBY13'; window['_fs_namespace'] = 'FS'; (function(m,n,e,t,l,o,g,y){ if (e in m) {if(m.console && m.console.log) { m.console.log('FullStory namespace conflict. Please set window["_fs_namespace"].');} return;} g=m[e]=function(a,b,s){g.q?g.q.push([a,b,s]):g._api(a,b,s);};g.q=[]; o=n.createElement(t);o.async=1;o.src='https://'+_fs_host+'/s/fs.js'; y=n.getElementsByTagName(t)[0];y.parentNode.insertBefore(o,y); g.identify=function(i,v,s){g(l,{uid:i},s);if(v)g(l,v,s)};g.setUserVars=function(v,s){g(l,v,s)};g.event=function(i,v,s){g('event',{n:i,p:v},s)}; g.shutdown=function(){g("rec",!1)};g.restart=function(){g("rec",!0)}; g.consent=function(a){g("consent",!arguments.length||a)}; g.identifyAccount=function(i,v){o='account';v=v||{};v.acctId=i;g(o,v)}; g.clearUserCookie=function(){}; })(window,document,window['_fs_namespace'],'script','user'); </script>
+    <script> window['_fs_debug'] = false;
+    window['_fs_host'] = 'fullstory.com';
+    window['_fs_org'] = 'GBY13';
+    window['_fs_namespace'] = 'FS';
+    (function (m, n, e, t, l, o, g, y) {
+        if (e in m) {
+            if (m.console && m.console.log) {
+                m.console.log('FullStory namespace conflict. Please set window["_fs_namespace"].');
+            }
+            return;
+        }
+        g = m[e] = function (a, b, s) {
+            g.q ? g.q.push([a, b, s]) : g._api(a, b, s);
+        };
+        g.q = [];
+        o = n.createElement(t);
+        o.async = 1;
+        o.src = 'https://' + _fs_host + '/s/fs.js';
+        y = n.getElementsByTagName(t)[0];
+        y.parentNode.insertBefore(o, y);
+        g.identify = function (i, v, s) {
+            g(l, {uid: i}, s);
+            if (v) g(l, v, s)
+        };
+        g.setUserVars = function (v, s) {
+            g(l, v, s)
+        };
+        g.event = function (i, v, s) {
+            g('event', {n: i, p: v}, s)
+        };
+        g.shutdown = function () {
+            g("rec", !1)
+        };
+        g.restart = function () {
+            g("rec", !0)
+        };
+        g.consent = function (a) {
+            g("consent", !arguments.length || a)
+        };
+        g.identifyAccount = function (i, v) {
+            o = 'account';
+            v = v || {};
+            v.acctId = i;
+            g(o, v)
+        };
+        g.clearUserCookie = function () {
+        };
+    })(window, document, window['_fs_namespace'], 'script', 'user'); </script>
     <!-- End of Fullstory -->
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129120112-1"></script>
     <script>
-     window.dataLayer = window.dataLayer || [];
-     function gtag(){dataLayer.push(arguments);}
-     gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
 
-     gtag('config', 'UA-129120112-1');
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-129120112-1');
     </script>
 
 
+    <link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/semantic.min.css" %}">
 
-
-
-	    <link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/semantic.min.css" %}">
-
-{#    <link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/menu.min.css" %}">#}
-{#    <link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/container.min.css" %}">#}
+    {#    <link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/menu.min.css" %}">#}
+    {#    <link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/container.min.css" %}">#}
     {#	<link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/search.min.css" %}">#}
-{#    <link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/header.min.css" %}">#}
+    {#    <link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/header.min.css" %}">#}
     {#	<link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/site.min.css" %}">#}
-{#    <link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/form.min.css" %}">#}
-{#    <link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/grid.min.css" %}">#}
+    {#    <link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/form.min.css" %}">#}
+    {#    <link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/grid.min.css" %}">#}
     <link rel="stylesheet" type="text/css" href="{% load static %}{% static "stylesheets/default.css" %}">
     <link rel="stylesheet" type="text/css" href="{% load static %}{% static "fontawesome/css/all.css" %}">
     <link rel="stylesheet" href="{% load static %}{% static "fontawesome/css/brands.css" %}">
@@ -83,8 +131,8 @@
     <meta content="Semantic-UI, Theme, Design, Template" name="keywords"/>
     <meta content="PPType" name="author"/>
     <meta content="#ffffff" name="theme-color"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Semantic-UI-Forest, collection of design, themes and templates for Semantic-UI.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Semantic-UI-Forest, collection of design, themes and templates for Semantic-UI.</title>
     {#    <link href="../../static/stylesheets/pandoc-code-highlight.css" rel="stylesheet" type="text/css" />#}
 
 
@@ -107,8 +155,10 @@
         {% include "base/navbar.html" with sidebar=True pointing=True %}
     </div>
 {% endblock %}
+
 {% block content %}
 {% endblock %}
+
 {#</div>#}
 </body>
 <script>
@@ -133,10 +183,10 @@
         $('.ui.checkbox')
             .checkbox()
         ;
-	    // create sidebar and attach to menu open
-	    $('.ui.sidebar')
-		    .sidebar('attach events', '.toc.item')
-	    ;
+        // create sidebar and attach to menu open
+        $('.ui.sidebar')
+            .sidebar('attach events', '.toc.item')
+        ;
         try {
             setup();
         }
