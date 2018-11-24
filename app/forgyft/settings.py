@@ -170,6 +170,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+SECURE_SSL_REDIRECT = not DEBUG
+
 AUTH_USER_MODEL = "forgyftapp.User"
 
 AUTHENTICATION_BACKENDS = (
@@ -180,9 +182,34 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOpenId',  # Google
     'social_core.backends.google.GoogleOAuth2',  # Google
     # 'social_core.backends.slack.SlackOAuth2',  # Slack
+    'social_core.backends.facebook.FacebookOAuth2', # Facebook
 
     'django.contrib.auth.backends.AllowAllUsersModelBackend',
 )
+
+SOCIAL_AUTH_AMAZON_KEY = os.getenv("SOCIAL_AUTH_AMAZON_KEY")
+SOCIAL_AUTH_AMAZON_SECRET = os.getenv("SOCIAL_AUTH_AMAZON_SECRET")
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv("GOOGLE_OAUTH_CLIENT_ID")
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv("GOOGLE_OAUTH_CLIENT_SECRET")
+
+SOCIAL_AUTH_TWITTER_KEY = os.getenv("TWITTER_OAUTH_KEY")
+SOCIAL_AUTH_TWITTER_SECRET = os.getenv("TWITTER_OAUTH_SECRET")
+
+SOCIAL_AUTH_FACEBOOK_KEY = os.getenv("FACEBOOK_APP_ID")
+SOCIAL_AUTH_FACEBOOK_SECRET = os.getenv("FACEBOOK_APP_SECRET")
+
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+    'fields': 'id, name, email'
+}
+
+SOCIAL_AUTH_REDIRECT_IS_HTTPS = SECURE_SSL_REDIRECT
+
+SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
+
+LOGIN_REDIRECT_URL = '/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
