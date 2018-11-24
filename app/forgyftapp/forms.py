@@ -21,9 +21,12 @@ class GifteeProfileForm(ModelForm):
 	gender = forms.ChoiceField(choices=models.gender.GENDER_CHOICES, help_text="What is the gender of the receiver?",
 	                           required=True)
 	age = forms.IntegerField(max_value=125, help_text="How old is the receiver of the gift?", required=True)
-	relationship = forms.CharField(help_text="What is your relationship to the receiver, "
-	                                         "please be as specific as possible?", required=True)
-	price_upper = forms.IntegerField(max_value=10000, label="Max Price (Dollars)", help_text="What is the most you are willing to spend on a gift? Please enter a number.", min_value=5)
+	relationship = forms.CharField(help_text="What is your relationship to the receiver? "
+	                                         "Please be as specific as possible.", required=True)
+	occasion = forms.CharField(help_text="What is the occasion that you will be giving the gift to the receiver?",
+	                           required=True)
+	price_upper = forms.IntegerField(max_value=10000, label="Max Price (Dollars)",
+	                                 help_text="What is the most you are willing to spend on a gift? Please enter a number.", min_value=5)
 	interests = forms.CharField(help_text="What are their main interests/hobbies, please be as specific as possible?",
 	                            required=True, widget=forms.Textarea(attrs={"rows": "2"}))
 	existing_related_items = forms.CharField(label="Items They Own",
@@ -45,7 +48,7 @@ class GifteeProfileForm(ModelForm):
 
 	class Meta:
 		model = GifteeProfile
-		fields = ("name", "age", "gender", "relationship", "price_upper",
+		fields = ("name", "age", "gender", "relationship", "occasion", "price_upper",
 		          "interests", "existing_related_items", "extra_info")
 
 

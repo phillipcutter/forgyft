@@ -84,33 +84,7 @@
 					</div>
 					<div class="column">
 						<div class="ui text container segment" style="width: 100%">
-
-							<h2 class="ui header">{{ giftee_profile.name }}'s Profile</h2>
-
-							<div class="ui dividing sub header">Gender</div>
-							<p>{{ giftee_profile.gender_string }}</p>
-
-							<div class="ui dividing sub header">Age</div>
-							<p>{{ giftee_profile.age }}</p>
-
-							<div class="ui dividing sub header">Relationship</div>
-							<p>{{ giftee_profile.relationship }}</p>
-
-							<div class="ui dividing sub header">Maximum Price</div>
-							<p>{{ giftee_profile.price_upper }}</p>
-
-							<div class="ui dividing sub header">Interests</div>
-							<p>{{ giftee_profile.interests }}</p>
-
-							{% if giftee_profile.existing_related_items %}
-								<div class="ui dividing sub header">Items They Already Have</div>
-								<p>{{ giftee_profile.existing_related_items }}</p>
-							{% endif %}
-
-							{% if giftee_profile.extra_info %}
-								<div class="ui dividing sub header">Extra Info</div>
-								<p>{{ giftee_profile.extra_info }}</p>
-							{% endif %}
+							{% include "base/giftee_profile.html" %}
 						</div>
 					</div>
 				</div>
