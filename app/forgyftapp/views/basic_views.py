@@ -36,7 +36,7 @@ def gift_request(request, profile=None):
 	if profile:
 		giftee_profile = get_object_or_404(GifteeProfile, pk=profile)
 
-		if not giftee_profile.published:
+		if not giftee_profile.published or not giftee_profile.user == request.user:
 			return redirect("forgyftapp:request")
 
 		return render(request, "request.html", {"giftee_profile": giftee_profile,

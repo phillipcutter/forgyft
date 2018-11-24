@@ -15,10 +15,10 @@
 {#<a class="{% if page == "blog" %}active {% endif %}item" href="/blog">Blog</a>#}
 <a class="{% if page == "request" %}active {% endif %}item" href="{% url "forgyftapp:request" %}">Quiz</a>
 {#<a class="{% if page == "how_it_works" %}active {% endif %}item">How it Works</a>#}
-<a class="{% if page == "about" %}active {% endif %}item" href="{% url "forgyftapp:about" %}">About Us</a>
 {% if user.is_staff %}
 	<a class="{% if page == "fulfill" %}active {% endif %}item" href="{% url "forgyftapp:fulfill" %}">Fulfill</a>
 {% endif %}
+<a class="{% if page == "about" %}active {% endif %}item" href="{% url "forgyftapp:about" %}">About Us</a>
 <div class="right menu">
 	{% if not request.user.is_authenticated %}
 		<div class="item button">
