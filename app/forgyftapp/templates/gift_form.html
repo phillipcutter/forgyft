@@ -1,15 +1,82 @@
-{% extends "base/base.html" %}
-{% block content %}
-	<div class="ui main container">
+{#{% extends "base/base.html" %}#}
+{#{% block content %}#}
+{#	<div class="ui main container">#}
+{##}
+{#		<h1 style="text-align: center; padding-bottom: 16px">Submit a Gift Idea Request</h1>#}
+{##}
+{#		{% if request.user.is_authenticated %}#}
+{#			{% url 'index' as url %}#}
+{#			{% include "base/form_template.html" with action=url action_text="Submit" message="By clicking submit you agree our terms of service." %}#}
+{#            #}
+{#		{% else %}#}
+{#			<h3>Login to submit a gift idea request.</h3>#}
+{#		{% endif %}#}
+{##}
+{#	</div>#}
+{#{% endblock %}#}
+<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="{% load static %}{% static "stylesheets/gift_form.css" %}">
+<script src="{% load static %}{% static "jquery-3.3.1.min.js" %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js"></script>
+<script src="{% load static %}{% static "js/gift_form.js" %}"></script>
 
-		<h1 style="text-align: center; padding-bottom: 16px">Submit a Gift Idea Request</h1>
 
-		{% if request.user.is_authenticated %}
-			{% url 'index' as url %}
-			{% include "base/form_template.html" with action=url action_text="Submit" message="By clicking submit you agree our terms of service." %}
-		{% else %}
-			<h3>Login to submit a gift idea request.</h3>
-		{% endif %}
 
-	</div>
-{% endblock %}
+<div class="upform">
+
+
+  <form>
+
+    <div class="upform-header"></div>
+
+    <div class="upform-main">
+
+
+      <div class="input-block">
+        <div class="label">Q1. If we give you a proven system to make at least $7,500 per month online, would you follow it to a tee?</div>
+        <div class="input-control">
+          <input id="toggle-on-q1" class="toggle toggle-left" name="q1" value="yes" type="radio">
+          <label for="toggle-on-q1" class="btn"><span>A</span> Yes</label>
+          <input id="toggle-off-q1" class="toggle toggle-right" name="q1" value="no" type="radio">
+          <label for="toggle-off-q1" class="btn"><span>B</span> No</label>
+        </div>
+      </div>
+
+      <div class="input-block">
+        <div class="label">Q2. Would you be willing to invest at least 30 minutes per day to make it work?</div>
+        <div class="input-control">
+          <input id="toggle-on-q2" class="toggle toggle-left" name="q2" value="yes" type="radio">
+          <label for="toggle-on-q2" class="btn"><span>A</span> Yes</label>
+          <input id="toggle-off-q2" class="toggle toggle-right" name="q2" value="no" type="radio">
+          <label for="toggle-off-q2" class="btn"><span>B</span> No</label>
+        </div>
+      </div>
+
+      <div class="input-block">
+        <div class="label">Q3. Would you like to get started NOW?</div>
+        <div class="input-control">
+          <input id="toggle-on-q3" class="toggle toggle-left" name="q3" value="yes" type="radio">
+          <label for="toggle-on-q3" class="btn"><span>A</span> Yes</label>
+          <input id="toggle-off-q3" class="toggle toggle-right" name="q3" value="no" type="radio">
+          <label for="toggle-off-q3" class="btn"><span>B</span> No</label>
+        </div>
+      </div>
+
+      <div class="input-block">
+        <div class="label">What is your name?</div>
+        <div class="input-control">
+          <input type="text" class="required" autocomplete="off">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="upform-footer">
+      <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+    </div>
+
+  </form>
+
+
+</div>
+
