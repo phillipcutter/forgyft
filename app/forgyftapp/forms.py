@@ -48,8 +48,8 @@ class GifteeProfileForm(ModelForm):
 
 	class Meta:
 		model = GifteeProfile
-		fields = ("name", "age", "gender", "relationship", "occasion", "price_upper",
-		          "interests", "existing_related_items", "extra_info")
+		fields = ("age", "gender", "relationship", "occasion", "price_upper",
+		          "interests", "existing_related_items", "extra_info", "name")
 
 
 class LoginForm(ModelForm):
