@@ -32,7 +32,7 @@ def privacy(request):
 	return render(request, "static/privacy.html")
 
 @login_required
-def gift_request(request, profile=None):
+def request(request, profile=None):
 	if profile:
 		giftee_profile = get_object_or_404(GifteeProfile, pk=profile)
 
@@ -60,6 +60,8 @@ def gift_form(request):
 		form = GifteeProfileForm()
 
 	return render(request, "gift_form.html", {"form": form, "page": "request"})
+
+
 
 
 @staff_member_required
