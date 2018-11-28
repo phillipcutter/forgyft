@@ -12,6 +12,7 @@ urlpatterns = [
 
 	url(r'^request/?$', basic_views.request, name='request'),
 	url(r'^request/(?P<profile>[0-9]+)/?$', basic_views.request, name='request'),
+	url(r'^view_gift/(?P<gift>[0-9]+)/?$', basic_views.view_gift, name='view_gift'),
 
 
 	url(r'^fulfill/?$', basic_views.fulfill, name='fulfill'),

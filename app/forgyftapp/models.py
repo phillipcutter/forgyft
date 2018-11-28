@@ -144,6 +144,11 @@ class GiftIdea(models.Model):
 	explanation = models.TextField()
 	published = models.BooleanField(default=False)
 	giftee_profile = models.ForeignKey(GifteeProfile, related_name="ideas", on_delete=models.CASCADE)
+	clicks = models.IntegerField(default=0)
+
+	def click(self):
+		self.clicks += 1
+		self.save()
 
 
 @receiver(models.signals.post_save)
