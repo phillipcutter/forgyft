@@ -47,6 +47,23 @@ def request(request, profile=None):
 
 		return render(request, "request.html", {"giftee_profiles": giftee_profiles, "page": "request"})
 
+
+@login_required
+def view_gift(request, gift=None):
+	if gift:
+		gift_idea = get_object_or_404(GiftIdea, pk=gift)
+		giftee_profile = gift_idea.giftee_profile
+
+		if not giftee_profile.published or not giftee_profile.user == request.user:
+			return redirect("forgyftapp:request", profile=giftee_profile.pk)
+
+		gift_idea.click()
+
+		return redirect(gift_idea.link)
+	else:
+		return redirect("forgyftapp:request")
+
+
 def gift_form_submitted(request):
 	return render(request, "gift_form_submitted.html", {"page": "request"})
 

@@ -130,44 +130,32 @@
 					</div>
 
 				</form>
-
-
-{#				<form id="myForm" method="post" action="">#}
-{#					{% csrf_token %}#}
-{#					<table border="0" cellpadding="0" cellspacing="0">#}
-{#						<tbody>#}
-{#						{% for form in gift_ideas.forms %}#}
-{#							<tr>#}
-{#								{% for field in form.visible_fields %}#}
-{#									{% if forloop.first %}#}
-{#										<td>#}
-{#											{% for hidden in form.hidden_fields %}#}
-{#												{{ hidden }}#}
-{#											{% endfor %}#}
-{#											{% if form.instance.pk %}{{ form.DELETE }}{% endif %}#}
-{#											{{ field }}#}
-{#										</td>#}
-{#									{% else %}#}
-{#										<td>{{ field }}</td>#}
-{#									{% endif %}#}
-{#								{% endfor %}#}
-{#							</tr>#}
-{#						{% endfor %}#}
-{#						</tbody>#}
-{#					</table>#}
-{#					{{ gift_ideas.management_form }}#}
-{#					<div class="ui one column stackable center aligned page grid">#}
-{#						<div class="column sixteen wide">#}
-{#							<div class="ui fluid buttons">#}
-{#								<input class="ui positive button" type="submit" value="Save"/>#}
-{#								<div class="or"></div>#}
-{#								<a class="ui negative button" href="{% url 'forgyftapp:fulfill' %}">Back</a>#}
-{#							</div>#}
-{#						</div>#}
-{#					</div>#}
-{##}
-{#				</form>#}
 			</div>
+			{% if giftee_profile.ideas and giftee_profile.emailed_about_publish %}
+				<div style="padding-top: 16px">
+					<div class="ui container segment" style="width: 100%">
+						<h3 class="ui header">Link Click Analytics</h3>
+						<table class="ui celled table">
+							<thead>
+							<tr>
+								<th>Idea</th>
+								<th>Idea Link</th>
+								<th>Clicks</th>
+							</tr>
+							</thead>
+							<tbody>
+							{% for idea in giftee_profile.ideas.all %}
+								<tr>
+									<td><a href="{{ idea.link }}">{{ idea.idea }}</a></td>
+									<td>{{ idea.explanation }}</td>
+									<td>{{ idea.clicks }}</td>
+								</tr>
+							{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			{% endif %}
 			<div style="padding-top: 16px">
 				<div class="ui container segment" style="width: 100%">
 					{% include "base/giftee_profile.html" %}
