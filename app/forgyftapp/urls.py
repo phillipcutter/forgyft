@@ -10,8 +10,8 @@ urlpatterns = [
 	url(r'^gift/form/?$', basic_views.gift_form, name='gift_form'),
 	url(r'^gift/submit/?$', basic_views.gift_form_submitted, name='gift_form_submitted'),
 
-	url(r'^request/?$', basic_views.gift_request, name='request'),
-	url(r'^request/(?P<profile>[0-9]+)/?$', basic_views.gift_request, name='request'),
+	url(r'^request/?$', basic_views.request, name='request'),
+	url(r'^request/(?P<profile>[0-9]+)/?$', basic_views.request, name='request'),
 
 
 	url(r'^fulfill/?$', basic_views.fulfill, name='fulfill'),

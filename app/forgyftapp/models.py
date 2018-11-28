@@ -143,7 +143,7 @@ class GiftIdea(models.Model):
 	link = models.URLField(max_length=600)
 	explanation = models.TextField()
 	published = models.BooleanField(default=False)
-	giftee_profile = models.ForeignKey(GifteeProfile, related_name="ideas", on_delete=models.PROTECT)
+	giftee_profile = models.ForeignKey(GifteeProfile, related_name="ideas", on_delete=models.CASCADE)
 
 
 @receiver(models.signals.post_save)
