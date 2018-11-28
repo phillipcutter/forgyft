@@ -9,4 +9,4 @@ install:
 jobs:
   include:
     - stage: test
-      script: ./test.sh
+      script: sudo ./test.sh
