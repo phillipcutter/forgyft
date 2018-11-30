@@ -255,3 +255,7 @@ else:
     MEDIAFILES_LOCATION = "media"
     STATICFILES_LOCATION = "static"
 DEFAULT_FILE_STORAGE = "forgyft.custom_storages.MediaStorage"
+
+AWS_HEADERS = {
+    'Cache-Control': 'max-age=86400',
+}
