@@ -115,6 +115,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'forgyft.wsgi.application'
 
+LINKPREVIEW_KEY = os.getenv("LINKPREVIEW_KEY")
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
@@ -258,4 +259,7 @@ DEFAULT_FILE_STORAGE = "forgyft.custom_storages.MediaStorage"
 
 AWS_HEADERS = {
     'Cache-Control': 'max-age=86400',
+}
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
 }
