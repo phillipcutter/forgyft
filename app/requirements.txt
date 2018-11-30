@@ -9,3 +9,4 @@ collectfast==0.6.2
 requests==2.20.0
 wagtail==2.3
 bugsnag==3.4.3
+webpreview==1.4.0
