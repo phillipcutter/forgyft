@@ -10,3 +10,4 @@ requests==2.20.0
 wagtail==2.3
 bugsnag==3.4.3
 webpreview==1.4.0
+tldextract==2.2.0

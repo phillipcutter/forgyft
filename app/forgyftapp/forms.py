@@ -9,9 +9,15 @@ from forgyftapp.models import GifteeProfile, User, GiftIdea
 
 class GiftIdeaForm(ModelForm):
 
+	idea = forms.CharField(widget=forms.Textarea(attrs={"rows": "2"}))
+	explanation = forms.CharField(widget=forms.Textarea(attrs={"rows": "4"}))
+
+	link = forms.CharField(widget=forms.Textarea(attrs={"rows": "2"}))
+	image = forms.CharField(widget=forms.Textarea(attrs={"rows": "2"}), required=False)
+
 	class Meta:
 		model = GiftIdea
-		fields = ("idea", "explanation", "link", "published")
+		fields = ("idea", "explanation", "link", "image", "published")
 
 GiftIdeaFormSet = inlineformset_factory(GifteeProfile, GiftIdea, form=GiftIdeaForm, extra=1, can_delete=True)
 

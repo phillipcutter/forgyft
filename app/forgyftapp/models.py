@@ -1,4 +1,6 @@
+import tldextract as tldextract
 from django.contrib.auth.models import AbstractUser
+from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import MultipleObjectsReturned
 from django.core.mail import send_mail
 from django.db import models
@@ -125,6 +127,9 @@ class GifteeProfile(models.Model, OnCreate):
 
 		return choices.get(self.gender)
 
+	@property
+	def admin_url(self):
+		return reverse('admin:{0}_{1}_change'.format(self._meta.app_label, self._meta.model_name), args=(self.pk,))
 
 	def __str__(self):
 		return f"Giftee Profile {self.pk} for {self.name} from {self.user.get_full_name()}"
@@ -138,13 +143,20 @@ class GifteeProfile(models.Model, OnCreate):
 			                   f"Enter gift ideas <{fulfillUrl}|here>")
 
 
-class GiftIdea(models.Model):
+class GiftIdea(models.Model, OnCreate):
 	idea = models.TextField()
-	link = models.URLField(max_length=600)
+	link = models.URLField(max_length=2400)
+	image = models.URLField(max_length=2400, blank=True, null=True)
 	explanation = models.TextField()
 	published = models.BooleanField(default=False)
 	giftee_profile = models.ForeignKey(GifteeProfile, related_name="ideas", on_delete=models.CASCADE)
 	clicks = models.IntegerField(default=0)
+
+
+	@property
+	def domain(self):
+		return tldextract.extract(self.link).domain
+
 
 	def click(self):
 		self.clicks += 1

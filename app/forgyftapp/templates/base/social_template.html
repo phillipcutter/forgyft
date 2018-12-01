@@ -5,25 +5,25 @@
 			   href="{% url 'social:begin' 'amazon' %}{% if next %}?next={{ next }}{% endif %}"
 			   style="width: 220px;">
 				<i class="amazon icon"></i>
-				Login with Amazon
+				{% if text %}{{ text }}{% else %}Login{% endif %} with Amazon
 			</a>
 		</div>
 		<div class="ui segment" style="border-top: none; margin: 0 auto">
 			<a class="ui google plus button" href="{% url 'social:begin' 'google-oauth2' %}{% if next %}?next={{ next }}{% endif %}" style="width: 220px;">
 				<i class="google icon"></i>
-				Login with Google
+				{% if text %}{{ text }}{% else %}Login{% endif %} with Google
 			</a>
 		</div>
 		<div class="ui segment" style="border-top: none; margin: 0 auto">
 			<a class="ui twitter button" href="{% url 'social:begin' 'twitter' %}{% if next %}?next={{ next }}{% endif %}" style="width: 220px;">
 				<i class="twitter icon"></i>
-				Login with Twitter
+				{% if text %}{{ text }}{% else %}Login{% endif %} with Twitter
 			</a>
 		</div>
 		<div class="ui segment" style="border-top: none; margin: 0 auto">
 			<a class="ui facebook button" href="{% url 'social:begin' 'facebook' %}{% if next %}?next={{ next }}{% endif %}" style="width: 220px;">
 				<i class="facebook icon"></i>
-				Login with Facebook
+				{% if text %}{{ text }}{% else %}Login{% endif %} with Facebook
 			</a>
 		</div>
 	</div>
