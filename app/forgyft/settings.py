@@ -63,6 +63,7 @@ INSTALLED_APPS = [
 
     'modelcluster',
     'taggit',
+    'django.contrib.sitemaps'
 ]
 
 ANYMAIL = {
