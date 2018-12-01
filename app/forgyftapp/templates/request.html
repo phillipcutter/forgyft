@@ -48,39 +48,36 @@
 					{#					</div>#}
 				</div>
 		{% else %}
-			<h1 style="text-align: center; padding-bottom: 4px">Results for {{ giftee_profile.name }}</h1>
+			<h1 class="ui header" style="text-align: center; padding-bottom: 4px">Gift Ideas for {{ giftee_profile.name }}</h1>
 			<div style="margin-left:auto;margin-right:auto;">
-				<div class="ui two column stackable grid">
-					<div class="column">
-						<div class="ui text container segment" style="width: 100%">
-							<h2 class="ui dividing header">Gift Ideas</h2>
-							<div class="ui one stackable cards">
-								{% for idea in ideas %}
-									<div class="ui fluid card">
-										<div class="content">
-											<div class="header">
-												{{ idea.idea }}
-											</div>
-											<div class="description">
-												{{ idea.explanation }}
-											</div>
+				<div class="ui text container" style="width: 100%">
+{#					<h2 class="ui dividing header"></h2>#}
+					<div class="ui three centered stackable cards">
+						{% for idea in ideas %}
+							<div class="ui fluid card">
+								<div class="content">
+									{% if idea.image %}
+										<div class="image">
+											<img src="{{ idea.image }}">
 										</div>
-										<div class="extra content">
-											<a class="ui primary fluid button" href="{% url "forgyftapp:view_gift" gift=idea.pk %}" target="_blank">View Gift</a>
-										</div>
+									{% endif %}
+									<div class="header">
+										{{ idea.idea }}
 									</div>
-								{% endfor %}
+									<div class="description">
+										{{ idea.explanation }}
+									</div>
+								</div>
+								<div class="extra content">
+									<a class="ui primary fluid button" href="{% url "forgyftapp:view_gift" gift=idea.pk %}" target="_blank">View Gift on {{ idea.domain|title }}</a>
+								</div>
 							</div>
-						</div>
-					</div>
-					<div class="column">
-						<div class="ui text container segment" style="width: 100%">
-							{% include "base/giftee_profile.html" %}
-						</div>
+						{% endfor %}
 					</div>
 				</div>
-
-			</div>
+				<div class="ui text container segment" style="width: 100%">
+					{% include "base/giftee_profile.html" %}
+				</div>
 			</div>
 		{% endif %}
 	</div>

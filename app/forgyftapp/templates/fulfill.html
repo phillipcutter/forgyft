@@ -79,7 +79,7 @@
 														{% endautoescape %}
 													</label>
 												{% endif %}
-												<textarea rows="1" name="{{ field.html_name }}"
+												<textarea rows="{{ field.field.widget.attrs.rows }}" name="{{ field.html_name }}"
 												          id="{{ field.id_for_label }}"
 												          style="width: 100%">{% if field.value %}{{ field.value }}{% endif %}</textarea>
 											</div>
@@ -125,7 +125,11 @@
 								<input class="ui positive button" type="submit" value="Save"/>
 								<div class="or"></div>
 								<a class="ui negative button" href="{% url 'forgyftapp:fulfill' %}">Back</a>
+
 							</div>
+							<a class="ui button" href="{{ giftee_profile.admin_url }}" style="margin-top: 8px">
+								View on Admin Site
+							</a>
 						</div>
 					</div>
 
