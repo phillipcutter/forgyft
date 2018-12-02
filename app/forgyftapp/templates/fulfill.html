@@ -160,6 +160,20 @@
 					</div>
 				</div>
 			{% endif %}
+			{% if giftee_profile.feedback %}
+				<div style="padding-top: 16px">
+					<div class="ui container segment" style="width: 100%">
+						<h3 class="ui header">Gift Ideas Feedback</h3>
+
+						<div class="ui dividing sub header">Rating</div>
+						<p>{{ giftee_profile.feedback.rating }}/5</p>
+						<div class="ui dividing sub header">Feedback</div>
+						<p>{{ giftee_profile.feedback.feedback }}</p>
+						<div class="ui dividing sub header">Purchased</div>
+						<p>{{ giftee_profile.feedback.bought|yesno:"Purchased,Not Purchased" }}</p>
+					</div>
+				</div>
+			{% endif %}
 			<div style="padding-top: 16px">
 				<div class="ui container segment" style="width: 100%">
 					{% include "base/giftee_profile.html" %}

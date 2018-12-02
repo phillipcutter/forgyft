@@ -4,7 +4,30 @@ from django.forms import ModelForm, inlineformset_factory
 from django import forms
 
 from forgyftapp import models
-from forgyftapp.models import GifteeProfile, User, GiftIdea
+from forgyftapp.models import GifteeProfile, User, GiftIdea, GiftFeedback
+
+
+class GiftFeedbackForm(ModelForm):
+
+	rating = forms.IntegerField(max_value=5, min_value=1, label="Rating", help_text="Please rate the gift ideas from "
+	                                                                                "on a scale from 1 to 5.",
+	                            required=True)
+	feedback = forms.CharField(help_text="What did you think of the gift ideas, how can we improve in the future?",
+	                           required=True, widget=forms.Textarea(attrs={"rows": "4"}))
+	bought = forms.BooleanField(label="Bought", help_text="Did you buy one of the gift ideas?", required=True)
+
+	def save(self, giftee_profile=None, commit=True):
+		if not giftee_profile:
+			raise TypeError("No giftee_profile object given to the GiftFeedbackForm.save method.")
+		instance = super().save(commit=False)
+		instance.giftee_profile = giftee_profile
+		if commit:
+			instance.save()
+		return instance
+
+	class Meta:
+		model = GiftFeedback
+		fields = ("rating", "feedback", "bought")
 
 
 class GiftIdeaForm(ModelForm):

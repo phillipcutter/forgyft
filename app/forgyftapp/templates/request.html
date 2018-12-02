@@ -76,6 +76,22 @@
 					</div>
 				</div>
 				<div class="ui text container segment" style="width: 100%">
+					<h3 class="ui header" style="text-align: center">Gift Idea Feedback</h3>
+					{% if hasFeedback %}
+						<div class="ui small positive message">
+							<div class="header">
+								Thanks for submitting feedback!
+							</div>
+							<p>We really appreciate your feedback on these gift ideas as we always work to improve
+							our service! Feel free to edit your feedback below if you left anything out, you're also
+								welcome to start a conversation with us if you'd like a response by typing your
+								message in the chat box in the bottom right.
+							</p>
+						</div>
+					{% endif %}
+					{% include "base/form_template.html" with form=feedback_form action_text="Submit" %}
+				</div>
+				<div class="ui text container segment" style="width: 100%">
 					{% include "base/giftee_profile.html" %}
 				</div>
 			</div>

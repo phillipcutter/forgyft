@@ -76,6 +76,21 @@ class gender:
 	                  (FEMALE, "Female"),
 	                  (OTHER, "Other"))
 
+
+class GiftFeedback(models.Model, OnCreate):
+
+	rating = models.IntegerField()
+	feedback = models.TextField(max_length=6000)
+	bought = models.BooleanField()
+
+	def onCreate(self):
+		super().onCreate()
+		fulfillUrl = settings.ABSOLUTE_URI + reverse("forgyftapp:fulfill", kwargs={"profile": self.pk})
+		debug_log(f"User submitted feedback for gift ideas. View it <{fulfillUrl}|here>.")
+		broadcast_to_slack(f"Hey <!channel>, a user submitted feedback for gift ideas."
+		                   f" View it <{fulfillUrl}|here>.")
+
+
 class GifteeProfile(models.Model, OnCreate):
 	name = models.TextField(max_length=150)
 	gender = models.CharField(max_length=80, choices=gender.GENDER_CHOICES)
@@ -84,7 +99,7 @@ class GifteeProfile(models.Model, OnCreate):
 	price_upper = models.IntegerField()
 	interests = models.TextField(max_length=6000)
 	existing_related_items = models.TextField(max_length=6000)
-	extra_info = models.TextField(max_length=6000)
+	extra_info = models.TextField(max_length=6000, blank=True, null=True)
 	occasion = models.TextField(max_length=6000)
 
 	published = models.BooleanField(default=False)
@@ -92,6 +107,8 @@ class GifteeProfile(models.Model, OnCreate):
 	emailed_about_publish = models.BooleanField(default=False)
 
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+	feedback = models.OneToOneField(GiftFeedback, on_delete=models.SET_NULL, null=True)
 
 	@property
 	def status(self):

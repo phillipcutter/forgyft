@@ -43,8 +43,8 @@ def signup(request):
 			# 	"token": account_activation_token.make_token(user),
 			# })
 			# user.email_user(subject, message)
-			#
-			# debug_log(f"New user signed up with email address \"{user.email}\", sent email to confirm address.")
+
+			debug_log(f"New user signed up with email address \"{user.email}\", sent email to confirm address.")
 
 			new_user = authenticate(request, username=form.cleaned_data["email"], password=form.cleaned_data["password"])
 			login(request, new_user)
