@@ -9,7 +9,7 @@
 			<div class="column">
 				{% url 'login' as url %}
 				{% include "base/form_template.html" with action=url action_text="Login" omit_end=True %}
-				<a class="ui blue basic button" href="{% url "forgyftapp:reset" %}">
+				<a class="ui red basic button" href="{% url "forgyftapp:reset" %}">
 					<i class="icon redo alternate"></i>
 					Reset Password
 				</a>
