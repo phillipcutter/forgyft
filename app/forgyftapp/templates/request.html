@@ -4,97 +4,175 @@
 		{% if not giftee_profile %}
 			<h1 style="text-align: center; padding-bottom: 16px">Your Gift Requests</h1>
 			<div style="margin-left:auto;margin-right:auto;">
-					<div class="ui centered stackable three cards">
-						<div class="ui fluid card">
+				<div class="ui centered stackable three cards">
+					<div class="ui fluid card">
+						<div class="content">
+							<div class="header">
+								New Gift Request
+							</div>
+							<div class="meta"> Anyone
+							</div>
+							<div class="description">
+								Create a new gift request to get ideas for what to get someone for that
+								upcoming special event.
+							</div>
+						</div>
+						<div class="extra content">
+							<a class="ui labeled icon fluid primary button" href="{% url "forgyftapp:gift_form" %}">
+								<i class="ui icon add"></i>
+								New Gift Request
+							</a>
+						</div>
+					</div>
+					{% for giftee_profile in giftee_profiles %}
+						<div class="ui fluid card" style="width: calc(33.33333333% - 2em);">
 							<div class="content">
 								<div class="header">
-									New Gift Request
+									Gift Ideas for {{ giftee_profile.name }}
 								</div>
-								<div class="meta"> Anyone
+								<div class="meta">
+									{{ giftee_profile.relationship }}
 								</div>
 								<div class="description">
-									Create a new gift request to get ideas for what to get someone for that
-									upcoming special event.
+									{{ giftee_profile.status }}
 								</div>
 							</div>
 							<div class="extra content">
-								<a class="ui labeled icon fluid primary button" href="{% url "forgyftapp:gift_form" %}">
-									<i class="ui icon add"></i>
-									New Gift Request
-								</a>
+								<a class="ui {% if not giftee_profile.published %}disabled grey {% else %}primary {% endif %}fluid  button"
+								   href="{% url "forgyftapp:request" profile=giftee_profile.pk %}">View Gift
+									Ideas</a>
 							</div>
 						</div>
-						{% for giftee_profile in giftee_profiles %}
-							<div class="ui fluid card" style="width: calc(33.33333333% - 2em);">
-								<div class="content">
-									<div class="header">
-										Gift Ideas for {{ giftee_profile.name }}
-									</div>
-									<div class="meta">
-										{{ giftee_profile.relationship }}
-									</div>
-									<div class="description">
-										{{ giftee_profile.status }}
-									</div>
-								</div>
-								<div class="extra content">
-									<a class="ui {% if not giftee_profile.published %}disabled grey {% else %}primary {% endif %}fluid  button"
-									   href="{% url "forgyftapp:request" profile=giftee_profile.pk %}">View Gift
-										Ideas</a>
-								</div>
-							</div>
-						{% endfor %}
-					</div>
-					{#					</div>#}
+					{% endfor %}
 				</div>
+				{#					</div>#}
+			</div>
 		{% else %}
-			<h1 class="ui header" style="text-align: center; padding-bottom: 4px">Gift Ideas for {{ giftee_profile.name }}</h1>
+			<h1 class="ui header" style="text-align: center; padding-bottom: 4px">Gift Ideas
+				for {{ giftee_profile.name }}</h1>
 			<div style="margin-left:auto;margin-right:auto;">
-				<div class="ui text container" style="width: 100%">
-{#					<h2 class="ui dividing header"></h2>#}
-					<div class="ui three centered stackable cards">
-						{% for idea in ideas %}
-							<div class="ui fluid card">
-								<div class="content">
-									{% if idea.image %}
-										<div class="image">
-											<img src="{{ idea.image }}">
+				<div class="ui two column stackable grid mobile hidden">
+					<div class="column">
+						<div class="ui text container" style="width: 100%">
+							{#					<h2 class="ui dividing header"></h2>#}
+							<div class="ui three centered stackable cards">
+								{% for idea in ideas %}
+									<div class="ui fluid card">
+										<div class="content">
+											{% if idea.image %}
+												<div class="image">
+													<img src="{{ idea.image }}">
+												</div>
+											{% endif %}
+											<div class="header">
+												{{ idea.idea }}
+											</div>
+											<div class="description">
+												{{ idea.explanation }}
+											</div>
 										</div>
-									{% endif %}
-									<div class="header">
-										{{ idea.idea }}
+										<div class="extra content">
+											<a class="ui primary fluid button"
+											   href="{% url "forgyftapp:view_gift" gift=idea.pk %}" target="_blank">View
+												Gift on {{ idea.domain|title }}</a>
+										</div>
 									</div>
-									<div class="description">
-										{{ idea.explanation }}
-									</div>
-								</div>
-								<div class="extra content">
-									<a class="ui primary fluid button" href="{% url "forgyftapp:view_gift" gift=idea.pk %}" target="_blank">View Gift on {{ idea.domain|title }}</a>
-								</div>
+								{% endfor %}
 							</div>
-						{% endfor %}
+						</div>
+						<div class="ui text container segment" style="width: 100%">
+							{% include "base/giftee_profile.html" %}
+						</div>
+					</div>
+					<div class="column">
+						<div class="ui text container segment" style="width: 100%">
+							<h3 class="ui header" style="text-align: center">Gift Idea Feedback</h3>
+							{% if hasFeedback %}
+								<div class="ui small positive message">
+									<div class="header">
+										Thanks for submitting feedback!
+									</div>
+									<p>We really appreciate your feedback on these gift ideas as we always work to
+										improve
+										our service! Feel free to edit your feedback below if you left anything out,
+										you're
+										also
+										welcome to start a conversation with us if you'd like a response by typing your
+										message in the chat box in the bottom right.
+									</p>
+								</div>
+							{% endif %}
+							{% include "base/form_template.html" with form=feedback_form action_text="Submit" %}
+						</div>
 					</div>
 				</div>
-				<div class="ui text container segment" style="width: 100%">
-					<h3 class="ui header" style="text-align: center">Gift Idea Feedback</h3>
-					{% if hasFeedback %}
-						<div class="ui small positive message">
-							<div class="header">
-								Thanks for submitting feedback!
+
+				<div class="mobile only">
+					<div class="ui two column stackable grid">
+						<div class="column">
+							<div class="ui text container" style="width: 100%">
+								{#					<h2 class="ui dividing header"></h2>#}
+								<div class="ui three centered stackable cards">
+									{% for idea in ideas %}
+										<div class="ui fluid card">
+											<div class="content">
+												{% if idea.image %}
+													<div class="image">
+														<img src="{{ idea.image }}">
+													</div>
+												{% endif %}
+												<div class="header">
+													{{ idea.idea }}
+												</div>
+												<div class="description">
+													{{ idea.explanation }}
+												</div>
+											</div>
+											<div class="extra content">
+												<a class="ui primary fluid button"
+												   href="{% url "forgyftapp:view_gift" gift=idea.pk %}" target="_blank">View
+													Gift on {{ idea.domain|title }}</a>
+											</div>
+										</div>
+									{% endfor %}
+								</div>
 							</div>
-							<p>We really appreciate your feedback on these gift ideas as we always work to improve
-							our service! Feel free to edit your feedback below if you left anything out, you're also
-								welcome to start a conversation with us if you'd like a response by typing your
-								message in the chat box in the bottom right.
-							</p>
+
 						</div>
-					{% endif %}
-					{% include "base/form_template.html" with form=feedback_form action_text="Submit" %}
+						<div class="column">
+							<div class="ui text container segment" style="width: 100%">
+								<h3 class="ui header" style="text-align: center">Gift Idea Feedback</h3>
+								{% if hasFeedback %}
+									<div class="ui small positive message">
+										<div class="header">
+											Thanks for submitting feedback!
+										</div>
+										<p>We really appreciate your feedback on these gift ideas as we always work to
+											improve
+											our service! Feel free to edit your feedback below if you left anything out,
+											you're
+											also
+											welcome to start a conversation with us if you'd like a response by typing
+											your
+											message in the chat box in the bottom right.
+										</p>
+									</div>
+								{% endif %}
+								{% include "base/form_template.html" with form=feedback_form action_text="Submit" %}
+							</div>
+						</div>
+					</div>
+					<div class="ui text container segment" style="width: 100%">
+						{% include "base/giftee_profile.html" %}
+					</div>
 				</div>
-				<div class="ui text container segment" style="width: 100%">
-					{% include "base/giftee_profile.html" %}
-				</div>
+
+
 			</div>
 		{% endif %}
 	</div>
+{% endblock %}
+
+{% block extra_dependencies %}
+<link rel="stylesheet" type="text/css" href="{% load static %}{% static "stylesheets/responsive-semantic.min.css" %}">
 {% endblock %}
