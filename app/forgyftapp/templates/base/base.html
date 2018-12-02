@@ -1,256 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Forgift - The gift they'll never forget</title>
-	<link rel='shortcut icon' type='image/x-icon' href='{% load static %}{% static "favicon/favicon.ico" %}'/>
+    <meta charset="UTF-8">
+    <title>Forgift - The gift they'll never forget</title>
+    <link rel='shortcut icon' type='image/x-icon' href='{% load static %}{% static "favicon/favicon.ico" %}'/>
 
-	<!-- Start of Async Drift Code -->
-	<script>
-		"use strict";
+    <!-- Start of Async Drift Code -->
+    <script>
+        "use strict";
 
-		!function () {
-			var t = window.driftt = window.drift = window.driftt || [];
-			if (!t.init) {
-				if (t.invoked) return void (window.console && console.error && console.error("Drift snippet included twice."));
-				t.invoked = !0, t.methods = ["identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on"],
-					t.factory = function (e) {
-						return function () {
-							var n = Array.prototype.slice.call(arguments);
-							return n.unshift(e), t.push(n), t;
-						};
-					}, t.methods.forEach(function (e) {
-					t[e] = t.factory(e);
-				}), t.load = function (t) {
-					var e = 3e5, n = Math.ceil(new Date() / e) * e, o = document.createElement("script");
-					o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous", o.src = "https://js.driftt.com/include/" + n + "/" + t + ".js";
-					var i = document.getElementsByTagName("script")[0];
-					i.parentNode.insertBefore(o, i);
-				};
-			}
-		}();
-		drift.SNIPPET_VERSION = '0.3.1';
-		drift.load('na3vedaychix');
-	</script>
-	<!-- End of Async Drift Code -->
+        !function () {
+            var t = window.driftt = window.drift = window.driftt || [];
+            if (!t.init) {
+                if (t.invoked) return void (window.console && console.error && console.error("Drift snippet included twice."));
+                t.invoked = !0, t.methods = ["identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on"],
+                    t.factory = function (e) {
+                        return function () {
+                            var n = Array.prototype.slice.call(arguments);
+                            return n.unshift(e), t.push(n), t;
+                        };
+                    }, t.methods.forEach(function (e) {
+                    t[e] = t.factory(e);
+                }), t.load = function (t) {
+                    var e = 3e5, n = Math.ceil(new Date() / e) * e, o = document.createElement("script");
+                    o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous", o.src = "https://js.driftt.com/include/" + n + "/" + t + ".js";
+                    var i = document.getElementsByTagName("script")[0];
+                    i.parentNode.insertBefore(o, i);
+                };
+            }
+        }();
+        drift.SNIPPET_VERSION = '0.3.1';
+        drift.load('na3vedaychix');
+    </script>
+    <!-- End of Async Drift Code -->
 
-	<!-- Start of Fullstory -->
-	<script> window['_fs_debug'] = false;
-	window['_fs_host'] = 'fullstory.com';
-	window['_fs_org'] = 'GBY13';
-	window['_fs_namespace'] = 'FS';
-	(function (m, n, e, t, l, o, g, y) {
-		if (e in m) {
-			if (m.console && m.console.log) {
-				m.console.log('FullStory namespace conflict. Please set window["_fs_namespace"].');
-			}
-			return;
-		}
-		g = m[e] = function (a, b, s) {
-			g.q ? g.q.push([a, b, s]) : g._api(a, b, s);
-		};
-		g.q = [];
-		o = n.createElement(t);
-		o.async = 1;
-		o.src = 'https://' + _fs_host + '/s/fs.js';
-		y = n.getElementsByTagName(t)[0];
-		y.parentNode.insertBefore(o, y);
-		g.identify = function (i, v, s) {
-			g(l, {uid: i}, s);
-			if (v) g(l, v, s)
-		};
-		g.setUserVars = function (v, s) {
-			g(l, v, s)
-		};
-		g.event = function (i, v, s) {
-			g('event', {n: i, p: v}, s)
-		};
-		g.shutdown = function () {
-			g("rec", !1)
-		};
-		g.restart = function () {
-			g("rec", !0)
-		};
-		g.consent = function (a) {
-			g("consent", !arguments.length || a)
-		};
-		g.identifyAccount = function (i, v) {
-			o = 'account';
-			v = v || {};
-			v.acctId = i;
-			g(o, v)
-		};
-		g.clearUserCookie = function () {
-		};
-	})(window, document, window['_fs_namespace'], 'script', 'user'); </script>
-	<!-- End of Fullstory -->
+    <!-- Start of Fullstory -->
+    <script> window['_fs_debug'] = false;
+    window['_fs_host'] = 'fullstory.com';
+    window['_fs_org'] = 'GBY13';
+    window['_fs_namespace'] = 'FS';
+    (function (m, n, e, t, l, o, g, y) {
+        if (e in m) {
+            if (m.console && m.console.log) {
+                m.console.log('FullStory namespace conflict. Please set window["_fs_namespace"].');
+            }
+            return;
+        }
+        g = m[e] = function (a, b, s) {
+            g.q ? g.q.push([a, b, s]) : g._api(a, b, s);
+        };
+        g.q = [];
+        o = n.createElement(t);
+        o.async = 1;
+        o.src = 'https://' + _fs_host + '/s/fs.js';
+        y = n.getElementsByTagName(t)[0];
+        y.parentNode.insertBefore(o, y);
+        g.identify = function (i, v, s) {
+            g(l, {uid: i}, s);
+            if (v) g(l, v, s)
+        };
+        g.setUserVars = function (v, s) {
+            g(l, v, s)
+        };
+        g.event = function (i, v, s) {
+            g('event', {n: i, p: v}, s)
+        };
+        g.shutdown = function () {
+            g("rec", !1)
+        };
+        g.restart = function () {
+            g("rec", !0)
+        };
+        g.consent = function (a) {
+            g("consent", !arguments.length || a)
+        };
+        g.identifyAccount = function (i, v) {
+            o = 'account';
+            v = v || {};
+            v.acctId = i;
+            g(o, v)
+        };
+        g.clearUserCookie = function () {
+        };
+    })(window, document, window['_fs_namespace'], 'script', 'user'); </script>
+    <!-- End of Fullstory -->
 
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129120112-1"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129120112-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-		function gtag() {
-			dataLayer.push(arguments);
-		}
+        function gtag() {
+            dataLayer.push(arguments);
+        }
 
-		gtag('js', new Date());
+        gtag('js', new Date());
 
-		gtag('config', 'UA-129120112-1');
-	</script>
-
-
-	<link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/semantic.min.css" %}">
-
-	{#    <link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/menu.min.css" %}">#}
-	{#    <link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/container.min.css" %}">#}
-	{#	<link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/search.min.css" %}">#}
-	{#    <link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/header.min.css" %}">#}
-	{#	<link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/site.min.css" %}">#}
-	{#    <link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/form.min.css" %}">#}
-	{#    <link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/grid.min.css" %}">#}
-	<link rel="stylesheet" type="text/css" href="{% load static %}{% static "stylesheets/default.css" %}">
-	<link rel="stylesheet" type="text/css" href="{% load static %}{% static "fontawesome/css/all.css" %}">
-	<link rel="stylesheet" href="{% load static %}{% static "fontawesome/css/brands.css" %}">
-	<link rel="stylesheet" href="{% load static %}{% static "fontawesome/css/fontawesome.css" %}">
+        gtag('config', 'UA-129120112-1');
+    </script>
 
 
-	{#	<link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/image.min.css" %}">#}
-	{#	<script src="{% load static %}{% static "semantic/components/search.min.js" %}"></script>#}
-	<script src="{% load static %}{% static "jquery-3.3.1.min.js" %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/semantic.min.css" %}">
 
-	{# Fonts #}
-	<link href="https://fonts.googleapis.com/css?family=Expletus+Sans" rel="stylesheet">
+    {#    <link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/menu.min.css" %}">#}
+    {#    <link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/container.min.css" %}">#}
+    {#	<link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/search.min.css" %}">#}
+    {#    <link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/header.min.css" %}">#}
+    {#	<link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/site.min.css" %}">#}
+    {#    <link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/form.min.css" %}">#}
+    {#    <link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/grid.min.css" %}">#}
+    <link rel="stylesheet" type="text/css" href="{% load static %}{% static "stylesheets/default.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% load static %}{% static "fontawesome/css/all.css" %}">
+    <link rel="stylesheet" href="{% load static %}{% static "fontawesome/css/brands.css" %}">
+    <link rel="stylesheet" href="{% load static %}{% static "fontawesome/css/fontawesome.css" %}">
 
 
-	<meta charset="utf-8"/>
-	<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta content="Find the perfect gift ideas, just fill out a quick two-minute quiz and we'll give you suggestions about
+    {#	<link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/image.min.css" %}">#}
+    {#	<script src="{% load static %}{% static "semantic/components/search.min.js" %}"></script>#}
+    <script src="{% load static %}{% static "jquery-3.3.1.min.js" %}"></script>
+
+    {# Fonts #}
+    <link href="https://fonts.googleapis.com/css?family=Expletus+Sans" rel="stylesheet">
+
+
+    <meta charset="utf-8"/>
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="Find the perfect gift ideas, just fill out a quick two-minute quiz and we'll give you suggestions about
 what to get your friend or loved one."
-	      name="description"/>
-	<meta content="Semantic-UI, Theme, Design, Template" name="keywords"/>
-	<meta content="PPType" name="author"/>
-	<meta content="#ffffff" name="theme-color"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	{#    <link href="../../static/stylesheets/pandoc-code-highlight.css" rel="stylesheet" type="text/css" />#}
+          name="description"/>
+    <meta content="Semantic-UI, Theme, Design, Template" name="keywords"/>
+    <meta content="PPType" name="author"/>
+    <meta content="#ffffff" name="theme-color"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {#    <link href="../../static/stylesheets/pandoc-code-highlight.css" rel="stylesheet" type="text/css" />#}
 
-	<style type="text/css">
-		.ui.primary.button,
-		.ui.submit.button {
-			background-color: #BF0000;
-		}
+    <style type="text/css">
+        .ui.primary.button,
+        .ui.submit.button {
+            background-color: #BF0000;
+        }
 
-		.ui.primary.button:hover,
-		.ui.submit.button:hover,
-		.ui.primary.button:focus,
-		.ui.submit.button:focus,
-		.ui.primary.button:active,
-		.ui.submit.button:active {
-			background-color: #9b0000;
-		}
-	</style>
+        .ui.primary.button:hover,
+        .ui.submit.button:hover,
+        .ui.primary.button:focus,
+        .ui.submit.button:focus,
+        .ui.primary.button:active,
+        .ui.submit.button:active {
+            background-color: #9b0000;
+        }
+    </style>
 
-	{% block extra_dependencies %}
+    {% block extra_dependencies %}
 
-	{% endblock %}
+    {% endblock %}
 </head>
 
 <body>
 <!--Sidebar Menu-->
 <div class="ui vertical inverted sidebar menu">
-	{% include "base/navbar.html" with sidebar=True pointing=True %}
+    {% include "base/navbar.html" with sidebar=True pointing=True %}
 </div>
 
 <div class="pusher Site-ie-container">
-	<div class="Site">
-		<header>
-			{% block navbar %}
-				<div class="ui large top fixed menu">
-					<div class="ui container">
-						{% include "base/navbar.html" %}
-					</div>
-				</div>
-			{% endblock %}
-		</header>
+    <div class="Site">
+        <header>
+            {% block navbar %}
+                <div class="ui large top fixed menu">
+                    <div class="ui container">
+                        {% include "base/navbar.html" %}
+                    </div>
+                </div>
+            {% endblock %}
+        </header>
 
-		<main class="Site-content">
-			{% block content %}
-			{% endblock %}
-		</main>
+        <main class="Site-content">
+            {% block content %}
+            {% endblock %}
+        </main>
 
 
-		{% block footer %}
-			<style type="text/css">
-				.Site {
-					display: flex;
-					min-height: 100vh;
-					flex-direction: column;
-				}
+        {% block footer %}
+            <style type="text/css">
+                .Site {
+                    display: flex;
+                    min-height: 100vh;
+                    flex-direction: column;
+                }
 
-				.Site-content {
-					flex-grow: 1;
-				}
+                .Site-content {
+                    flex-grow: 1;
+                }
 
-				/* Only IE11 */
-				@media all and (-ms-high-contrast: none) {
-					*::-ms-backdrop, .Site-ie-container {
-						display: flex;
-					}
+                /* Only IE11 */
+                @media all and (-ms-high-contrast: none) {
+                    *::-ms-backdrop, .Site-ie-container {
+                        display: flex;
+                    }
 
-					*::-ms-backdrop, .Site {
-						width: 100%;
-					}
-				}
-			</style>
-			<footer style="padding-top: 32px">
-				{% include "base/footer.html" %}
-			</footer>
-		{% endblock %}
-	</div>
+                    *::-ms-backdrop, .Site {
+                        width: 100%;
+                    }
+                }
+            </style>
+            <footer style="padding-top: 32px">
+                {% include "base/footer.html" %}
+            </footer>
+        {% endblock %}
+    </div>
 </div>
 
 
 {#</div>#}
 </body>
 <script>
-	$(document).ready(function () {
-		$('.ui.dropdown').dropdown();
-		{#		dropdown({#}
-		{#			onChange: function (value) {#}
-		{#				var target = $(this).dropdown();#}
-		{#				if (value) {#}
-		{#					target#}
-		{#						.find('.dropdown.icon')#}
-		{#						.removeClass('dropdown')#}
-		{#						.addClass('delete')#}
-		{#						.on('click', function () {#}
-		{#							target.dropdown('clear');#}
-		{#							$(this).removeClass('delete').addClass('dropdown');#}
-		{#							return false;#}
-		{#						});#}
-		{#				}#}
-		{#			}#}
-		{#		});#}
-		{#$('.ui.checkbox')#}
-		{#    .checkbox()#}
-		{#;#}
-		// create sidebar and attach to menu open
-		$('.ui.sidebar')
-		    .sidebar('attach events', '.toc.item')
-		;
-		try {
-			setup();
-		} catch (e) {
+    $(document).ready(function () {
+        $('.ui.dropdown').dropdown();
+        {#		dropdown({#}
+        {#			onChange: function (value) {#}
+        {#				var target = $(this).dropdown();#}
+        {#				if (value) {#}
+        {#					target#}
+        {#						.find('.dropdown.icon')#}
+        {#						.removeClass('dropdown')#}
+        {#						.addClass('delete')#}
+        {#						.on('click', function () {#}
+        {#							target.dropdown('clear');#}
+        {#							$(this).removeClass('delete').addClass('dropdown');#}
+        {#							return false;#}
+        {#						});#}
+        {#				}#}
+        {#			}#}
+        {#		});#}
+        {#$('.ui.checkbox')#}
+        {#    .checkbox()#}
+        {#;#}
+        // create sidebar and attach to menu open
+        $('.ui.sidebar')
+            .sidebar('attach events', '.toc.item')
+        ;
+        $('.ui.accordion')
+            .accordion()
+        ;
+        try {
+            setup();
+        } catch (e) {
 
-		}
-	});
+        }
+    });
 </script>
 
 <style type="text/css">
-	div.ui.main.container {
-		margin-top: 7em;
-	}
+    div.ui.main.container {
+        margin-top: 7em;
+    }
 </style>
 
 {% block css %}
