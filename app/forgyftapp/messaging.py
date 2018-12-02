@@ -6,6 +6,9 @@ from forgyft import settings
 
 
 def broadcast_to_slack(message):
+	if settings.DEBUG:
+		print(message)
+		return
 	webhook_url = "***REMOVED***"
 	return requests.post(webhook_url, json.dumps({"text": message}), json=True)
 

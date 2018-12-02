@@ -11,7 +11,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView, ListView
 
-from forgyftapp.forms import GifteeProfileForm, GiftIdeaForm, GiftIdeaFormSet
+from forgyftapp.forms import GifteeProfileForm, GiftIdeaForm, GiftIdeaFormSet, GiftFeedbackForm
 from forgyftapp.messaging import broadcast_to_slack
 from forgyftapp.models import GifteeProfile, GiftIdea
 
@@ -39,9 +39,22 @@ def request(request, profile=None):
 		if not giftee_profile.published or not giftee_profile.user == request.user:
 			return redirect("forgyftapp:request")
 
+		if request.method == "POST":
+			feedback_form = GiftFeedbackForm(request.POST, instance=giftee_profile.feedback)
+			if feedback_form.is_valid():
+				feedback = feedback_form.save(giftee_profile=giftee_profile)
+				giftee_profile.feedback = feedback
+				giftee_profile.save()
+				return redirect("forgyftapp:request", profile=profile)
+		else:
+			feedback_form = GiftFeedbackForm(instance=giftee_profile.feedback)
+
+		hasFeedback = giftee_profile.feedback is not None
+
 		return render(request, "request.html", {"giftee_profile": giftee_profile,
 		                                        "ideas": GiftIdea.objects.filter(giftee_profile=giftee_profile),
-		                                        "page": "request"})
+		                                        "page": "request", "feedback_form": feedback_form,
+		                                        "hasFeedback": hasFeedback})
 	else:
 		giftee_profiles = GifteeProfile.objects.filter(user=request.user)
 
