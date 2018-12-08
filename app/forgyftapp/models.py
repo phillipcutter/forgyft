@@ -85,7 +85,7 @@ class GiftFeedback(models.Model, OnCreate):
 
 	def onCreate(self):
 		super().onCreate()
-		fulfillUrl = settings.ABSOLUTE_URI + reverse("forgyftapp:fulfill", kwargs={"profile": self.gifteeprofile.pk})
+		fulfillUrl = settings.ABSOLUTE_URI + reverse("forgyftapp:fulfill", kwargs={"profile": self.giftee_profile.pk})
 		debug_log(f"User submitted feedback for gift ideas. View it <{fulfillUrl}|here>.")
 		broadcast_to_slack(f"Hey <!channel>, a user submitted feedback for gift ideas."
 		                   f" View it <{fulfillUrl}|here>.")
