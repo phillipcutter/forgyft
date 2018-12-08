@@ -1,6 +1,10 @@
-<h3 class="ui header">{{ giftee_profile.name }}'s Profile</h3>
-
-<div class="ui dividing sub header">Gender</div>
+<div class="ui styled accordion" style="width: 100%;">
+  <div class="active title">
+    <i class="dropdown icon"></i>
+      {{ giftee_profile.name }}'s Profile
+  </div>
+  <div class="active content">
+    <div class="ui dividing sub header">Gender</div>
 <p>{{ giftee_profile.gender_string }}</p>
 
 <div class="ui dividing sub header">Age</div>
@@ -27,3 +31,5 @@
 	<div class="ui dividing sub header">Extra Info</div>
 	<p>{{ giftee_profile.extra_info }}</p>
 {% endif %}
+  </div>
+</div>
