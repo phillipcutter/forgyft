@@ -14,7 +14,7 @@ class GiftFeedbackForm(ModelForm):
 	                            required=True)
 	feedback = forms.CharField(help_text="What did you think of the gift ideas, how can we improve in the future?",
 	                           required=True, widget=forms.Textarea(attrs={"rows": "4"}))
-	bought = forms.BooleanField(label="Bought", help_text="Did you buy one of the gift ideas?", required=True)
+	bought = forms.BooleanField(label="Bought", help_text="Did you buy one of the gift ideas?", required=False)
 
 	def save(self, giftee_profile=None, commit=True):
 		if not giftee_profile:
