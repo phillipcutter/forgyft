@@ -109,8 +109,9 @@
 
 				<div class="mobile only">
 					<div class="ui two column stackable grid">
-						<div class="column">
-							<div class="ui text container" style="width: 100%">
+						<div class="column" style="padding-left: 0 !important; padding-right: 0 !important;">
+							<div class="ui text container" style="width: 100% !important; margin-left: 0 !important;
+							margin-right: 0 !important;">
 								{#					<h2 class="ui dividing header"></h2>#}
 								<div class="ui three centered stackable cards">
 									{% for idea in ideas %}
@@ -139,8 +140,9 @@
 							</div>
 
 						</div>
-						<div class="column">
-							<div class="ui text container segment" style="width: 100%">
+						<div class="column" style="padding-left: 0 !important; padding-right: 0 !important;">
+							<div class="ui text container segment" style="width: 100% !important; margin-left: 0 !important;
+							margin-right: 0 !important;">
 								<h3 class="ui header" style="text-align: center">Gift Idea Feedback</h3>
 								{% if hasFeedback %}
 									<div class="ui small positive message">
@@ -162,7 +164,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="ui text container segment" style="width: 100%">
+					<div class="ui basic segment" style="width: 100%; padding-right: 0; padding-left: 0">
 						{% include "base/giftee_profile.html" %}
 					</div>
 				</div>
