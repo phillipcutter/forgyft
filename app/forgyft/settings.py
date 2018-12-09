@@ -67,13 +67,14 @@ INSTALLED_APPS = [
 ]
 
 ANYMAIL = {
-    "MAILGUN_API_KEY": os.getenv("MAILGUN_API_KEY"),
-    "MAILGUN_SENDER_DOMAIN": "forgift.org"
+    # "MAILGUN_API_KEY": os.getenv("MAILGUN_API_KEY"),
+    # "MAILGUN_SENDER_DOMAIN": "forgift.org",
+    "SENDGRID_API_KEY": os.getenv("SENDGRID_API_KEY"),
 }
 
 LOGIN_URL = reverse_lazy("forgyftapp:signup")
 
-EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
+EMAIL_BACKEND = "anymail.backends.sendgrid.EmailBackend"
 DEFAULT_FROM_EMAIL = "support@forgift.org"
 
 if DEBUG:
