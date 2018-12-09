@@ -31,6 +31,13 @@
         }();
         drift.SNIPPET_VERSION = '0.3.1';
         drift.load('na3vedaychix');
+        {% if request.user.is_authenticated %}
+        drift.on('ready', function () {
+	        drift.api.setUserAttributes({
+		        email: '{{ request.user.email }}',
+	        })
+        });
+        {% endif %}
     </script>
     <!-- End of Async Drift Code -->
 
@@ -82,7 +89,13 @@
         };
         g.clearUserCookie = function () {
         };
-    })(window, document, window['_fs_namespace'], 'script', 'user'); </script>
+    })(window, document, window['_fs_namespace'], 'script', 'user');
+    {% if request.user.is_authenticated %}
+	    FS.identify('{{ request.user.pk }}', {
+		    email: '{{ request.user.email }}'
+	    });
+    {% endif %}
+    </script>
     <!-- End of Fullstory -->
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
