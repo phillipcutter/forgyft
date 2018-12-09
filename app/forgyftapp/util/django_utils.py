@@ -1,5 +1,6 @@
 from django.utils.crypto import get_random_string
-
+import random
+import string
 
 def get_slug(obj, length=6, allowed_chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", underscoreSlug=False):
 	while True:
@@ -20,3 +21,7 @@ def get_client_ip(request):
 	else:
 		ip = request.META.get('REMOTE_ADDR')
 	return ip
+
+
+def rand_slug(length=6):
+	return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(length))

@@ -39,7 +39,7 @@
 							</div>
 							<div class="extra content">
 								<a class="ui {% if not giftee_profile.published %}disabled grey {% else %}primary {% endif %}fluid  button"
-								   href="{% url "forgyftapp:request" profile=giftee_profile.pk %}">View Gift
+								   href="{% url "forgyftapp:request" slug=giftee_profile.slug %}">View Gift
 									Ideas</a>
 							</div>
 						</div>
@@ -104,6 +104,28 @@
 							{% endif %}
 							{% include "base/form_template.html" with form=feedback_form action_text="Submit" %}
 						</div>
+						{% if giftee_profile.email %}
+							<div class="ui text container segment" style="width: 100%;  text-align: center">
+								<h3 class="ui header">Save Your Gift Ideas</h3>
+								{% if giftee_profile.has_user %}
+									<div class="ui small positive message">
+										<div class="header">
+											Account Successfully Linked
+										</div>
+										<p>
+											Your gift ideas have been successfully linked to your account, you can
+											come back to them later at any time by signing into your account and
+											heading to your <a href="{% url "forgyftapp:request" %}">gift requests</a>.
+										</p>
+									</div>
+								{% endif %}
+								<p>Want to save your ideas so you can come back later, just link an account!</p>
+								<a href="{% url "forgyftapp:link_request" slug=giftee_profile.slug %}"
+								   class="ui primary {% if giftee_profile.has_user %}disabled {% endif %}button">
+									Link an Account
+								</a>
+							</div>
+						{% endif %}
 					</div>
 				</div>
 
@@ -164,6 +186,29 @@
 							</div>
 						</div>
 					</div>
+					{% if giftee_profile.email %}
+						<div class="ui text container segment" style="width: 100% !important; margin-left: 0 !important;
+							margin-right: 0 !important;text-align: center">
+							<h3 class="ui header">Save Your Gift Ideas</h3>
+							{% if giftee_profile.has_user %}
+								<div class="ui small positive message">
+									<div class="header">
+										Account Successfully Linked
+									</div>
+									<p>
+										Your gift ideas have been successfully linked to your account, you can
+										come back to them later at any time by signing into your account and
+										heading to your <a href="{% url "forgyftapp:request" %}">gift requests</a>.
+									</p>
+								</div>
+							{% endif %}
+							<p>Want to save your ideas so you can come back later, just link an account!</p>
+							<a href="{% url "forgyftapp:link_request" slug=giftee_profile.slug %}"
+							   class="ui primary {% if giftee_profile.has_user %}disabled {% endif %}button">
+								Link an Account
+							</a>
+						</div>
+					{% endif %}
 					<div class="ui basic segment" style="width: 100%; padding-right: 0; padding-left: 0">
 						{% include "base/giftee_profile.html" %}
 					</div>

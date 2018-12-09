@@ -7,15 +7,18 @@ app_name = "forgyftapp"
 urlpatterns = [
 	url(r'^$', basic_views.index, name="index"),
 
-	url(r'^gift/form/?$', basic_views.gift_form, name='gift_form'),
-	url(r'^gift/submit/?$', basic_views.gift_form_submitted, name='gift_form_submitted'),
+	url(r'^quiz/?$', basic_views.gift_form, name='gift_form'),
+	url(r'^submit/?$', basic_views.gift_form_submitted, name='gift_form_submitted'),
 
 	url(r'^request/?$', basic_views.request, name='request'),
 	url(r'^request/(?P<profile>[0-9]+)/?$', basic_views.request, name='request'),
+	url(r'^request/slug/(?P<slug>[A-Za-z0-9]+)/?$', basic_views.request, name='request'),
 	url(r'^view_gift/(?P<gift>[0-9]+)/?$', basic_views.view_gift, name='view_gift'),
 
+	url(r'^request/link/(?P<slug>[A-Za-z0-9]+)/?$', basic_views.link_request, name='link_request'),
 
 	url(r'^fulfill/?$', basic_views.fulfill, name='fulfill'),
+	url(r'^fulfill/(?P<profile>[0-9]+)/?$', basic_views.fulfill, name='fulfill'),
 	url(r'^fulfill/(?P<profile>[0-9]+)/?$', basic_views.fulfill, name='fulfill'),
 
 	# Static pages

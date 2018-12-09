@@ -1,9 +1,11 @@
 import bugsnag as bugsnag
 from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import redirect_to_login
 from django.db import transaction
 from django.http import HttpResponse
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, resolve_url
 
 # Create your views here.
 from django.template.response import TemplateResponse
@@ -11,6 +13,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView, ListView
 
+from forgyft import settings
 from forgyftapp.forms import GifteeProfileForm, GiftIdeaForm, GiftIdeaFormSet, GiftFeedbackForm
 from forgyftapp.messaging import broadcast_to_slack
 from forgyftapp.models import GifteeProfile, GiftIdea
@@ -31,8 +34,49 @@ def contact(request):
 def privacy(request):
 	return render(request, "static/privacy.html")
 
-@login_required
-def request(request, profile=None):
+@login_required()
+def link_request(request, slug=None):
+	if not slug:
+		return redirect("forgyftapp:request")
+
+	giftee_profile = GifteeProfile.fromSlug(slug)
+	user = request.user
+
+	if giftee_profile.has_user:
+		return redirect("forgyftapp:request", slug=slug)
+
+	giftee_profile.link_user(user)
+	return redirect("forgyftapp:request", slug=slug)
+
+def request(request, profile=None, slug=None):
+	if slug:
+		giftee_profile = GifteeProfile.fromSlug(slug)
+
+		if not giftee_profile.published and not giftee_profile.has_user:
+			return redirect("forgyftapp:index")
+		elif not giftee_profile.published or (giftee_profile.has_user and not giftee_profile.user == request.user):
+			return redirect("forgyftapp:request")
+
+		if request.method == "POST":
+			feedback_form = GiftFeedbackForm(request.POST, instance=giftee_profile.feedback)
+			if feedback_form.is_valid():
+				feedback = feedback_form.save(giftee_profile=giftee_profile)
+				giftee_profile.feedback = feedback
+				giftee_profile.save()
+				return redirect("forgyftapp:request", slug=giftee_profile.slug)
+		else:
+			feedback_form = GiftFeedbackForm(instance=giftee_profile.feedback)
+
+		hasFeedback = giftee_profile.feedback is not None
+
+		return render(request, "request.html", {"giftee_profile": giftee_profile,
+		                                        "ideas": GiftIdea.objects.filter(giftee_profile=giftee_profile),
+		                                        "page": "request", "feedback_form": feedback_form,
+		                                        "hasFeedback": hasFeedback})
+
+	if not request.user.is_authenticated:
+		return login_required()(request)(request)
+
 	if profile:
 		giftee_profile = get_object_or_404(GifteeProfile, pk=profile)
 
@@ -45,7 +89,7 @@ def request(request, profile=None):
 				feedback = feedback_form.save(giftee_profile=giftee_profile)
 				giftee_profile.feedback = feedback
 				giftee_profile.save()
-				return redirect("forgyftapp:request", profile=profile)
+				return redirect("forgyftapp:request", slug=giftee_profile.slug)
 		else:
 			feedback_form = GiftFeedbackForm(instance=giftee_profile.feedback)
 
@@ -68,7 +112,7 @@ def view_gift(request, gift=None):
 		giftee_profile = gift_idea.giftee_profile
 
 		if not giftee_profile.published or not giftee_profile.user == request.user:
-			return redirect("forgyftapp:request", profile=giftee_profile.pk)
+			return redirect("forgyftapp:request", slug=giftee_profile.slug)
 
 		gift_idea.click()
 
@@ -78,18 +122,20 @@ def view_gift(request, gift=None):
 
 
 def gift_form_submitted(request):
-	return render(request, "gift_form_submitted.html", {"page": "request"})
+	return render(request, "gift_form_submitted.html", {"page": "quiz"})
 
 def gift_form(request):
+	has_account = request.user.is_authenticated
+
 	if request.method == "POST":
-		form = GifteeProfileForm(request.POST)
+		form = GifteeProfileForm(request.POST, account=has_account)
 		if form.is_valid():
 			form.save(user=request.user, request=request)
 			return redirect("forgyftapp:gift_form_submitted")
 	else:
-		form = GifteeProfileForm()
+		form = GifteeProfileForm(account=has_account)
 
-	return render(request, "gift_form.html", {"form": form, "page": "request"})
+	return render(request, "gift_form.html", {"form": form, "page": "quiz"})
 
 
 

@@ -66,14 +66,25 @@ class GifteeProfileForm(ModelForm):
 	                                                                    "us to know while finding the perfect gift?",
 	                             required=False)
 
+	def __init__(self, *args, **kwargs):
+		account = kwargs.pop("account", False)
+		super().__init__(*args, **kwargs)
+		if not account:
+			self.fields['email'] = forms.EmailField(label="Email Address",
+		                              help_text="We'll shoot you an email when you're results are "
+		                                        "ready.", required=True)
+
 
 	def save(self, user=None, request=None, commit=True):
-		if not user:
+		if not user and not self.fields.get("email", None):
 			raise TypeError("No user object given to the GifteeProfileForm.save method.")
 		if not request:
 			raise TypeError("No request object given to the GifteeProfileForm.save method.")
 		instance = super().save(commit=False)
-		instance.user = user
+		if not self.fields.get("email", None):
+			instance.user = user
+		else:
+			instance.email = self.cleaned_data["email"]
 		instance.ip_address = get_client_ip(request)
 		if commit:
 			instance.save()
@@ -83,7 +94,6 @@ class GifteeProfileForm(ModelForm):
 		model = GifteeProfile
 		fields = ("age", "gender", "relationship", "occasion", "price_upper",
 		          "interests", "existing_related_items", "extra_info", "name")
-
 
 class LoginForm(ModelForm):
 	password = forms.CharField(label="Password", widget=forms.PasswordInput, min_length=6)
