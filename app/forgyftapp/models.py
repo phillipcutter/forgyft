@@ -10,6 +10,7 @@ from django.db.models import Model
 from django.dispatch import receiver
 from django.http import Http404
 from django.urls import reverse
+from django.utils import timezone
 
 from forgyft import settings
 from forgyftapp.messaging import broadcast_to_slack, debug_log
@@ -110,6 +111,8 @@ class GifteeProfile(models.Model, OnCreate):
 
 	feedback = models.OneToOneField(GiftFeedback, on_delete=models.SET_NULL, null=True)
 
+	created = models.DateTimeField(editable=False, null=True, blank=True)
+
 	@property
 	def status(self):
 		if self.published:
@@ -153,6 +156,8 @@ class GifteeProfile(models.Model, OnCreate):
 
 	def onCreate(self):
 		super().onCreate()
+		self.created = timezone.now()
+		self.save()
 		if not settings.DEBUG:
 			fulfillUrl = settings.ABSOLUTE_URI + reverse("forgyftapp:fulfill", kwargs={"profile": self.pk})
 			debug_log(f"User with email address \"{self.user.email}\" submitted new gift request.")
