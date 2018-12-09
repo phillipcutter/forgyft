@@ -29,6 +29,19 @@
 						{% endfor %}
 					</select>
 				</div>
+			{% elif field.field.widget.input_type == "number" and stars %}
+				<div class="field">
+					<label for="{{ field.id_for_label }}" style="display: inline">{{ field.label }}</label>
+					{% if field.help_text %}
+						<label style="font-weight: 100; font-size: 13px; display: inline"> -
+							{% autoescape off %}{{ field.help_text }}{% endautoescape %}</label>
+					{% endif %}
+					<div class="ui input" style="padding-top: 8px">
+						<div class="ui huge rating" data-rating="{{ field.field.initial }}" data-max-rating=
+								"{{ field.field.max_value }}" name="{{ field.html_name }}" data-input="{{ field.id_for_label }}"></div>
+						<input style="display: none" id="{{ field.id_for_label }}" type="number">
+					</div>
+				</div>
 			{% elif field.field.widget.input_type == "checkbox" %}
 				<div class="inline field">
 					<div class="ui toggle checkbox">
@@ -46,10 +59,12 @@
 					{% if field.help_text %}
 						<label style="font-weight: 100; font-size: 13px; display: inline"> - {% autoescape off %}{{ field.help_text }}{% endautoescape %}</label>
 					{% endif %}
-					<div class="ui input">
-{#                        {% if field.label == "Max Price" %}#}
-{#                            <div style="margin-top: auto; margin-bottom: auto; margin-right: 4px; margin-left: 2px">$</div>#}
-{#                        {% endif %}#}
+					<div class="ui {% if field.label == "Max Price" %}labeled {% endif %} input">
+                        {% if field.label == "Max Price" %}
+	                        <div class="ui label">
+		                        $
+	                        </div>
+                        {% endif %}
 						{{ field }}
 					</div>
 				</div>

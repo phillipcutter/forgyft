@@ -102,7 +102,7 @@
 									</p>
 								</div>
 							{% endif %}
-							{% include "base/form_template.html" with form=feedback_form action_text="Submit" %}
+							{% include "base/form_template.html" with stars=True form=feedback_form action_text="Submit" %}
 						</div>
 						{% if giftee_profile.email %}
 							<div class="ui text container segment" style="width: 100%;  text-align: center">
@@ -182,7 +182,7 @@
 										</p>
 									</div>
 								{% endif %}
-								{% include "base/form_template.html" with form=feedback_form action_text="Submit" %}
+								{% include "base/form_template.html" with stars=True form=feedback_form action_text="Submit" %}
 							</div>
 						</div>
 					</div>

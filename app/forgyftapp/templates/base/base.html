@@ -256,6 +256,10 @@ what to get your friend or loved one."
         $('.ui.accordion')
             .accordion()
         ;
+	    $('.ui.rating')
+		    .rating({onRate: function (r) {
+				    $("#" + $(this).data("input")).val(r)
+			    }});
         try {
             setup();
         } catch (e) {
