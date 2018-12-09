@@ -1,3 +1,4 @@
+import requests
 import tldextract as tldextract
 from django.contrib.auth.models import AbstractUser
 from django.contrib.contenttypes.models import ContentType
@@ -112,10 +113,26 @@ class GifteeProfile(Slug):
 
 	ip_address = models.GenericIPAddressField(null=True, default=None)
 
+	_location = models.TextField(null=True, default=None, blank=True)
 
 	def link_user(self, user):
 		self.user = user
 		self.save()
+
+	@property
+	def location(self):
+		if self._location:
+			return self._location
+		else:
+			#TODO: Make this asynchronous
+			r = requests.get("http://api.ipstack.com/" + str(self.ip_address),
+		                  params={"access_key": settings.IPSTACK_KEY})
+			results = r.json()
+			location_string = f"{results['city']}, {results['region_name']}, {results['country_name']}"
+			self._location = location_string
+			self.save()
+			return location_string
+
 
 	@property
 	def email_address(self):
