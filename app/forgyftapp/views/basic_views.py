@@ -84,7 +84,7 @@ def gift_form(request):
 	if request.method == "POST":
 		form = GifteeProfileForm(request.POST)
 		if form.is_valid():
-			form.save(user=request.user)
+			form.save(user=request.user, request=request)
 			return redirect("forgyftapp:gift_form_submitted")
 	else:
 		form = GifteeProfileForm()
