@@ -117,6 +117,12 @@ class GifteeProfile(Slug):
 		self.user = user
 		self.save()
 
+	@property
+	def email_address(self):
+		if self.has_user:
+			return self.user.email
+		else:
+			return self.email
 
 	@property
 	def has_user(self):
@@ -182,8 +188,8 @@ class GifteeProfile(Slug):
 		self.save()
 		if not settings.DEBUG:
 			fulfillUrl = settings.ABSOLUTE_URI + reverse("forgyftapp:fulfill", kwargs={"profile": self.pk})
-			debug_log(f"User with email address \"{self.user.email}\" submitted new gift request.")
-			broadcast_to_slack(f"Hey <!channel>, there was a new gift request created by {str(self.user)}. "
+			debug_log(f"User with email address \"{self.email_address}\" submitted new gift request.")
+			broadcast_to_slack(f"Hey <!channel>, there was a new gift request created by {self.user_full_name}. "
 			                   f"Enter gift ideas <{fulfillUrl}|here>")
 
 
