@@ -113,6 +113,8 @@ class GifteeProfile(models.Model, OnCreate):
 
 	created = models.DateTimeField(editable=False, null=True, blank=True)
 
+	ip_address = models.GenericIPAddressField(null=True, default=None)
+
 	@property
 	def status(self):
 		if self.published:

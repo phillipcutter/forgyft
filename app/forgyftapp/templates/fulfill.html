@@ -175,7 +175,13 @@
         </div>
     {% endif %}
     <div class="ui basic segment" style="width: 100%; padding-right: 0; padding-left: 0">
-        {% include "base/giftee_profile.html" %}
+        {% include "base/giftee_profile.html" with no_close=True %}
+	    {% if giftee_profile.ip_address %}
+			    <div class="ui dividing sub header">IP Address</div>
+			    <p>{{ giftee_profile.ip_address }}</p>
+		    </div>
+		    </div>
+	    {% endif %}
     </div>
 
     {% else %}

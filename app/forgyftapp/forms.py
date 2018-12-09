@@ -5,6 +5,7 @@ from django import forms
 
 from forgyftapp import models
 from forgyftapp.models import GifteeProfile, User, GiftIdea, GiftFeedback
+from forgyftapp.util.django_utils import get_client_ip
 
 
 class GiftFeedbackForm(ModelForm):
@@ -66,11 +67,14 @@ class GifteeProfileForm(ModelForm):
 	                             required=False)
 
 
-	def save(self, user=None, commit=True):
+	def save(self, user=None, request=None, commit=True):
 		if not user:
-			raise TypeError("No user object given to the ListingForm.save method.")
+			raise TypeError("No user object given to the GifteeProfileForm.save method.")
+		if not request:
+			raise TypeError("No request object given to the GifteeProfileForm.save method.")
 		instance = super().save(commit=False)
 		instance.user = user
+		instance.ip_address = get_client_ip(request)
 		if commit:
 			instance.save()
 		return instance
