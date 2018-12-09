@@ -123,7 +123,7 @@ class GifteeProfile(models.Model, OnCreate):
 			view_url = request.build_absolute_uri(reverse("forgyftapp:request", kwargs={"profile": self.pk}))
 			send_mail(f"Your gift ideas for {self.name} are ready",
 			          f"To view your gift ideas click this link: {view_url}",
-			          "noreply@forgyft.com",
+			          "Forgift <support@forgift.org>",
 			          [self.user.email],
 			          html_message=f"To view your gift ideas click <a href=\"{view_url}\">here</a>")
 			self.emailed_about_publish = True
