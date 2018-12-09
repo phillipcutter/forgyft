@@ -192,7 +192,7 @@
 			<div class="ui dividing sub header">Linked to Account</div>
 			<p>
 				{% if giftee_profile.has_user %}
-					Linked to {{ giftee_profile.user }}
+					Linked to account: {{ giftee_profile.user }}
 				{% else %}
 					Linked to email: {{ giftee_profile.email }}
 				{% endif %}
