@@ -183,6 +183,22 @@
 		    </div>
 	    {% endif %}
     </div>
+	<div class="ui styled accordion" style="width: 100%;">
+		<div class="active title">
+			<i class="dropdown icon"></i>
+			Giftee Profile Account Status
+		</div>
+		<div class="active content">
+			<div class="ui dividing sub header">Linked to Account</div>
+			<p>
+				{% if giftee_profile.has_user %}
+					Linked to {{ giftee_profile.user }}
+				{% else %}
+					Linked to email: {{ giftee_profile.email }}
+				{% endif %}
+			</p>
+			</div>
+		</div>
 
     {% else %}
     <h1 style="text-align: center; padding-bottom: 4px">Unfulfilled Gift Requests</h1>

@@ -4,12 +4,8 @@
 
 		<h1 style="text-align: center; padding-bottom: 16px">Submit a Gift Idea Request</h1>
 
-		{% if request.user.is_authenticated %}
-			{% url 'index' as url %}
-			{% include "base/form_template.html" with action=url action_text="Submit" message="By clicking submit you agree our terms of service." %}
-		{% else %}
-			<h3>Login to submit a gift idea request.</h3>
-		{% endif %}
+		{% url 'index' as url %}
+		{% include "base/form_template.html" with action=url action_text="Submit" message="By clicking submit you agree our terms of service." %}
 
 	</div>
 {% endblock %}

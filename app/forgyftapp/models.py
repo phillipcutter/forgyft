@@ -15,15 +15,11 @@ from django.utils import timezone
 from forgyft import settings
 from forgyftapp.messaging import broadcast_to_slack, debug_log
 from forgyftapp.util import django_utils
-
+from forgyftapp.util.django_utils import rand_slug
 
 class OnCreate:
 	def onCreate(self):
 		pass
-
-
-
-
 
 class Slug(OnCreate, models.Model):
 	_slug = models.SlugField(max_length=7, blank=True)
@@ -92,7 +88,7 @@ class GiftFeedback(models.Model, OnCreate):
 		                   f" View it <{fulfillUrl}|here>.")
 
 
-class GifteeProfile(models.Model, OnCreate):
+class GifteeProfile(Slug):
 	name = models.TextField(max_length=150)
 	gender = models.CharField(max_length=80, choices=gender.GENDER_CHOICES)
 	age = models.IntegerField()
@@ -107,13 +103,31 @@ class GifteeProfile(models.Model, OnCreate):
 
 	emailed_about_publish = models.BooleanField(default=False)
 
-	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+	email = models.EmailField(null=True)
 
 	feedback = models.OneToOneField(GiftFeedback, on_delete=models.SET_NULL, null=True)
 
 	created = models.DateTimeField(editable=False, null=True, blank=True)
 
 	ip_address = models.GenericIPAddressField(null=True, default=None)
+
+
+	def link_user(self, user):
+		self.user = user
+		self.save()
+
+
+	@property
+	def has_user(self):
+		return bool(self.user)
+
+	@property
+	def user_full_name(self):
+		if self.user:
+			return self.user.get_full_name()
+		else:
+			return self.email
 
 	@property
 	def status(self):
@@ -123,13 +137,19 @@ class GifteeProfile(models.Model, OnCreate):
 			return "We're still deciding on the perfect gifts, please check back soon."
 
 	def submit(self, request):
-		debug_log(f"Submitted gift ideas for {self.name}, as requested by {self.user.get_full_name()}")
+		debug_log(f"Submitted gift ideas for {self.name}, as requested by {self.user_full_name}")
 		if not self.emailed_about_publish:
-			view_url = request.build_absolute_uri(reverse("forgyftapp:request", kwargs={"profile": self.pk}))
+
+			if self.has_user:
+				email = self.user.email
+			else:
+				email = self.email
+
+			view_url = request.build_absolute_uri(reverse("forgyftapp:request", kwargs={"slug": self.slug}))
 			send_mail(f"Your gift ideas for {self.name} are ready",
 			          f"To view your gift ideas click this link: {view_url}",
 			          "Forgift <support@forgift.org>",
-			          [self.user.email],
+			          [email],
 			          html_message=f"To view your gift ideas click <a href=\"{view_url}\">here</a>")
 			self.emailed_about_publish = True
 		self.published = True
@@ -137,7 +157,7 @@ class GifteeProfile(models.Model, OnCreate):
 
 	def unsubmit(self):
 		if self.published:
-			debug_log(f"Unsubmitted gift ideas for {self.name}, as requested by {self.user.get_full_name()}")
+			debug_log(f"Unsubmitted gift ideas for {self.name}, as requested by {self.user_full_name}")
 			self.published = False
 			self.save()
 

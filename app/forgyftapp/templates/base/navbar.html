@@ -13,7 +13,10 @@
 
 </a>
 {#<a class="{% if page == "blog" %}active {% endif %}item" href="/blog">Blog</a>#}
-<a class="{% if page == "request" %}active {% endif %}item" href="{% url "forgyftapp:request" %}">Quiz</a>
+<a class="{% if page == "quiz" %}active {% endif %}item" href="{% url "forgyftapp:gift_form" %}">Quiz</a>
+{% if request.user.is_authenticated %}
+	<a class="{% if page == "request" %}active {% endif %}item" href="{% url "forgyftapp:request" %}">Requests</a>
+{% endif %}
 {#<a class="{% if page == "how_it_works" %}active {% endif %}item">How it Works</a>#}
 {% if user.is_staff %}
 	<a class="{% if page == "fulfill" %}active {% endif %}item" href="{% url "forgyftapp:fulfill" %}">Fulfill</a>
