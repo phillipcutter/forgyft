@@ -191,6 +191,7 @@
                         </div>
                         <div class="meta">
                             From {{ giftee_profile.user.email }}
+	                        {% if giftee_profile.created %}<br>{{ giftee_profile.created }} UTC{% endif %}
                         </div>
                         <div class="description">
                             {{ giftee_profile.ideas.get_queryset|length }} Ideas Currently
@@ -223,6 +224,7 @@
                         </div>
                         <div class="meta">
                             From {{ giftee_profile.user.email }}
+	                        {% if giftee_profile.created %}<br>{{ giftee_profile.created }} UTC{% endif %}
                         </div>
                         <div class="description">
                             {{ giftee_profile.ideas.get_queryset|length }} Ideas Currently
