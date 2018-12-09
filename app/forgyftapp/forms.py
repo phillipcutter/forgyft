@@ -55,7 +55,7 @@ class GifteeProfileForm(ModelForm):
 	                                         "Please be as specific as possible.", required=True)
 	occasion = forms.CharField(help_text="What is the occasion that you will be giving the gift to the receiver?",
 	                           required=True)
-	price_upper = forms.IntegerField(max_value=10000, label="Max Price (Dollars)",
+	price_upper = forms.IntegerField(max_value=10000, label="Max Price",
 	                                 help_text="What is the most you are willing to spend on a gift? Please enter a number.", min_value=5)
 	interests = forms.CharField(help_text="What are their main interests/hobbies, please be as specific as possible?",
 	                            required=True, widget=forms.Textarea(attrs={"rows": "2"}))
