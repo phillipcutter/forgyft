@@ -174,8 +174,8 @@ def fulfill(request, profile=None):
 		return render(request, "fulfill.html", {"giftee_profile": giftee_profile, "gift_ideas": gift_ideas,
 		                                        "page": "fulfill", "published": published})
 	else:
-		giftee_profiles_unpublished = GifteeProfile.objects.filter(published=False).order_by('-created')
-		giftee_profile_published = GifteeProfile.objects.filter(published=True).order_by('-created')
+		giftee_profiles_unpublished = GifteeProfile.objects.filter(published=False).order_by('created')
+		giftee_profile_published = GifteeProfile.objects.filter(published=True).order_by('created')
 
 		return render(request, "fulfill.html", {"giftee_profiles_unpublished": giftee_profiles_unpublished,
 		                                        "page": "fulfill", "giftee_profile_published": giftee_profile_published})
