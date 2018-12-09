@@ -115,7 +115,7 @@ def reset_password(request):
 	                      email_template_name="auth/reset/reset_email.html",
 	                      subject_template_name="auth/reset/reset_subject.txt",
 	                      success_url=reverse("forgyftapp:reset_success"),
-	                      from_email="Forgyft <support@forgyft.com>")(request) # TODO Name Change and Domain
+	                      from_email="Forgift <support@forgift.org>")(request) # TODO Name Change and Domain
 
 
 def reset_confirm(request, uidb64=None, token=None):
