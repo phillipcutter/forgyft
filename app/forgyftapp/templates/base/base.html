@@ -258,6 +258,7 @@ what to get your friend or loved one."
         ;
 	    $('.ui.rating')
 		    .rating({onRate: function (r) {
+		    	{#alert("#" + $(this).data("input").val())#}
 				    $("#" + $(this).data("input")).val(r)
 			    }});
         try {
