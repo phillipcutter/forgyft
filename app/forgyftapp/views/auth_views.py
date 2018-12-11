@@ -14,6 +14,7 @@ from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from urllib import parse
 
 from forgyftapp.forms import UserForm, LoginForm, ResetPasswordForm
 from forgyftapp.messaging import debug_log
@@ -24,6 +25,11 @@ from forgyftapp.models import User
 
 def signup(request):
 	redirectUrl = request.GET.get("next", None)
+	email = None
+	if len(redirectUrl.split("?")) > 1 and redirectUrl.split("?")[1].startswith("email"):
+		raw_email = redirectUrl.split("?")[1][6:]
+		email = parse.unquote(raw_email)
+		redirectUrl = redirectUrl.replace("?email=" + raw_email, "")
 
 	if request.method == "POST":
 		form = UserForm(request.POST)
@@ -53,9 +59,13 @@ def signup(request):
 			else:
 				return HttpResponseRedirect(reverse("forgyftapp:index"))
 	else:
-		form = UserForm()
+		if email:
+			form = UserForm(initial={"email": email})
+		else:
+			form = UserForm()
 
-	return render(request, "auth/signup.html", {"form": form, "next": redirectUrl})
+
+	return render(request, "auth/signup.html", {"form": form, "next": redirectUrl, "email": email})
 
 def logout_view(request):
 	logout(request)
@@ -63,6 +73,7 @@ def logout_view(request):
 
 def login_view(request):
 	redirectUrl = request.GET.get("next", None)
+
 	if request.method == "POST":
 		form = LoginForm(request.POST)
 
