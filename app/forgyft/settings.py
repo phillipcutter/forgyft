@@ -36,43 +36,44 @@ WAGTAIL_SITE_NAME = 'Forgift Blog'
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'collectfast',
-    'django.contrib.staticfiles',
-    'forgyftapp',
-    'social_django',
-    'anymail',
-    'blog',
+	'django.contrib.admin',
+	'django.contrib.auth',
+	'django.contrib.contenttypes',
+	'django.contrib.sessions',
+	'django.contrib.messages',
+	'collectfast',
+	'django.contrib.staticfiles',
+	'forgyftapp',
+	'social_django',
+	'anymail',
+	'blog',
 
-    # Wagtail stuff below V
-    'wagtail.contrib.forms',
-    'wagtail.contrib.redirects',
-    'wagtail.embeds',
-    'wagtail.sites',
-    'wagtail.users',
-    'wagtail.snippets',
-    'wagtail.documents',
-    'wagtail.images',
-    'wagtail.search',
-    'wagtail.admin',
-    'wagtail.core',
+	# Wagtail stuff below V
+	'wagtail.contrib.forms',
+	'wagtail.contrib.redirects',
+	'wagtail.embeds',
+	'wagtail.sites',
+	'wagtail.users',
+	'wagtail.snippets',
+	'wagtail.documents',
+	'wagtail.images',
+	'wagtail.search',
+	'wagtail.admin',
+	'wagtail.core',
 
-    'modelcluster',
-    'taggit',
-    'django.contrib.sitemaps'
+	'modelcluster',
+	'taggit',
+	'django.contrib.sitemaps'
 ]
 
 ANYMAIL = {
-    # "MAILGUN_API_KEY": os.getenv("MAILGUN_API_KEY"),
-    # "MAILGUN_SENDER_DOMAIN": "forgift.org",
-    "SENDGRID_API_KEY": os.getenv("SENDGRID_API_KEY"),
+	# "MAILGUN_API_KEY": os.getenv("MAILGUN_API_KEY"),
+	# "MAILGUN_SENDER_DOMAIN": "forgift.org",
+	"SENDGRID_API_KEY": os.getenv("SENDGRID_API_KEY"),
 }
 
-LOGIN_URL = reverse_lazy("forgyftapp:signup")
+LOGIN_URL = reverse_lazy("forgyftapp:login")
+SIGNUP_URL = reverse_lazy("forgyftapp:signup")
 
 EMAIL_BACKEND = "anymail.backends.sendgrid.EmailBackend"
 DEFAULT_FROM_EMAIL = "support@forgift.org"
@@ -80,41 +81,41 @@ DEFAULT_FROM_EMAIL = "support@forgift.org"
 IPSTACK_KEY = os.getenv("IPSTACK_KEY")
 
 if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+	EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ABSOLUTE_URI = "https://www.forgift.org"
 
 MIDDLEWARE = [
-    'bugsnag.django.middleware.BugsnagMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	'bugsnag.django.middleware.BugsnagMiddleware',
+	'django.middleware.security.SecurityMiddleware',
+	'django.contrib.sessions.middleware.SessionMiddleware',
+	'django.middleware.common.CommonMiddleware',
+	'django.middleware.csrf.CsrfViewMiddleware',
+	'django.contrib.auth.middleware.AuthenticationMiddleware',
+	'django.contrib.messages.middleware.MessageMiddleware',
+	'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    # Wagtail V
-    'wagtail.core.middleware.SiteMiddleware',
-    'wagtail.contrib.redirects.middleware.RedirectMiddleware',
+	# Wagtail V
+	'wagtail.core.middleware.SiteMiddleware',
+	'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
 
 ROOT_URLCONF = 'forgyft.urls'
 
 TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
+	{
+		'BACKEND': 'django.template.backends.django.DjangoTemplates',
+		'DIRS': [],
+		'APP_DIRS': True,
+		'OPTIONS': {
+			'context_processors': [
+				'django.template.context_processors.debug',
+				'django.template.context_processors.request',
+				'django.contrib.auth.context_processors.auth',
+				'django.contrib.messages.context_processors.messages',
+			],
+		},
+	},
 ]
 
 WSGI_APPLICATION = 'forgyft.wsgi.application'
@@ -125,54 +126,54 @@ LINKPREVIEW_KEY = os.getenv("LINKPREVIEW_KEY")
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 if DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
-    }
-    COLLECTFAST_ENABLED = False
+	DATABASES = {
+		'default': {
+			'ENGINE': 'django.db.backends.sqlite3',
+			'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+		}
+	}
+	COLLECTFAST_ENABLED = False
 else:
-    # DATABASES = {
-    #     'default': {
-    #         'ENGINE': 'django.db.backends.postgresql',
-    #         'NAME': os.getenv("DB_NAME"),
-    #         'USER': os.getenv("DB_USER"),
-    #         'PASSWORD': os.getenv("DB_PASSWORD"),
-    #         'HOST': os.getenv("DB_HOST"),
-    #         'PORT': os.getenv("DB_PORT", 5432)
-    #     }
-    # }
+	# DATABASES = {
+	#     'default': {
+	#         'ENGINE': 'django.db.backends.postgresql',
+	#         'NAME': os.getenv("DB_NAME"),
+	#         'USER': os.getenv("DB_USER"),
+	#         'PASSWORD': os.getenv("DB_PASSWORD"),
+	#         'HOST': os.getenv("DB_HOST"),
+	#         'PORT': os.getenv("DB_PORT", 5432)
+	#     }
+	# }
 
-    DATABASES = {  # Docker-compose configuration
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': "postgres",
-            'USER': "postgres",
-            # 'PASSWORD': os.getenv("POSTGRES_PASSWORD"),
-            'HOST': "db",
-            'PORT': 5432
-        }
-    }
+	DATABASES = {  # Docker-compose configuration
+		'default': {
+			'ENGINE': 'django.db.backends.postgresql',
+			'NAME': "postgres",
+			'USER': "postgres",
+			# 'PASSWORD': os.getenv("POSTGRES_PASSWORD"),
+			'HOST': "db",
+			'PORT': 5432
+		}
+	}
 
-    SOCIAL_AUTH_POSTGRES_JSONFIELD = True
+	SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+	{
+		'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+	},
+	{
+		'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+	},
+	{
+		'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+	},
+	{
+		'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+	},
 ]
 
 # SECURE_SSL_REDIRECT = not DEBUG
@@ -180,16 +181,16 @@ AUTH_PASSWORD_VALIDATORS = [
 AUTH_USER_MODEL = "forgyftapp.User"
 
 AUTHENTICATION_BACKENDS = (
-    # 'social_core.backends.github.GithubOAuth2',  # Github
-    'social_core.backends.amazon.AmazonOAuth2', # Amazon
-    'social_core.backends.twitter.TwitterOAuth',  # Twitter
-    'social_core.backends.open_id.OpenIdAuth',  # Google
-    'social_core.backends.google.GoogleOpenId',  # Google
-    'social_core.backends.google.GoogleOAuth2',  # Google
-    # 'social_core.backends.slack.SlackOAuth2',  # Slack
-    'social_core.backends.facebook.FacebookOAuth2', # Facebook
+	# 'social_core.backends.github.GithubOAuth2',  # Github
+	'social_core.backends.amazon.AmazonOAuth2', # Amazon
+	'social_core.backends.twitter.TwitterOAuth',  # Twitter
+	'social_core.backends.open_id.OpenIdAuth',  # Google
+	'social_core.backends.google.GoogleOpenId',  # Google
+	'social_core.backends.google.GoogleOAuth2',  # Google
+	# 'social_core.backends.slack.SlackOAuth2',  # Slack
+	'social_core.backends.facebook.FacebookOAuth2', # Facebook
 
-    'django.contrib.auth.backends.AllowAllUsersModelBackend',
+	'django.contrib.auth.backends.AllowAllUsersModelBackend',
 )
 
 SOCIAL_AUTH_AMAZON_KEY = os.getenv("SOCIAL_AUTH_AMAZON_KEY")
@@ -207,7 +208,7 @@ SOCIAL_AUTH_FACEBOOK_SECRET = os.getenv("FACEBOOK_APP_SECRET")
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
-    'fields': 'id, name, email'
+	'fields': 'id, name, email'
 }
 
 SOCIAL_AUTH_REDIRECT_IS_HTTPS = not DEBUG
@@ -230,9 +231,9 @@ USE_L10N = True
 USE_TZ = True
 
 if not DEBUG:
-    BUGSNAG = {
-        'api_key': '***REMOVED***',
-    }
+	BUGSNAG = {
+		'api_key': '***REMOVED***',
+	}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
@@ -250,20 +251,20 @@ AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
 if not DEBUG:
-    STATICFILES_STORAGE = 'forgyft.custom_storages.StaticStorage'
-    AWS_S3_CUSTOM_DOMAIN = "***REMOVED***"
+	STATICFILES_STORAGE = 'forgyft.custom_storages.StaticStorage'
+	AWS_S3_CUSTOM_DOMAIN = "***REMOVED***"
 
 if DEBUG:
-    MEDIAFILES_LOCATION = "media-debug"
-    STATICFILES_LOCATION = "static-debug"
+	MEDIAFILES_LOCATION = "media-debug"
+	STATICFILES_LOCATION = "static-debug"
 else:
-    MEDIAFILES_LOCATION = "media"
-    STATICFILES_LOCATION = "static"
+	MEDIAFILES_LOCATION = "media"
+	STATICFILES_LOCATION = "static"
 DEFAULT_FILE_STORAGE = "forgyft.custom_storages.MediaStorage"
 
 AWS_HEADERS = {
-    'Cache-Control': 'max-age=86400',
+	'Cache-Control': 'max-age=86400',
 }
 AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
+	'CacheControl': 'max-age=86400',
 }

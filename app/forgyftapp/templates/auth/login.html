@@ -13,7 +13,10 @@
 					<i class="icon redo alternate"></i>
 					Reset Password
 				</a>
-				<br><p>Don't have an account? <a href="{% url "forgyftapp:signup" %}">Sign up here</a></p>
+				<br><p>Don't have an account? <a href="{% url "forgyftapp:signup" %}{% if next %}?next={{ next }}
+{% endif %}">Sign
+				up
+				here</a></p>
 			</div>
 		</div>
 		<div class="divider-column">

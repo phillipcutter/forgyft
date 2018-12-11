@@ -62,7 +62,7 @@ class GifteeProfileForm(ModelForm):
 	existing_related_items = forms.CharField(label="Items They Own",
 	                                         help_text="What items do they already have that are"
 	                                                   " related to their main interests/hobbies?")
-	extra_info = forms.CharField(label="Special Information", help_text="Is their any other information you would like "
+	extra_info = forms.CharField(label="Special Information", help_text="Is there any other information you would like "
 	                                                                    "us to know while finding the perfect gift?",
 	                             required=False)
 
@@ -71,7 +71,7 @@ class GifteeProfileForm(ModelForm):
 		super().__init__(*args, **kwargs)
 		if not account:
 			self.fields['email'] = forms.EmailField(label="Email Address",
-		                              help_text="We'll shoot you an email when you're results are "
+		                              help_text="We'll shoot you an email when your results are "
 		                                        "ready.", required=True)
 
 

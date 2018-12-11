@@ -34,7 +34,7 @@ def contact(request):
 def privacy(request):
 	return render(request, "static/privacy.html")
 
-@login_required()
+@login_required(login_url=settings.SIGNUP_URL)
 def link_request(request, slug=None):
 	if not slug:
 		return redirect("forgyftapp:request")

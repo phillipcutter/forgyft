@@ -120,7 +120,8 @@
 									</div>
 								{% endif %}
 								<p>Want to save your ideas so you can come back later, just link an account!</p>
-								<a href="{% url "forgyftapp:link_request" slug=giftee_profile.slug %}"
+								<a href="{% url "forgyftapp:link_request" slug=giftee_profile.slug %}?email=
+{{ giftee_profile.email|urlencode }}"
 								   class="ui primary {% if giftee_profile.has_user %}disabled {% endif %}button">
 									Link an Account
 								</a>
