@@ -37,9 +37,10 @@
 							{% autoescape off %}{{ field.help_text }}{% endautoescape %}</label>
 					{% endif %}
 					<div class="ui input" style="padding-top: 8px">
-						<div class="ui huge rating" data-rating="{{ field.field.initial }}" data-max-rating=
-								"{{ field.field.max_value }}" name="{{ field.html_name }}" data-input="{{ field.id_for_label }}"></div>
-						<input style="display: none" id="{{ field.id_for_label }}" type="number">
+						<div class="ui huge rating" data-rating="{{ field.value }}" data-max-rating=
+								"{{ field.field.max_value }}" data-input="{{ field.id_for_label }}"></div>
+						<input style="display: none" id="{{ field.id_for_label }}" name="{{ field.html_name }}"
+						       type="number" value="{{ field.value }}">
 					</div>
 				</div>
 			{% elif field.field.widget.input_type == "checkbox" %}
