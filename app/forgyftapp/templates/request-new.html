@@ -50,87 +50,92 @@
 		{% else %}
 			<h1 class="ui header" style="text-align: center; padding-bottom: 4px">Gift Ideas
 				for {{ giftee_profile.name }}</h1>
-			<div style="margin-left:auto;margin-right:auto;">
-				<div class="ui three centered stackable cards">
-					{% for idea in ideas %}
-						<div class="ui fluid card">
-							<div class="content">
-								{% if idea.image %}
-									<div class="image">
-										<img src="{{ idea.image }}">
-									</div>
-								{% endif %}
-								<div class="header">
-									{{ idea.idea }}
-								</div>
-								<div class="description">
-									{{ idea.explanation }}
-								</div>
+
+			{% for idea in ideas %}
+				<div class="ui segment">
+					<div class="ui {% if idea.image %}two{% else %}one{% endif %} column grid">
+						{% if idea.image %}
+							<div class="four wide column">
+								<img class="ui centered small image rounded" src=
+										"{{ idea.image }}">
 							</div>
-							<div class="extra content">
-								<a class="ui primary fluid button"
+						{% endif %}
+						<div class="ten wide column">
+							<div>
+								<h2 class="ui header">
+									{{ idea.idea }}
+								</h2>
+								<p>
+									{{ idea.explanation }}
+								</p>
+							</div>
+
+							<div style="display:flex;justify-content:center;align-items:flex-end; padding-top: 32px">
+								<a class="ui large primary button"
 								   href="{% url "forgyftapp:view_gift" gift=idea.pk %}" target="_blank">View
 									Gift on {{ idea.domain|title }}</a>
 							</div>
 						</div>
-					{% endfor %}
-				</div>
-				<div class="ui container segment" style="width: 100%">
-					<h3 class="ui header" style="text-align: center">Gift Idea Feedback</h3>
-					{% if hasFeedback %}
-						<div class="ui small positive message">
-							<div class="header">
-								Thanks for submitting feedback!
-							</div>
-							<p>We really appreciate your feedback on these gift ideas as we always work to
-								improve
-								our service! Feel free to edit your feedback below if you left anything out,
-								you're
-								also
-								welcome to start a conversation with us if you'd like a response by typing your
-								message in the chat box in the bottom right.
-							</p>
-						</div>
-					{% endif %}
-					{% include "base/form_template.html" with stars=True form=feedback_form action_text="Submit" %}
-				</div>
-				{% if giftee_profile.email %}
-					<div class="ui text container segment" style="width: 100%;  text-align: center">
-						<h3 class="ui header">Save Your Gift Ideas</h3>
-						{% if giftee_profile.has_user %}
-							<div class="ui small positive message">
-								<div class="header">
-									Account Successfully Linked
-								</div>
-								<p>
-									Your gift ideas have been successfully linked to your account, you can
-									come back to them later at any time by signing into your account and
-									heading to your <a href="{% url "forgyftapp:request" %}">gift requests</a>.
-								</p>
-							</div>
-						{% endif %}
-						<p>Want to save your ideas so you can come back later, just link an account!</p>
-						<a href="{% url "forgyftapp:link_request" slug=giftee_profile.slug %}?email=
-{{ giftee_profile.email|urlencode }}"
-						   class="ui primary {% if giftee_profile.has_user %}disabled {% endif %}button">
-							Link an Account
-						</a>
 					</div>
-				{% endif %}
-				<div class="ui basic segment" style="width: 100%; padding-right: 0; padding-left: 0">
-					{% include "base/giftee_profile.html" with closed=True %}
 				</div>
+
+			{% endfor %}
+
+			<div style="margin-left:auto;margin-right:auto;">
 				<div class="ui two column stackable grid mobile hidden">
 					<div class="column">
 						<div class="ui text container" style="width: 100%">
-							{#					<h2 class="ui dividing header"></h2>#}
+							<div class="ui three centered stackable cards">
 
+							</div>
 						</div>
-
+						<div class="ui basic segment" style="width: 100%; padding-right: 0; padding-left: 0">
+							{% include "base/giftee_profile.html" with closed=True %}
+						</div>
 					</div>
 					<div class="column">
-
-
+						<div class="ui text container segment" style="width: 100%">
+							<h3 class="ui header" style="text-align: center">Gift Idea Feedback</h3>
+							{% if hasFeedback %}
+								<div class="ui small positive message">
+									<div class="header">
+										Thanks for submitting feedback!
+									</div>
+									<p>We really appreciate your feedback on these gift ideas as we always work to
+										improve
+										our service! Feel free to edit your feedback below if you left anything out,
+										you're
+										also
+										welcome to start a conversation with us if you'd like a response by typing your
+										message in the chat box in the bottom right.
+									</p>
+								</div>
+							{% endif %}
+							{% include "base/form_template.html" with stars=True form=feedback_form action_text="Submit" %}
+						</div>
+						{% if giftee_profile.email %}
+							<div class="ui text container segment" style="width: 100%;  text-align: center">
+								<h3 class="ui header">Save Your Gift Ideas</h3>
+								{% if giftee_profile.has_user %}
+									<div class="ui small positive message">
+										<div class="header">
+											Account Successfully Linked
+										</div>
+										<p>
+											Your gift ideas have been successfully linked to your account, you can
+											come back to them later at any time by signing into your account and
+											heading to your <a href="{% url "forgyftapp:request" %}">gift requests</a>.
+										</p>
+									</div>
+								{% endif %}
+								<p>Want to save your ideas so you can come back later, just link an account!</p>
+								<a href="{% url "forgyftapp:link_request" slug=giftee_profile.slug %}?email=
+{{ giftee_profile.email|urlencode }}"
+								   class="ui primary {% if giftee_profile.has_user %}disabled {% endif %}button">
+									Link an Account
+								</a>
+							</div>
+						{% endif %}
 					</div>
 				</div>
 
