@@ -1,9 +1,9 @@
 <div class="ui styled accordion" style="width: 100%;">
-  <div class="active title">
+  <div class="{% if not closed %}active {% endif %}title">
     <i class="dropdown icon"></i>
       {{ giftee_profile.name }}'s Profile
   </div>
-  <div class="active content">
+  <div class="{% if not closed %}active {% endif %} content">
     <div class="ui dividing sub header">Gender</div>
 <p>{{ giftee_profile.gender_string }}</p>
 

@@ -107,7 +107,6 @@ class LoginForm(ModelForm):
 		model = User
 		fields = ("email", "password")
 
-
 class UserForm(ModelForm):
 	# email = forms.EmailField(label="Email Address", widget=forms.EmailInput, u)
 	first_name = forms.CharField(label="First Name", widget=forms.TextInput, required=True)
