@@ -206,12 +206,13 @@
     <h1 style="text-align: center; padding-bottom: 4px">Unfulfilled Gift Requests</h1>
     <div class="ui divider"></div>
     <div style="margin-left:auto;margin-right:auto;">
-        <div {% if giftee_profiles_unpublished %}class="ui cards"{% endif %}>
+        <div {% if giftee_profiles_unpublished %}class="ui three stackable cards"{% endif %}>
             {% for giftee_profile in giftee_profiles_unpublished %}
-                <div class="u card">
+                <div class="ui card">
                     <div class="content">
                         <div class="header">
-                            Gift Ideas for {{ giftee_profile.name }}
+	                        {% if giftee_profile.has_clicked_on_idea %}<i class="linkify icon"></i>{% endif %}
+	                        Gift Ideas for {{ giftee_profile.name }}
                         </div>
                         <div class="meta">
                             From {{ giftee_profile.user.email }}
@@ -239,11 +240,12 @@
     <h1 style="text-align: center; padding-bottom: 4px; padding-top: 32px">Fulfilled Gift Requests</h1>
     <div class="ui divider"></div>
     <div style="margin-left:auto;margin-right:auto;">
-        <div class="ui cards">
+        <div class="ui three stackable cards">
             {% for giftee_profile in giftee_profile_published %}
                 <div class="ui card">
                     <div class="content">
                         <div class="header">
+	                        {% if giftee_profile.has_clicked_on_idea %}<i class="linkify icon"></i>{% endif %}
                             Gift Ideas for {{ giftee_profile.name }}
                         </div>
                         <div class="meta">
