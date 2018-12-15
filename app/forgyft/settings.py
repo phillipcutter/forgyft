@@ -80,8 +80,8 @@ DEFAULT_FROM_EMAIL = "support@forgift.org"
 
 IPSTACK_KEY = os.getenv("IPSTACK_KEY")
 
-if DEBUG:
-	EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# if DEBUG:
+# 	EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ABSOLUTE_URI = "https://www.forgift.org"
 
