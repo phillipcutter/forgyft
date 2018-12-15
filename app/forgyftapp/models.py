@@ -3,15 +3,17 @@ import tldextract as tldextract
 from django.contrib.auth.models import AbstractUser
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import MultipleObjectsReturned
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMultiAlternatives
 from django.db import models
 
 # Create your models here.
 from django.db.models import Model
 from django.dispatch import receiver
 from django.http import Http404
+from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.html import strip_tags
 
 from forgyft import settings
 from forgyftapp.messaging import broadcast_to_slack, debug_log
@@ -120,6 +122,13 @@ class GifteeProfile(Slug):
 		self.save()
 
 	@property
+	def has_clicked_on_idea(self):
+		for idea in self.ideas.all():
+			if idea.clicks > 0:
+				return True
+		return False
+
+	@property
 	def location(self):
 		if self._location:
 			return self._location
@@ -168,12 +177,24 @@ class GifteeProfile(Slug):
 			else:
 				email = self.email
 
+			subject, from_email, to_email = \
+				f"Your gift ideas for {self.name} are ready", \
+				"Forgift <support@forgift.org>", \
+				email
+
 			view_url = request.build_absolute_uri(reverse("forgyftapp:request", kwargs={"slug": self.slug}))
-			send_mail(f"Your gift ideas for {self.name} are ready",
-			          f"To view your gift ideas click this link: {view_url}",
-			          "Forgift <support@forgift.org>",
-			          [email],
-			          html_message=f"To view your gift ideas click <a href=\"{view_url}\">here</a>")
+			html_content = render_to_string("email/ideas_ready.html", {"view_url": view_url})
+			text_content = strip_tags(html_content)
+
+			msg = EmailMultiAlternatives(subject, text_content, from_email, [to_email])
+			msg.attach_alternative(html_content, "text/html")
+			msg.send()
+
+			# send_mail(,
+			#           f"To view your gift ideas click this link: {view_url}",
+			#           ,
+			#           [email],
+			#           html_message=f"To view your gift ideas click <a href=\"{view_url}\">here</a>")
 			self.emailed_about_publish = True
 		self.published = True
 		self.save()

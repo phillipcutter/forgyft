@@ -26,7 +26,7 @@ from forgyftapp.models import User
 def signup(request):
 	redirectUrl = request.GET.get("next", None)
 	email = None
-	if len(redirectUrl.split("?")) > 1 and redirectUrl.split("?")[1].startswith("email"):
+	if redirectUrl and len(redirectUrl.split("?")) > 1 and redirectUrl.split("?")[1].startswith("email"):
 		raw_email = redirectUrl.split("?")[1][6:]
 		email = parse.unquote(raw_email)
 		redirectUrl = redirectUrl.replace("?email=" + raw_email, "")
