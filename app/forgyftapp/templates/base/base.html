@@ -266,6 +266,18 @@ what to get your friend or loved one."
         } catch (e) {
 
         }
+        try {
+        	largest = 0;
+	        $(".img-content img").each(function (e) {
+	        	if ($(this).height() > largest) {
+	        		largest = $(this).height()
+		        }
+	        });
+	        $("<style type='text/css'> .img-content{ height: " + largest + "px; } </style>").appendTo("head");
+        } catch (e) {
+
+        }
+
     });
 </script>
 
