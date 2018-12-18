@@ -122,11 +122,11 @@ class GifteeProfile(Slug):
 		self.save()
 
 	@property
-	def has_clicked_on_idea(self):
+	def idea_clicks(self):
+		clicks = 0
 		for idea in self.ideas.all():
-			if idea.clicks > 0:
-				return True
-		return False
+			clicks += idea.clicks
+		return clicks
 
 	@property
 	def location(self):

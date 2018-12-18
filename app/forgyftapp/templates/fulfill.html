@@ -208,27 +208,7 @@
     <div style="margin-left:auto;margin-right:auto;">
         <div {% if giftee_profiles_unpublished %}class="ui three stackable cards"{% endif %}>
             {% for giftee_profile in giftee_profiles_unpublished %}
-                <div class="ui card">
-                    <div class="content">
-                        <div class="header">
-	                        {% if giftee_profile.has_clicked_on_idea %}<i class="linkify icon"></i>{% endif %}
-	                        Gift Ideas for {{ giftee_profile.name }}
-                        </div>
-                        <div class="meta">
-                            From {{ giftee_profile.user.email }}
-	                        {% if giftee_profile.created %}<br>{{ giftee_profile.created }} UTC{% endif %}
-                        </div>
-                        <div class="description">
-                            {{ giftee_profile.ideas.get_queryset|length }} Ideas Currently
-                        </div>
-                    </div>
-                    <div class="extra content">
-                        <div class="ui two buttons">
-                            <a class="ui primary button"
-                               href="{% url "forgyftapp:fulfill" profile=giftee_profile.pk %}">Fulfill</a>
-                        </div>
-                    </div>
-                </div>
+	            {% include "base/fulfill_card.html" with edit_text="Fulfill Ideas" %}
                 {% empty %}
                 <div class="ui disabled header" style="text-align: center; width: 100%; margin-top: 32px;">There
                     are currently no unfulfilled gift requests.
@@ -242,27 +222,7 @@
     <div style="margin-left:auto;margin-right:auto;">
         <div class="ui three stackable cards">
             {% for giftee_profile in giftee_profile_published %}
-                <div class="ui card">
-                    <div class="content">
-                        <div class="header">
-	                        {% if giftee_profile.has_clicked_on_idea %}<i class="linkify icon"></i>{% endif %}
-                            Gift Ideas for {{ giftee_profile.name }}
-                        </div>
-                        <div class="meta">
-                            From {{ giftee_profile.user.email }}
-	                        {% if giftee_profile.created %}<br>{{ giftee_profile.created }} UTC{% endif %}
-                        </div>
-                        <div class="description">
-                            {{ giftee_profile.ideas.get_queryset|length }} Ideas Currently
-                        </div>
-                    </div>
-                    <div class="extra content">
-                        <div class="ui two buttons">
-                            <a class="ui primary button"
-                               href="{% url "forgyftapp:fulfill" profile=giftee_profile.pk %}">Edit Ideas</a>
-                        </div>
-                    </div>
-                </div>
+                {% include "base/fulfill_card.html" with edit_text="Edit Ideas" %}
                 {% empty %}
                 <div class="ui disabled header" style="text-align: center; width: 100%; margin-top: 32px;">There
                     are currently no fulfilled gift requests.

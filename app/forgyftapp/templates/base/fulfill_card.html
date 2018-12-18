@@ -1,0 +1,30 @@
+<div class="ui card">
+	<div class="content">
+		<div class="header">
+			<span style="float: left;">
+				Gift Ideas for {{ giftee_profile.name }}
+			</span>
+			
+			<span style="float: right;">
+				{% if giftee_profile.idea_clicks %}
+					<i class="linkify icon"></i>
+					{{ giftee_profile.idea_clicks }}
+				{% endif %}
+			</span><br>
+		
+		</div>
+		<div class="meta">
+			From {{ giftee_profile.user.email }}
+			{% if giftee_profile.created %}<br>{{ giftee_profile.created }} UTC{% endif %}
+		</div>
+		<div class="description">
+			{{ giftee_profile.ideas.get_queryset|length }} Ideas Currently
+		</div>
+	</div>
+	<div class="extra content">
+		<div class="ui two buttons">
+			<a class="ui primary button"
+			   href="{% url "forgyftapp:fulfill" profile=giftee_profile.pk %}">{{ edit_text }}</a>
+		</div>
+	</div>
+</div>
