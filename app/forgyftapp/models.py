@@ -218,7 +218,7 @@ class GifteeProfile(Slug):
 		return reverse('admin:{0}_{1}_change'.format(self._meta.app_label, self._meta.model_name), args=(self.pk,))
 
 	def __str__(self):
-		return f"Giftee Profile {self.pk} for {self.name} from {self.user.get_full_name()}"
+		return f"Giftee Profile {self.pk} for {self.name} from {self.user_full_name()}"
 
 	def onCreate(self):
 		super().onCreate()
