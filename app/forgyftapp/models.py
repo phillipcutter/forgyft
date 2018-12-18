@@ -169,9 +169,8 @@ class GifteeProfile(Slug):
 			return "We're still deciding on the perfect gifts, please check back soon."
 
 	def submit(self, request):
-		debug_log(f"Submitted gift ideas for {self.name}, as requested by {self.user_full_name}")
 		if not self.emailed_about_publish:
-
+			debug_log(f"Submitted gift ideas for {self.name}, as requested by {self.user_full_name}")
 			if self.has_user:
 				email = self.user.email
 			else:
