@@ -266,16 +266,17 @@ what to get your friend or loved one."
         } catch (e) {
 
         }
-        //total = 0;
-        //images = 0;
-        //$(".img-content img").each(function (e) {
-	    //    total += $(this).height();
-	    //    images++;
-        //});
-        //image_size = total / images;
-	    //image_size = 400;
-        //$("<style type='text/css'> .img-content img { height: " + image_size + "px; } .img-content { height: " +
-	        //image_size + "px; }</style>").appendTo("head");
+        try {
+        	largest = 200;
+	        $(".img-content img").each(function (e) {
+	        	if ($(this).height() > largest) {
+	        		largest = $(this).height()
+		        }
+	        });
+	        $("<style type='text/css'> .img-content { height: " + largest + "px; } </style>").appendTo("head");
+        } catch (e) {
+
+        }
 
     });
 </script>
