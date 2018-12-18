@@ -93,8 +93,11 @@
 				</p>
 			</div>
 		{% endif %}
-		{% if message %}
-			<p>{{ message }}</p>
+		{% if message_type == "terms_of_service" %}
+			<p>
+				By clicking submit you agree our
+				<a href="{% url "forgyftapp:terms"%}">terms of service</a>.
+			</p>
 		{% endif %}
 		<button class="ui blue submit button" type="submit">{{ action_text }}</button>
 		{% if not omit_end %}
