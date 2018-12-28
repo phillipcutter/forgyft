@@ -48,7 +48,7 @@ for interest in interests:
 	pages = 2
 	results = google.search("Gifts for " + interest.plural, pages)
 	for result in results:
-		interest.links = [result.link]
+		interest.links.append(result.link)
 
 for interest in tqdm(interests):
 	for url in tqdm(interest.links):
