@@ -1,0 +1,3 @@
+tqdm==4.28.1
+git+https://github.com/abenassi/Google-Search-API/
+dill==0.2.8.2
