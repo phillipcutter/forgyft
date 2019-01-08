@@ -61,14 +61,16 @@ def hook_factory(*factory_args, **factory_kwargs):
 
 interests = [
 	# Interest("skiing", "skiers"),
-	# Interest("art", "artists"),
+	Interest("art", "artists"),
+	Interest("color", "color lovers"),
+	Interest("animals", "animal lovers"),
 	# Interest("programming", "programmers"),
 	# Interest("writing", "writers"),
 	# Interest("gaming", "gamers"),
 	# Interest("music", "music lovers")
-	Interest("astrology", "astrology lovers"),
-	Interest("physics", "physics lovers"),
-	Interest("makeup", "makeup lovers"),
+	# Interest("astrology", "astrology lovers"),
+	# Interest("physics", "physics lovers"),
+	# Interest("makeup", "makeup lovers"),
 ]
 
 
@@ -76,7 +78,7 @@ def main():
 	session = FuturesSession(max_workers=64)
 
 	for interest in interests:
-		pages = 1
+		pages = 2
 		results = google.search("Gifts for " + interest.plural, pages)
 		for result in results:
 			interest.links.append(result.link)
@@ -91,7 +93,7 @@ def main():
 
 
 	for req in async_requests:
-		print(req.result())
+		req.result()
 
 	print("All Requests Done")
 	print("Pickle: " + str(dill.dumps(interests)))

@@ -11,3 +11,9 @@ wagtail==2.3
 bugsnag==3.4.3
 webpreview==1.4.0
 tldextract==2.2.0
+celery==4.2.1
+tqdm==4.28.1
+git+https://github.com/abenassi/Google-Search-API/
+dill==0.2.8.2
+requests-futures==0.9.9
+django-celery-results==1.0.4

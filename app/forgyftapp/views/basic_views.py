@@ -17,9 +17,12 @@ from forgyft import settings
 from forgyftapp.forms import GifteeProfileForm, GiftIdeaForm, GiftIdeaFormSet, GiftFeedbackForm
 from forgyftapp.messaging import broadcast_to_slack
 from forgyftapp.models import GifteeProfile, GiftIdea
+from scraper.tasks import add
 
 
 def index(request):
+	# add.apply_asyn1254c(args=[12, 1234])
+	add.delay(1124, 1234)
 	return render(request, "homepage.html", {"page": "home"})
 
 def terms(request):

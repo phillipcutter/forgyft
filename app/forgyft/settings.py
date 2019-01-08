@@ -63,7 +63,8 @@ INSTALLED_APPS = [
 
 	'modelcluster',
 	'taggit',
-	'django.contrib.sitemaps'
+	'django.contrib.sitemaps',
+	'django_celery_results',
 ]
 
 ANYMAIL = {
@@ -79,6 +80,10 @@ EMAIL_BACKEND = "anymail.backends.sendgrid.EmailBackend"
 DEFAULT_FROM_EMAIL = "support@forgift.org"
 
 IPSTACK_KEY = os.getenv("IPSTACK_KEY")
+
+if DEBUG:
+	CELERY_RESULT_BACKEND = "django-db"
+	CELERY_BROKER_URL = "amqp://guest:guest@localhost:5672//"
 
 # if DEBUG:
 # 	EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
