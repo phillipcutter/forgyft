@@ -11,3 +11,9 @@ You can start a worker with this command:
 ~~~
 celery -A forgyft worker -l info
 ~~~
+
+## Docker
+
+Deploy:
+
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --build

@@ -21,6 +21,8 @@ services:
     restart: always
     env_file:
       - env.list
+    environment:
+      - DOCKER=1
     depends_on:
       - db
   web:
@@ -30,6 +32,8 @@ services:
     restart: always
     env_file:
       - env.list
+    environment:
+      - DOCKER=1
     depends_on:
       - db
       - worker
