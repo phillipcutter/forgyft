@@ -81,9 +81,13 @@ DEFAULT_FROM_EMAIL = "support@forgift.org"
 
 IPSTACK_KEY = os.getenv("IPSTACK_KEY")
 
-if DEBUG:
-	CELERY_RESULT_BACKEND = "django-db"
+CELERY_RESULT_BACKEND = "django-db"
+
+if not DEBUG or (os.getenv("DOCKER", "0") == "1"):
+	CELERY_BROKER_URL = "***REMOVED***"
+else:
 	CELERY_BROKER_URL = "amqp://guest:guest@localhost:5672//"
+
 
 # if DEBUG:
 # 	EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -130,7 +134,8 @@ LINKPREVIEW_KEY = os.getenv("LINKPREVIEW_KEY")
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-if DEBUG:
+if DEBUG and not (str(os.getenv("DOCKER", 0)) == "1"):
+	print("Using Sqlite database")
 	DATABASES = {
 		'default': {
 			'ENGINE': 'django.db.backends.sqlite3',
@@ -149,7 +154,7 @@ else:
 	#         'PORT': os.getenv("DB_PORT", 5432)
 	#     }
 	# }
-
+	print("Using docker database")
 	DATABASES = {  # Docker-compose configuration
 		'default': {
 			'ENGINE': 'django.db.backends.postgresql',

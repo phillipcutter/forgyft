@@ -21,11 +21,10 @@ from scraper.tasks import add
 
 
 def index(request):
-	# add.apply_asyn1254c(args=[12, 1234])
-	add.delay(1124, 1234)
 	return render(request, "homepage.html", {"page": "home"})
 
 def terms(request):
+	add.delay(1124, 1234)
 	return render(request, "static/terms.html")
 
 def about(request):

@@ -105,5 +105,9 @@ ENV/
 # IDEA
 .idea/
 
+# IDEs
+.vscode/
+
 # Mac
 .DS_Store
+

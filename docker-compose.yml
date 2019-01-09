@@ -15,6 +15,14 @@ services:
       interval: 30s
       timeout: 30s
       retries: 3
+  worker:
+    build: .
+    command: ./worker.sh
+    restart: always
+    env_file:
+      - env.list
+    depends_on:
+      - db
   web:
 #    image: mrfleap/esprza
     build: .
@@ -23,9 +31,21 @@ services:
     env_file:
       - env.list
     depends_on:
-    - db
+      - db
+      - worker
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost"]
       interval: 30s
       timeout: 30s
       retries: 4
+  amqp:
+    image: rabbitmq:3-management
+    restart: always
+    ports:
+      - "15674:15672"
+      - "5672:5672"
+    environment:
+      RABBITMQ_DEFAULT_USER: "forgyft"
+      RABBITMQ_DEFAULT_PASS: "RfF^1&GI6F@w9t"
+      # This isn't supposed to be super secure, just not the default. By default the message queue won't be exposed
+      # to the internet, a VPN, or even the machine, just the local server's Docker daemon

@@ -6,3 +6,8 @@ services:
       - "80:80"
     environment:
       - DEBUG=1
+      - DOCKER=1
+  worker:
+    environment:
+      - DEBUG=1
+      - DOCKER=1
