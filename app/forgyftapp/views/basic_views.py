@@ -14,7 +14,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView, ListView
 
 from forgyft import settings
-from forgyftapp.forms import GifteeProfileForm, GiftIdeaForm, GiftIdeaFormSet, GiftFeedbackForm
+from forgyftapp.forms import GifteeProfileForm, GiftIdeaForm, GiftIdeaFormSet, GiftFeedbackForm, ScraperInterestsForm
 from forgyftapp.messaging import broadcast_to_slack
 from forgyftapp.models import GifteeProfile, GiftIdea
 from scraper.tasks import add
@@ -24,7 +24,6 @@ def index(request):
 	return render(request, "homepage.html", {"page": "home"})
 
 def terms(request):
-	add.delay(1124, 1234)
 	return render(request, "static/terms.html")
 
 def about(request):
@@ -148,7 +147,15 @@ def fulfill(request, profile=None):
 		giftee_profile = get_object_or_404(GifteeProfile, pk=profile)
 
 		if request.method == "POST":
-			gift_ideas = GiftIdeaFormSet(request.POST, instance=giftee_profile)
+			scrape_form = ScraperInterestsForm(request.POST, instance=giftee_profile.feedback, prefix="scrape_form")
+			if scrape_form.is_valid():
+				scraper_interests = scrape_form.save(giftee_profile=giftee_profile)
+				giftee_profile.scraper_interests = scraper_interests
+				giftee_profile.save()
+				return redirect("forgyftapp:fulfill", profile=giftee_profile.pk)
+
+
+			gift_ideas = GiftIdeaFormSet(request.POST, instance=giftee_profile, prefix="gift_ideas")
 			i = 0
 			for form in gift_ideas:
 				if len(form.changed_data) == 1 and form.changed_data[0] == "published":
@@ -169,12 +176,30 @@ def fulfill(request, profile=None):
 
 				return redirect("forgyftapp:fulfill", profile=profile)
 		else:
-			gift_ideas = GiftIdeaFormSet(instance=giftee_profile)
+			gift_ideas = GiftIdeaFormSet(instance=giftee_profile, prefix="gift_ideas")
+			scrape_form = ScraperInterestsForm(instance=giftee_profile.feedback, prefix="scrape_form")
+
+		scraper_status = ""
+		scraper_results = None
+
+		if giftee_profile.scraper_interests:
+			scraper_status = "DONE" if giftee_profile.scraper_interests.generated else "WAIT"
+			if giftee_profile.scraper_interests.generated:
+				scraper_results = giftee_profile.scraper_interests.interest_objects.all()
+		else:
+			scraper_status = "FORM"
 
 		published = giftee_profile.published or (hasattr(gift_ideas.forms[0], "cleaned_data") and gift_ideas.forms[0].cleaned_data["published"])
 
-		return render(request, "fulfill.html", {"giftee_profile": giftee_profile, "gift_ideas": gift_ideas,
-		                                        "page": "fulfill", "published": published})
+		return render(request, "fulfill.html", {
+			"giftee_profile": giftee_profile,
+			"gift_ideas": gift_ideas,
+		    "page": "fulfill",
+			"published": published,
+			"scrape_form": scrape_form,
+			"scraper_status": scraper_status,
+			"scraper_results": scraper_results,
+		})
 	else:
 		giftee_profiles_unpublished = GifteeProfile.objects.filter(published=False).order_by('created')
 		giftee_profile_published = GifteeProfile.objects.filter(published=True).order_by('created')

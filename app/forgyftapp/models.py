@@ -19,6 +19,8 @@ from forgyft import settings
 from forgyftapp.messaging import broadcast_to_slack, debug_log
 from forgyftapp.util import django_utils
 from forgyftapp.util.django_utils import rand_slug
+from scraper.tasks import scrape_for_giftee_profile
+
 
 class OnCreate:
 	def onCreate(self):
@@ -90,6 +92,31 @@ class GiftFeedback(models.Model, OnCreate):
 		broadcast_to_slack(f"Hey <!channel>, a user submitted feedback for gift ideas."
 		                   f" View it <{fulfillUrl}|here>.")
 
+class ScraperInterests(models.Model, OnCreate):
+	interests = models.TextField(null=True, default=None, blank=True)
+
+	interest_objects = models.ManyToManyField("scraper.Interest")
+
+	@property
+	def generated(self):
+		# Oh Python and your one-liners
+		return sum([len(interest.scrapeproduct_set.all()) for interest in self.interest_objects.all()]) > 0
+
+	@property
+	def interests_arr(self):
+		return [interest.strip() for interest in self.interests.split(",")]
+
+	def onCreate(self):
+		super().onCreate()
+		print("Kicking off scraper for scraper interests")
+		scrape_for_giftee_profile.delay(self.giftee_profile.slug)
+
+	def done_generating(self, interests):
+		for interest in interests:
+			self.interest_objects.add(interest)
+		self.save()
+
+
 
 class GifteeProfile(Slug):
 	name = models.TextField(max_length=150)
@@ -110,12 +137,14 @@ class GifteeProfile(Slug):
 	email = models.EmailField(null=True)
 
 	feedback = models.OneToOneField(GiftFeedback, on_delete=models.SET_NULL, null=True)
+	scraper_interests = models.OneToOneField(ScraperInterests, on_delete=models.SET_NULL, null=True)
 
 	created = models.DateTimeField(editable=False, null=True, blank=True)
 
 	ip_address = models.GenericIPAddressField(null=True, default=None)
 
 	_location = models.TextField(null=True, default=None, blank=True)
+
 
 	def link_user(self, user):
 		self.user = user

@@ -33,6 +33,8 @@ AWS_PRELOAD_METADATA = True
 
 WAGTAIL_SITE_NAME = 'Forgift Blog'
 
+AMAZON_AFFILIATE_TAG = "forgift06-20"
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -43,6 +45,7 @@ INSTALLED_APPS = [
 	'django.contrib.messages',
 	'collectfast',
 	'django.contrib.staticfiles',
+	'scraper',
 	'forgyftapp',
 	'social_django',
 	'anymail',

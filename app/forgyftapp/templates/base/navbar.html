@@ -20,6 +20,7 @@
 {#<a class="{% if page == "how_it_works" %}active {% endif %}item">How it Works</a>#}
 {% if user.is_staff %}
 	<a class="{% if page == "fulfill" %}active {% endif %}item" href="{% url "forgyftapp:fulfill" %}">Fulfill</a>
+	<a class="item" href="{% url 'admin:index' %}">Admin</a>
 {% endif %}
 <a class="{% if page == "about" %}active {% endif %}item" href="{% url "forgyftapp:about" %}">About Us</a>
 <div class="right menu">

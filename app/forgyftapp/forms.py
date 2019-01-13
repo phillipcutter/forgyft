@@ -4,7 +4,7 @@ from django.forms import ModelForm, inlineformset_factory
 from django import forms
 
 from forgyftapp import models
-from forgyftapp.models import GifteeProfile, User, GiftIdea, GiftFeedback
+from forgyftapp.models import GifteeProfile, User, GiftIdea, GiftFeedback, ScraperInterests
 from forgyftapp.util.django_utils import get_client_ip
 
 
@@ -30,6 +30,20 @@ class GiftFeedbackForm(ModelForm):
 		model = GiftFeedback
 		fields = ("rating", "feedback", "bought")
 
+class ScraperInterestsForm(ModelForm):
+
+	def save(self, giftee_profile=None, commit=True):
+		if not giftee_profile:
+			raise TypeError("No giftee_profile object given to the ScraperInterestsForm.save method.")
+		instance = super().save(commit=False)
+		instance.giftee_profile = giftee_profile
+		if commit:
+			instance.save()
+		return instance
+
+	class Meta:
+		model = ScraperInterests
+		fields = ("interests",)
 
 class GiftIdeaForm(ModelForm):
 
