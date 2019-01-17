@@ -147,8 +147,10 @@ def fulfill(request, profile=None):
 		giftee_profile = get_object_or_404(GifteeProfile, pk=profile)
 
 		if request.method == "POST":
+			gift_ideas = GiftIdeaFormSet(request.POST, instance=giftee_profile, prefix="gift_ideas")
+			scrape_form = ScraperInterestsForm(request.POST, instance=giftee_profile.feedback, prefix="scrape_form")
+
 			if 'gift_ideas' in request.POST:
-				gift_ideas = GiftIdeaFormSet(request.POST, instance=giftee_profile, prefix="gift_ideas")
 				i = 0
 				for form in gift_ideas:
 					if len(form.changed_data) == 1 and form.changed_data[0] == "published":
@@ -169,7 +171,6 @@ def fulfill(request, profile=None):
 
 					return redirect("forgyftapp:fulfill", profile=profile)
 			elif 'scrape_form' in request.POST:
-				scrape_form = ScraperInterestsForm(request.POST, instance=giftee_profile.feedback, prefix="scrape_form")
 				if scrape_form.is_valid():
 					scraper_interests = scrape_form.save(giftee_profile=giftee_profile)
 					giftee_profile.scraper_interests = scraper_interests
