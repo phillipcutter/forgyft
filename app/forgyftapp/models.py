@@ -133,11 +133,11 @@ class GifteeProfile(Slug):
 
 	emailed_about_publish = models.BooleanField(default=False)
 
-	user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+	user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 	email = models.EmailField(null=True)
 
-	feedback = models.OneToOneField(GiftFeedback, on_delete=models.SET_NULL, null=True)
-	scraper_interests = models.OneToOneField(ScraperInterests, on_delete=models.SET_NULL, null=True)
+	feedback = models.OneToOneField(GiftFeedback, on_delete=models.SET_NULL, null=True, blank=True)
+	scraper_interests = models.OneToOneField(ScraperInterests, on_delete=models.SET_NULL, null=True, blank=True)
 
 	created = models.DateTimeField(editable=False, null=True, blank=True)
 

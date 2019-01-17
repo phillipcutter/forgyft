@@ -124,7 +124,10 @@ def scrape(interest_list):
 			                                                                  async_requests=async_requests)}))
 
 	for req in async_requests:
-		req.result()
+		try:
+			req.result()
+		except:
+			pass
 
 	print("All Requests Done")
 
