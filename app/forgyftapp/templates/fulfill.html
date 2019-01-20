@@ -80,8 +80,7 @@
 												<textarea rows="{{ field.field.widget.attrs.rows }}"
 												          name="{{ field.html_name }}"
 												          id="{{ field.id_for_label }}"
-												          style="width: 100%">{% if field.value %}
-													{{ field.value }}{% endif %}</textarea>
+												          style="width: 100%">{% if field.value %}{{ field.value }}{% endif %}</textarea>
 											</div>
 										{% elif field.field.widget.input_type == "checkbox" and field.label != "Delete" %}
 											<div class="inline field">
@@ -122,7 +121,7 @@
 					<div class="ui one column stackable center aligned page grid">
 						<div class="column sixteen wide">
 							<div class="ui fluid buttons">
-								<input class="ui positive button" type="submit" value="Save"/>
+								<input class="ui positive button" name="gift_ideas" type="submit" value="Save"/>
 								<div class="or"></div>
 								<a class="ui negative button" href="{% url 'forgyftapp:fulfill' %}">Back</a>
 
@@ -147,8 +146,8 @@
 						{% include "base/form_template.html" with action_text="Scrape" form=scrape_form %}
 					{% elif scraper_status == "WAIT" %}
 						{# Wait #}
-						<div class="ui disabled header" style="text-align: center; width: 100%; margin-top: 24px;">
-							Please wait while the scraper finds products.
+						<div class="ui active centered text inline loader">
+							Please wait while the scraper finds products
 						</div>
 					{% else %}
 						{# Results #}

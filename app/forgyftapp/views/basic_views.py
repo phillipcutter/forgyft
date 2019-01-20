@@ -147,34 +147,35 @@ def fulfill(request, profile=None):
 		giftee_profile = get_object_or_404(GifteeProfile, pk=profile)
 
 		if request.method == "POST":
-			scrape_form = ScraperInterestsForm(request.POST, instance=giftee_profile.feedback, prefix="scrape_form")
-			if scrape_form.is_valid():
-				scraper_interests = scrape_form.save(giftee_profile=giftee_profile)
-				giftee_profile.scraper_interests = scraper_interests
-				giftee_profile.save()
-				return redirect("forgyftapp:fulfill", profile=giftee_profile.pk)
-
-
 			gift_ideas = GiftIdeaFormSet(request.POST, instance=giftee_profile, prefix="gift_ideas")
-			i = 0
-			for form in gift_ideas:
-				if len(form.changed_data) == 1 and form.changed_data[0] == "published":
-					form.changed_data = []
-				i += 1
-			if gift_ideas.is_valid():
-				gift_ideas.save()
+			scrape_form = ScraperInterestsForm(request.POST, instance=giftee_profile.feedback, prefix="scrape_form")
 
-				published = False
+			if 'gift_ideas' in request.POST:
+				i = 0
 				for form in gift_ideas:
-					if len(gift_ideas.forms[0].cleaned_data) > 0 and gift_ideas.forms[0].cleaned_data["published"]:
-						published = True
+					if len(form.changed_data) == 1 and form.changed_data[0] == "published":
+						form.changed_data = []
+					i += 1
+				if gift_ideas.is_valid():
+					gift_ideas.save()
 
-				if published:
-					giftee_profile.submit(request)
-				else:
-					giftee_profile.unsubmit()
+					published = False
+					for form in gift_ideas:
+						if len(gift_ideas.forms[0].cleaned_data) > 0 and gift_ideas.forms[0].cleaned_data["published"]:
+							published = True
 
-				return redirect("forgyftapp:fulfill", profile=profile)
+					if published:
+						giftee_profile.submit(request)
+					else:
+						giftee_profile.unsubmit()
+
+					return redirect("forgyftapp:fulfill", profile=profile)
+			elif 'scrape_form' in request.POST:
+				if scrape_form.is_valid():
+					scraper_interests = scrape_form.save(giftee_profile=giftee_profile)
+					giftee_profile.scraper_interests = scraper_interests
+					giftee_profile.save()
+					return redirect("forgyftapp:fulfill", profile=giftee_profile.pk)
 		else:
 			gift_ideas = GiftIdeaFormSet(instance=giftee_profile, prefix="gift_ideas")
 			scrape_form = ScraperInterestsForm(instance=giftee_profile.feedback, prefix="scrape_form")

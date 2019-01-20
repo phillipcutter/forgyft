@@ -99,7 +99,7 @@
 				<a href="{% url "forgyftapp:terms"%}">terms of service</a>.
 			</p>
 		{% endif %}
-		<button class="ui blue submit button" type="submit">{{ action_text }}</button>
+		<button class="ui blue submit button" type="submit" name="{{ form.prefix }}">{{ action_text }}</button>
 		{% if not omit_end %}
 	</div>
 </form>
