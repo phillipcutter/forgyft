@@ -1,3 +1,4 @@
+import django
 from django.db import models
 
 # Create your models here.
@@ -6,7 +7,10 @@ class Interest(models.Model):
 	interest = models.TextField()
 
 	def add_product(self, **kwargs):
-		return ScrapeProduct.objects.create(**kwargs, interest=self)
+		try:
+			return ScrapeProduct.objects.create(**kwargs, interest=self)
+		except django.db.utils.DataError:
+			return False
 
 	def __str__(self):
 		return "Interest: " + str(self.interest)
