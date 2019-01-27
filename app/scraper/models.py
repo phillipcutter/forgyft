@@ -8,7 +8,10 @@ class Interest(models.Model):
 
 	def add_product(self, **kwargs):
 		try:
-			return ScrapeProduct.objects.create(**kwargs, interest=self)
+			o = ScrapeProduct.objects.create(**kwargs, interest=self)
+			print(o.title + ": " + o.url)
+			print("Created scrape product")
+			return o
 		except django.db.utils.DataError:
 			return False
 

@@ -166,7 +166,10 @@ class GifteeProfile(Slug):
 			r = requests.get("http://api.ipstack.com/" + str(self.ip_address),
 		                  params={"access_key": settings.IPSTACK_KEY})
 			results = r.json()
-			location_string = f"{results['city']}, {results['region_name']}, {results['country_name']}"
+			try:
+				location_string = f"{results['city']}, {results['region_name']}, {results['country_name']}"
+			except:
+				location_string = "Unknown Location"
 			self._location = location_string
 			self.save()
 			return location_string

@@ -40,6 +40,7 @@ def scrape_for_giftee_profile(giftee_profile_slug):
 				url=url,
 				image_url=product.image_url
 			)
+			interest_object.save()
 		interest_objects.append(interest_object)
 
 	scraper_interests.done_generating(interest_objects)

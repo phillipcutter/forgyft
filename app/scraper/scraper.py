@@ -48,7 +48,7 @@ def filter_links(links):
 
 api_url = "https://api.diffbot.com/v3/article"
 product_api_url = "https://api.diffbot.com/v3/product"
-api_token = "2380b8630674273660e2d3654b3ec3cf"
+api_token = "eae1403f47c1e31e7a43dd5e56d5ed6f"
 
 
 def hook_factory(*factory_args, **factory_kwargs):
