@@ -1,12 +1,13 @@
 from django.conf.urls import url
 
-from forgyftapp.views import basic_views, auth_views
+from forgyftapp.views import basic_views, auth_views, expert_views
 
 app_name = "forgyftapp"
 
 urlpatterns = [
 	url(r'^$', basic_views.index, name="index"),
 
+	url(r'^experts/?$', expert_views.experts_index, name='experts_index'),
 	url(r'^quiz/?$', basic_views.gift_form, name='gift_form'),
 	url(r'^submit/?$', basic_views.gift_form_submitted, name='gift_form_submitted'),
 
@@ -31,6 +32,9 @@ urlpatterns = [
 	url(r'^signup/?$', auth_views.signup, name='signup'),
 	url(r'^login/?$', auth_views.login_view, name='login'),
 	url(r'^logout/?$', auth_views.logout_view, name='logout'),
+
+	url(r'^experts_signup/?$', auth_views.signup, name='experts_signup'),
+
 
 	url(r'^account_activation_send/?$', auth_views.account_activation_sent, name="account_activation_sent"),
 	url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
