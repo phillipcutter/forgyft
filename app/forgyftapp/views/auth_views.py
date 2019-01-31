@@ -23,7 +23,7 @@ from forgyftapp.tokens import account_activation_token
 from forgyftapp.models import User
 
 
-def signup(request):
+def signup(request, expert=None):
 	redirectUrl = request.GET.get("next", None)
 	email = None
 	if redirectUrl and len(redirectUrl.split("?")) > 1 and redirectUrl.split("?")[1].startswith("email"):
@@ -57,6 +57,8 @@ def signup(request):
 			if redirectUrl:
 				return HttpResponseRedirect(redirectUrl)
 			else:
+				if expert:
+					return HttpResponseRedirect(reverse("forgyftapp:expert_profile"))
 				return HttpResponseRedirect(reverse("forgyftapp:index"))
 	else:
 		if email:

@@ -33,7 +33,9 @@ urlpatterns = [
 	url(r'^login/?$', auth_views.login_view, name='login'),
 	url(r'^logout/?$', auth_views.logout_view, name='logout'),
 
-	url(r'^experts_signup/?$', auth_views.signup, name='experts_signup'),
+	## Expert Auth
+	url(r'^experts_signup/?$', expert_views.signup, name='experts_signup'),
+	url(r'^expert_profile/?$', expert_views.profile, name='expert_profile'),
 
 
 	url(r'^account_activation_send/?$', auth_views.account_activation_sent, name="account_activation_sent"),

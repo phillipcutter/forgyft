@@ -1,9 +1,11 @@
+{% if not no_open %}
 <div class="ui styled accordion" style="width: 100%;">
   <div class="{% if not closed %}active {% endif %}title">
     <i class="dropdown icon"></i>
       {{ giftee_profile.name }}'s Profile
   </div>
-  <div class="{% if not closed %}active {% endif %} content">
+{% endif %}
+<div class="{% if not closed %}active {% endif %} content">
     <div class="ui dividing sub header">Gender</div>
 <p>{{ giftee_profile.gender_string }}</p>
 
@@ -21,6 +23,8 @@
 
 <div class="ui dividing sub header">Interests</div>
 <p>{{ giftee_profile.interests }}</p>
+
+{# IMPORANT - This template is rendered for experts too, make sure no sensitive information is displayed in this template #}
 
 {% if giftee_profile.existing_related_items %}
 	<div class="ui dividing sub header">Items They Already Have</div>

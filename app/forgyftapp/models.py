@@ -61,12 +61,22 @@ class Slug(OnCreate, models.Model):
 		abstract = True
 
 
+class SampleGiftRequest(models.Model):
+	pass
+
 class User(AbstractUser, Slug):
 	email_confirmed = models.BooleanField(default=False)
+
+	expert_age = models.IntegerField(null=True, blank=True)
+	expert_interests = models.TextField(null=True, blank=True)
+	expert_sample_gift_request = models.OneToOneField(SampleGiftRequest, on_delete = models.SET_NULL, null=True,
+	                                                  blank=True)
 
 	def onCreate(self):
 		super().onCreate()
 		self.save()
+
+
 
 class gender:
 	MALE = "MALE"

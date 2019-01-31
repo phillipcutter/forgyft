@@ -6,8 +6,7 @@
 		<div class="ui two column middle aligned very relaxed stackable grid">
 {#		<div class="ui column middle aligned very relaxed stackable grid">#}
 			<div class="column">
-				{% url 'signup' as url %}
-				{% include "base/form_template.html" with action=url action_text="Signup" %}
+				{% include "base/form_template.html" with action_text="Signup" %}
 				<br>
 				<p>Already have an account? <a href="{% url "forgyftapp:login" %}{% if next %}?next={{ next }}
 {% endif %}">Login here</a></p>

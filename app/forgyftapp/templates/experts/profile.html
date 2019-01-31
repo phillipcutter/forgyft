@@ -1,0 +1,62 @@
+{% extends "base/base.html" %}
+
+{% block extra_js_dependencies %}
+	<script src="{% load static %}{% static "semantic/components/rating.min.js" %}"></script>
+{% endblock %}
+
+{% block extra_dependencies %}
+	<link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/rating.min.css" %}">
+{% endblock %}
+
+{% block content %}
+	<div class="ui main container">
+		<div class="ui two column doubling stackable grid">
+		<div class="four wide column">
+			<div class="ui container segment" style="width: 100%">
+				<h1>{{ user.first_name }} {{ user.last_name }}</h1>
+				<p>Joined {{ user.date_joined|date:"M d, Y" }}</p>
+			</div>
+			<div class="ui container" style="width: 100%">
+				<div class="ui card">
+					<div class="content">
+						<div class="header">
+							Average Gift Rating
+						</div>
+						<div class="meta">
+							<span class="date">
+								{{ user.rating_amount }} User Ratings
+							</span>
+						</div>
+					</div>
+					<div class="extra content">
+						<div class="ui rating disabled" data-rating="{{ user.average_rating }}"
+						     data-max-rating="5"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="twelve wide column">
+			<div class="ui container segment" style="width: 100%;">
+				{% if expert_profile_form %}
+					<h1>Hey {{ user.first_name }}, let's finish setting up your expert account</h1>
+					<div class="ui divider"></div>
+					<div class="ui relaxed divided list">
+						{% include "base/form_template.html" with form=expert_profile_form action_text="Submit" %}
+					</div>
+				{% elif sample_gift_request %}
+					<h1>Last step, let's try filling out a sample gift request</h1>
+					<div class="ui divider"></div>
+					<p>When a use submits a gift request that matches your profile, you'll automatically get an
+						email asking you to fill out the gift request. Gift requests will generally look like this,
+						you should try to use as much information given to find the perfect gift ideas. Good luck!</p>
+					<div style="padding-bottom: 8px"></div>
+					<div class="ui relaxed divided list">
+						{% include "base/giftee_profile.html" with no_close=True no_open=True %}
+						{% include "base/form_template.html" with form=expert_profile_form action_text="Submit" %}
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+	</div>
+{% endblock %}

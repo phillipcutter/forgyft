@@ -8,6 +8,14 @@ from forgyftapp.models import GifteeProfile, User, GiftIdea, GiftFeedback, Scrap
 from forgyftapp.util.django_utils import get_client_ip
 
 
+class ExpertProfileForm(forms.Form):
+	age = forms.IntegerField(label="Age", help_text="We need your approximate age to best understand what gift "
+	                                                "requests you can fulfill.")
+	interests = forms.CharField(label="Interests", help_text="What are your main interests/hobbies? Please be as "
+	                                                         "specific as possible.")
+
+
+
 class GiftFeedbackForm(ModelForm):
 
 	rating = forms.IntegerField(max_value=5, min_value=1, label="Rating", help_text="Please rate the gift ideas from "
@@ -71,7 +79,7 @@ class GifteeProfileForm(ModelForm):
 	                           required=True)
 	price_upper = forms.IntegerField(max_value=10000, label="Max Price",
 	                                 help_text="What is the most you are willing to spend on a gift? Please enter a number.", min_value=5)
-	interests = forms.CharField(help_text="What are their main interests/hobbies, please be as specific as possible?",
+	interests = forms.CharField(help_text="What are their main interests/hobbies? Please be as specific as possible.",
 	                            required=True, widget=forms.Textarea(attrs={"rows": "2"}))
 	existing_related_items = forms.CharField(label="Items They Own",
 	                                         help_text="What items do they already have that are"

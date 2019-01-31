@@ -257,11 +257,13 @@ what to get your friend or loved one."
         $('.ui.accordion')
             .accordion()
         ;
-	    $('.ui.rating')
-		    .rating({onRate: function (r) {
-		    	{#alert("#" + $(this).data("input").val())#}
-				    $("#" + $(this).data("input")).val(r)
-			    }});
+	    $(".ui.rating:not(.disabled)").rating({
+		    onRate: function (r) {
+			    $("#" + $(this).data("input")).val(r)
+		    }
+	    });
+	    $(".ui.rating.disabled").rating("disable");
+
         try {
             setup();
         } catch (e) {
