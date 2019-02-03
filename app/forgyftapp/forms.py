@@ -10,11 +10,18 @@ from forgyftapp.util.django_utils import get_client_ip
 
 class ExpertProfileForm(forms.Form):
 	age = forms.IntegerField(label="Age", help_text="We need your approximate age to best understand what gift "
-	                                                "requests you can fulfill.")
+	                                                "requests you can fulfill.", required=True)
+	gender = forms.ChoiceField(choices=models.gender.GENDER_CHOICES, help_text="What is your gender?",
+	                           required=True)
 	interests = forms.CharField(label="Interests", help_text="What are your main interests/hobbies? Please be as "
-	                                                         "specific as possible.")
+	                                                         "specific as possible.", required=True)
 
-
+	def save(self, user):
+		data = self.cleaned_data
+		user.expert_age = data.get("age")
+		user.expert_gender = data.get("gender")
+		user.expert_interests = data.get("interests")
+		user.save()
 
 class GiftFeedbackForm(ModelForm):
 

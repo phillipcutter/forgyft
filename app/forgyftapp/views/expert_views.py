@@ -35,24 +35,28 @@ def signup(request):
 def profile(request):
 	user = request.user
 	form = None
+	sample_ideas_form = None
+	sample_gift_request = None
 
 	if not user.expert_age or not user.expert_interests:
 		if request.method == "POST":
 			form = ExpertProfileForm(request.POST)
 
 			if form.is_valid():
-				age = form.cleaned_data.get("age")
-				interests = form.cleaned_data.get("interests")
-
-
-				user.expert_age = age
-				user.expert_interests = interests
-				user.save()
+				form.save(user)
 				return HttpResponseRedirect(request.path_info)
 
 		else:
 			form = ExpertProfileForm()
+	else:
+		if request.method == "POST":
+			pass
+		else:
+			pass
+
+		sample_gift_request = user.expert_sample_gift_request
+
 
 
 	return render(request, "experts/profile.html", {"page": "experts.profile", "expert_profile_form": form,
-	                                                "sample_gift_request": True})
+	                                                "sample_gift_request": sample_gift_request, "sample_ideas": sample_ideas_form})

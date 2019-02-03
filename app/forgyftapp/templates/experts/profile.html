@@ -51,7 +51,7 @@
 						you should try to use as much information given to find the perfect gift ideas. Good luck!</p>
 					<div style="padding-bottom: 8px"></div>
 					<div class="ui relaxed divided list">
-						{% include "base/giftee_profile.html" with no_close=True no_open=True %}
+						{% include "base/giftee_profile.html" with giftee_profile=sample_gift_request no_close=True no_open=True %}
 						{% include "base/form_template.html" with form=expert_profile_form action_text="Submit" %}
 					</div>
 				{% endif %}

@@ -36,6 +36,9 @@ def signup(request, expert=None):
 
 		if form.is_valid():
 			user = form.save()
+			if expert:
+				user.is_expert = True
+				user.save()
 			# user = form.save(commit=False)
 			# user.is_active = False
 			# user.save()

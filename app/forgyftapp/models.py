@@ -1,3 +1,5 @@
+import random
+
 import requests
 import tldextract as tldextract
 from django.contrib.auth.models import AbstractUser
@@ -20,6 +22,17 @@ from forgyftapp.messaging import broadcast_to_slack, debug_log
 from forgyftapp.util import django_utils
 from forgyftapp.util.django_utils import rand_slug
 from scraper.tasks import scrape_for_giftee_profile
+
+
+class gender:
+	MALE = "MALE"
+	FEMALE = "FEMALE"
+	OTHER = "OTHER"
+
+	GENDERS = ["Male", "Female", "Other"]
+	GENDER_CHOICES = ((MALE, "Male"),
+	                  (FEMALE, "Female"),
+	                  (OTHER, "Other"))
 
 
 class OnCreate:
@@ -61,32 +74,64 @@ class Slug(OnCreate, models.Model):
 		abstract = True
 
 
+
 class SampleGiftRequest(models.Model):
-	pass
+	_SAMPLE_OCCASIONS = ["Birthday", "Anniversary", "Valentine's Day", "Christmas", "Hanukkah"]
+
+	gender = models.CharField(max_length=80, choices=gender.GENDER_CHOICES)
+	age = models.IntegerField()
+	occasion = models.TextField(max_length=6000)
+	relationship = models.TextField(max_length=6000)
+	price_upper = models.IntegerField()
+	interests = models.TextField(max_length=6000)
+
+	def gender_string(self):
+		choices = {}
+
+		for choice in gender.GENDER_CHOICES:
+			choices[choice[0]] = choice[1]
+
+		return choices.get(self.gender)
+
+	@classmethod
+	def fromExpert(cls, expert):
+		if not expert.is_expert:
+			return None
+
+		sample = cls()
+		sample.gender = expert.expert_gender
+		sample.age = expert.expert_age + random.randint(-1, 1)
+		sample.occasion = random.choice(cls._SAMPLE_OCCASIONS)
+		sample.relationship = "Close Friend"
+		sample.price_upper = round(random.randint(6, 90), -1)
+		sample.interests = "Basketball, " + expert.expert_interests + ", drawing"
+		sample.save()
+		return sample
+
 
 class User(AbstractUser, Slug):
 	email_confirmed = models.BooleanField(default=False)
 
+	is_expert = models.BooleanField(default=False)
 	expert_age = models.IntegerField(null=True, blank=True)
+	expert_gender = models.CharField(max_length=80, choices=gender.GENDER_CHOICES)
 	expert_interests = models.TextField(null=True, blank=True)
-	expert_sample_gift_request = models.OneToOneField(SampleGiftRequest, on_delete = models.SET_NULL, null=True,
+	_expert_sample_gift_request = models.OneToOneField(SampleGiftRequest, on_delete = models.SET_NULL, null=True,
 	                                                  blank=True)
+
+	@property
+	def expert_sample_gift_request(self):
+		if self._expert_sample_gift_request:
+			return self._expert_sample_gift_request
+		else:
+			self._expert_sample_gift_request = SampleGiftRequest.fromExpert(self)
+			self.save()
+			return self.expert_sample_gift_request
 
 	def onCreate(self):
 		super().onCreate()
 		self.save()
 
-
-
-class gender:
-	MALE = "MALE"
-	FEMALE = "FEMALE"
-	OTHER = "OTHER"
-
-	GENDERS = ["Male", "Female", "Other"]
-	GENDER_CHOICES = ((MALE, "Male"),
-	                  (FEMALE, "Female"),
-	                  (OTHER, "Other"))
 
 
 class GiftFeedback(models.Model, OnCreate):
