@@ -4,7 +4,8 @@ from django.forms import ModelForm, inlineformset_factory
 from django import forms
 
 from forgyftapp import models
-from forgyftapp.models import GifteeProfile, User, GiftIdea, GiftFeedback, ScraperInterests
+from forgyftapp.models import GifteeProfile, User, GiftIdea, GiftFeedback, ScraperInterests, SampleGiftIdea, \
+	SampleGiftRequest
 from forgyftapp.util.django_utils import get_client_ip
 
 
@@ -60,8 +61,21 @@ class ScraperInterestsForm(ModelForm):
 		model = ScraperInterests
 		fields = ("interests",)
 
-class GiftIdeaForm(ModelForm):
+class SampleGiftIdeaForm(ModelForm):
+	idea = forms.CharField(widget=forms.Textarea(attrs={"rows": "2"}))
+	explanation = forms.CharField(widget=forms.Textarea(attrs={"rows": "4"}))
 
+	link = forms.CharField(widget=forms.Textarea(attrs={"rows": "2"}))
+	image = forms.CharField(widget=forms.Textarea(attrs={"rows": "2"}), required=False)
+
+	class Meta:
+		model = SampleGiftIdea
+		fields = ("idea", "explanation", "link", "image", "published")
+
+SampleGiftIdeaFormSet = inlineformset_factory(SampleGiftRequest, SampleGiftIdea, form=SampleGiftIdeaForm, extra=1,
+                                              can_delete=True)
+
+class GiftIdeaForm(ModelForm):
 	idea = forms.CharField(widget=forms.Textarea(attrs={"rows": "2"}))
 	explanation = forms.CharField(widget=forms.Textarea(attrs={"rows": "4"}))
 

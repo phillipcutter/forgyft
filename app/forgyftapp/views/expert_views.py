@@ -17,7 +17,7 @@ from django.views.generic import CreateView, ListView
 
 from forgyft import settings
 from forgyftapp.forms import GifteeProfileForm, GiftIdeaForm, GiftIdeaFormSet, GiftFeedbackForm, ScraperInterestsForm, \
-	UserForm, LoginForm, ExpertProfileForm
+	UserForm, LoginForm, ExpertProfileForm, SampleGiftIdeaFormSet
 from forgyftapp.messaging import broadcast_to_slack, debug_log
 from forgyftapp.models import GifteeProfile, GiftIdea
 from forgyftapp.views import auth_views
@@ -34,6 +34,9 @@ def signup(request):
 @login_required
 def profile(request):
 	user = request.user
+	if not user.is_expert:
+		user.is_expert = True
+		user.save()
 	form = None
 	sample_ideas_form = None
 	sample_gift_request = None
@@ -49,14 +52,33 @@ def profile(request):
 		else:
 			form = ExpertProfileForm()
 	else:
-		if request.method == "POST":
-			pass
-		else:
-			pass
-
 		sample_gift_request = user.expert_sample_gift_request
+
+		if request.method == "POST":
+			gift_ideas = SampleGiftIdeaFormSet(request.POST, instance=sample_gift_request, prefix="gift_ideas")
+
+			if "gift_ideas" in request.POST:
+				i = 0
+				for form in gift_ideas:
+					if len(form.changed_data) == 1 and form.changed_data[0] == "published":
+						form.changed_data = []
+					i += 1
+				if gift_ideas.is_valid():
+					gift_ideas.save()
+
+					published = False
+					for form in gift_ideas:
+						if len(gift_ideas.forms[0].cleaned_data) > 0 and gift_ideas.forms[0].cleaned_data["published"]:
+							published = True
+
+
+
+					return redirect("forgyftapp:expert_profile")
+		else:
+			gift_ideas = SampleGiftIdeaFormSet(instance=sample_gift_request, prefix="gift_ideas")
 
 
 
 	return render(request, "experts/profile.html", {"page": "experts.profile", "expert_profile_form": form,
-	                                                "sample_gift_request": sample_gift_request, "sample_ideas": sample_ideas_form})
+	                                                "sample_gift_request": sample_gift_request,
+	                                                "gift_ideas": sample_ideas_form})

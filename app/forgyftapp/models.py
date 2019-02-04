@@ -73,8 +73,6 @@ class Slug(OnCreate, models.Model):
 	class Meta:
 		abstract = True
 
-
-
 class SampleGiftRequest(models.Model):
 	_SAMPLE_OCCASIONS = ["Birthday", "Anniversary", "Valentine's Day", "Christmas", "Hanukkah"]
 
@@ -107,6 +105,20 @@ class SampleGiftRequest(models.Model):
 		sample.interests = "Basketball, " + expert.expert_interests + ", drawing"
 		sample.save()
 		return sample
+
+
+class SampleGiftIdea(models.Model, OnCreate):
+	idea = models.TextField()
+	link = models.URLField(max_length=2400)
+	image = models.URLField(max_length=2400, blank=True, null=True)
+	explanation = models.TextField()
+	published = models.BooleanField(default=False)
+	sample_giftee_profile = models.ForeignKey(SampleGiftRequest, related_name="ideas", on_delete=models.CASCADE)
+	clicks = models.IntegerField(default=0)
+
+	@property
+	def domain(self):
+		return tldextract.extract(self.link).domain
 
 
 class User(AbstractUser, Slug):
