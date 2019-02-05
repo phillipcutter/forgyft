@@ -83,6 +83,12 @@ class SampleGiftRequest(models.Model):
 	price_upper = models.IntegerField()
 	interests = models.TextField(max_length=6000)
 
+	published = models.BooleanField(default=False)
+
+	def submit(self):
+		self.published = True
+		self.save()
+
 	def gender_string(self):
 		choices = {}
 
@@ -130,6 +136,7 @@ class User(AbstractUser, Slug):
 	expert_interests = models.TextField(null=True, blank=True)
 	_expert_sample_gift_request = models.OneToOneField(SampleGiftRequest, on_delete = models.SET_NULL, null=True,
 	                                                  blank=True)
+
 
 	@property
 	def expert_sample_gift_request(self):
@@ -201,7 +208,7 @@ class GifteeProfile(Slug):
 	emailed_about_publish = models.BooleanField(default=False)
 
 	user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-	email = models.EmailField(null=True)
+	email = models.EmailField(null=True, blank=True)
 
 	feedback = models.OneToOneField(GiftFeedback, on_delete=models.SET_NULL, null=True, blank=True)
 	scraper_interests = models.OneToOneField(ScraperInterests, on_delete=models.SET_NULL, null=True, blank=True)
@@ -211,6 +218,8 @@ class GifteeProfile(Slug):
 	ip_address = models.GenericIPAddressField(null=True, default=None)
 
 	_location = models.TextField(null=True, default=None, blank=True)
+
+	expert = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name="expert_request_set")
 
 
 	def link_user(self, user):

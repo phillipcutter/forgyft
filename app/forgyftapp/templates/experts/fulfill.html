@@ -1,0 +1,84 @@
+{% extends "base/base.html" %}
+
+{% block extra_js_dependencies %}
+	<script src="{% load static %}{% static "semantic/components/rating.min.js" %}"></script>
+{% endblock %}
+
+{% block extra_dependencies %}
+	<link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/rating.min.css" %}">
+{% endblock %}
+
+{% block content %}
+	<style type="text/css">
+		textarea {
+			margin: 0;
+			-webkit-appearance: none;
+			tap-highlight-color: rgba(255, 255, 255, 0);
+			padding: .78571429em 1em;
+			background: #fff;
+			border: 1px solid rgba(34, 36, 38, .15);
+			outline: 0;
+			color: rgba(0, 0, 0, .87);
+			border-radius: .28571429rem;
+			-webkit-box-shadow: 0 0 0 0 transparent inset;
+			box-shadow: 0 0 0 0 transparent inset;
+			-webkit-transition: color .1s ease, border-color .1s ease;
+			transition: color .1s ease, border-color .1s ease;
+			font-size: 1em;
+			line-height: 1.2857;
+			resize: vertical;
+		}
+
+		a.ui.button.add {
+			margin-bottom: 12px;
+			margin-left: 12px;
+		}
+	</style>
+	<div class="ui main container">
+		<div class="ui one column doubling stackable grid">
+			<div class="sixteen wide column">
+				<div class="ui container segment" style="width: 100%;">
+						<div class="ui stackable two column grid">
+							<div class="ui column">
+								<h1>Fulfilling Ideas for {{ gift_request.occasion }} Gift</h1>
+
+							</div>
+							<div class="ui column">
+								<div class="ui one column stackable center aligned page grid">
+									<div class="column sixteen wide">
+										<a class="ui fluid center primary button" href="
+{% url "forgyftapp:expert_profile" %}">
+											<i class="left chevron icon"></i>
+
+											Back
+										</a>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+
+
+
+					<div class="ui divider"></div>
+					<p>When a use submits a gift request that matches your profile, you'll automatically get an
+						email asking you to fill out the gift request. Gift requests will generally look like this,
+						you should try to use as much information given to find the perfect gift ideas. Good
+						luck!</p>
+					<div style="padding-bottom: 8px"></div>
+					<div class="ui relaxed divided list">
+						{% include "base/giftee_profile.html" with giftee_profile=gift_request no_close=True no_open=True %}
+						<h1 style="text-align: center; padding-bottom: 4px">Enter Gift Ideas</h1>
+						<p style="text-align: center">
+							When you are finished entering gift ideas and are ready to submit them, press the
+							published toggle to publish all gift ideas.
+						</p>
+						{% include "base/gift_ideas_form.html" %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

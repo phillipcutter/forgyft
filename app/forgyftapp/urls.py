@@ -22,6 +22,8 @@ urlpatterns = [
 	url(r'^fulfill/(?P<profile>[0-9]+)/?$', basic_views.fulfill, name='fulfill'),
 	url(r'^fulfill/(?P<profile>[0-9]+)/?$', basic_views.fulfill, name='fulfill'),
 
+	url(r'^experts_profile/fulfill/(?P<slug>[A-Za-z0-9]+)/?$', expert_views.expert_fulfill, name='expert_fulfill'),
+
 	# Static pages
 	url(r'^terms/?$', basic_views.terms, name='terms'),
 	url(r'^privacy/?$', basic_views.privacy, name='privacy'),

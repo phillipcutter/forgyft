@@ -31,8 +31,51 @@ def experts_index(request):
 def signup(request):
 	return auth_views.signup(request, expert=True)
 
+
+@login_required
+def expert_fulfill(request, slug):
+	returnData = {}
+	user = request.user
+
+	gift_request = GifteeProfile.fromSlug(slug)
+
+	if request.method == "POST":
+		gift_ideas = GiftIdeaFormSet(request.POST, instance=gift_request, prefix="gift_ideas")
+
+		if "gift_ideas" in request.POST:
+			i = 0
+			for form in gift_ideas:
+				if len(form.changed_data) == 1 and form.changed_data[0] == "published":
+					form.changed_data = []
+				i += 1
+			if gift_ideas.is_valid():
+				gift_ideas.save()
+
+				published = False
+				for form in gift_ideas:
+					if len(gift_ideas.forms[0].cleaned_data) > 0 and gift_ideas.forms[0].cleaned_data["published"]:
+						published = True
+
+				if published:
+					gift_request.submit(request)
+				else:
+					gift_request.unsubmit()
+
+				return HttpResponseRedirect("forgyftapp:expert_fulfill", slug=slug)
+	else:
+		gift_ideas = GiftIdeaFormSet(instance=gift_request, prefix="gift_ideas")
+
+	returnData["gift_ideas"] = gift_ideas
+
+
+	returnData.update({"page": "experts.fulfill", "gift_request": gift_request})
+	return render(request, "experts/fulfill.html", returnData)
+
+
 @login_required
 def profile(request):
+	returnData = {}
+
 	user = request.user
 	if not user.is_expert:
 		user.is_expert = True
@@ -53,32 +96,40 @@ def profile(request):
 			form = ExpertProfileForm()
 	else:
 		sample_gift_request = user.expert_sample_gift_request
-
-		if request.method == "POST":
-			gift_ideas = SampleGiftIdeaFormSet(request.POST, instance=sample_gift_request, prefix="gift_ideas")
-
-			if "gift_ideas" in request.POST:
-				i = 0
-				for form in gift_ideas:
-					if len(form.changed_data) == 1 and form.changed_data[0] == "published":
-						form.changed_data = []
-					i += 1
-				if gift_ideas.is_valid():
-					gift_ideas.save()
-
-					published = False
-					for form in gift_ideas:
-						if len(gift_ideas.forms[0].cleaned_data) > 0 and gift_ideas.forms[0].cleaned_data["published"]:
-							published = True
+		if sample_gift_request.published:
+			returnData["display_sample_request"] = False
+			returnData["unfulfilled_requests"] = user.expert_request_set.all()
 
 
-
-					return redirect("forgyftapp:expert_profile")
 		else:
-			gift_ideas = SampleGiftIdeaFormSet(instance=sample_gift_request, prefix="gift_ideas")
+			returnData["display_sample_request"] = True
+			if request.method == "POST":
+				gift_ideas = SampleGiftIdeaFormSet(request.POST, instance=sample_gift_request, prefix="gift_ideas")
 
+				if "gift_ideas" in request.POST:
+					i = 0
+					for form in gift_ideas:
+						if len(form.changed_data) == 1 and form.changed_data[0] == "published":
+							form.changed_data = []
+						i += 1
+					if gift_ideas.is_valid():
+						gift_ideas.save()
 
+						published = False
+						for form in gift_ideas:
+							if len(gift_ideas.forms[0].cleaned_data) > 0 and gift_ideas.forms[0].cleaned_data[
+								"published"]:
+								published = True
 
-	return render(request, "experts/profile.html", {"page": "experts.profile", "expert_profile_form": form,
-	                                                "sample_gift_request": sample_gift_request,
-	                                                "gift_ideas": sample_ideas_form})
+						if published:
+							sample_gift_request.submit()
+
+						return redirect("forgyftapp:expert_profile")
+			else:
+				gift_ideas = SampleGiftIdeaFormSet(instance=sample_gift_request, prefix="gift_ideas")
+
+			returnData["gift_ideas"] = gift_ideas
+
+	returnData.update({"page": "experts.profile", "expert_profile_form": form,
+	                   "sample_gift_request": sample_gift_request})
+	return render(request, "experts/profile.html", returnData)
