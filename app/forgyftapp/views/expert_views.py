@@ -61,7 +61,7 @@ def expert_fulfill(request, slug):
 				else:
 					gift_request.unsubmit()
 
-				return HttpResponseRedirect("forgyftapp:expert_fulfill", slug=slug)
+				return HttpResponseRedirect(reverse("forgyftapp:expert_fulfill", args=(slug,)))
 	else:
 		gift_ideas = GiftIdeaFormSet(instance=gift_request, prefix="gift_ideas")
 
