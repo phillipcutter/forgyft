@@ -43,18 +43,10 @@ def expert_fulfill(request, slug):
 		gift_ideas = GiftIdeaFormSet(request.POST, instance=gift_request, prefix="gift_ideas")
 
 		if "gift_ideas" in request.POST:
-			i = 0
-			for form in gift_ideas:
-				if len(form.changed_data) == 1 and form.changed_data[0] == "published":
-					form.changed_data = []
-				i += 1
 			if gift_ideas.is_valid():
 				gift_ideas.save()
 
-				published = False
-				for form in gift_ideas:
-					if len(gift_ideas.forms[0].cleaned_data) > 0 and gift_ideas.forms[0].cleaned_data["published"]:
-						published = True
+				published = (request.POST.get("published", 'false') == 'true')
 
 				if published:
 					gift_request.submit(request)
@@ -94,32 +86,23 @@ def profile(request):
 
 		else:
 			form = ExpertProfileForm()
+
+		returnData["expert_profile_form"] = form
 	else:
 		sample_gift_request = user.expert_sample_gift_request
 		if sample_gift_request.published:
 			returnData["display_sample_request"] = False
-			returnData["unfulfilled_requests"] = user.expert_request_set.all()
-
-
+			returnData["unfulfilled_requests"] = user.expert_request_set.filter(published=False).order_by('created')
+			returnData["fulfilled_requests"] = user.expert_request_set.filter(published=True).order_by('created')
 		else:
 			returnData["display_sample_request"] = True
 			if request.method == "POST":
 				gift_ideas = SampleGiftIdeaFormSet(request.POST, instance=sample_gift_request, prefix="gift_ideas")
 
 				if "gift_ideas" in request.POST:
-					i = 0
-					for form in gift_ideas:
-						if len(form.changed_data) == 1 and form.changed_data[0] == "published":
-							form.changed_data = []
-						i += 1
 					if gift_ideas.is_valid():
 						gift_ideas.save()
-
-						published = False
-						for form in gift_ideas:
-							if len(gift_ideas.forms[0].cleaned_data) > 0 and gift_ideas.forms[0].cleaned_data[
-								"published"]:
-								published = True
+						published = (request.POST.get("published", 'false') == 'true')
 
 						if published:
 							sample_gift_request.submit()
@@ -130,6 +113,5 @@ def profile(request):
 
 			returnData["gift_ideas"] = gift_ideas
 
-	returnData.update({"page": "experts.profile", "expert_profile_form": form,
-	                   "sample_gift_request": sample_gift_request})
+	returnData.update({"page": "experts.profile", "sample_gift_request": sample_gift_request})
 	return render(request, "experts/profile.html", returnData)

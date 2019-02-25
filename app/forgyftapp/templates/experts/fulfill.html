@@ -5,6 +5,8 @@
 {% endblock %}
 
 {% block extra_dependencies %}
+	<link rel="stylesheet" type="text/css"
+	      href="{% load static %}{% static "stylesheets/responsive-semantic.min.css" %}">
 	<link rel="stylesheet" type="text/css" href="{% load static %}{% static "semantic/components/rating.min.css" %}">
 {% endblock %}
 
@@ -38,28 +40,27 @@
 		<div class="ui one column doubling stackable grid">
 			<div class="sixteen wide column">
 				<div class="ui container segment" style="width: 100%;">
-						<div class="ui stackable two column grid">
-							<div class="ui column">
-								<h1>Fulfilling Ideas for {{ gift_request.occasion }} Gift</h1>
-
+					<div class="ui stackable two column grid">
+						<div class="ui column">
+							<h1>Fulfilling Ideas for {{ gift_request.occasion }} Gift</h1>
+						</div>
+						<div class="ui column">
+							<div class="mobile hidden">
+								<a class="ui right floated center primary button"
+								   href="{% url "forgyftapp:expert_profile" %}">
+									<i class="left chevron icon"></i>
+									Back
+								</a>
 							</div>
-							<div class="ui column">
-								<div class="ui one column stackable center aligned page grid">
-									<div class="column sixteen wide">
-										<a class="ui fluid center primary button" href="
-{% url "forgyftapp:expert_profile" %}">
-											<i class="left chevron icon"></i>
-
-											Back
-										</a>
-									</div>
-								</div>
-
+							<div class="mobile only">
+								<a class="ui fluid center primary button"
+								   href="{% url "forgyftapp:expert_profile" %}">
+									<i class="left chevron icon"></i>
+									Back
+								</a>
 							</div>
 						</div>
-
-
-
+					</div>
 
 					<div class="ui divider"></div>
 					<p>When a use submits a gift request that matches your profile, you'll automatically get an
@@ -72,7 +73,7 @@
 						<h1 style="text-align: center; padding-bottom: 4px">Enter Gift Ideas</h1>
 						<p style="text-align: center">
 							When you are finished entering gift ideas and are ready to submit them, press the
-							published toggle to publish all gift ideas.
+							publish button to publish all gift ideas.
 						</p>
 						{% include "base/gift_ideas_form.html" %}
 					</div>

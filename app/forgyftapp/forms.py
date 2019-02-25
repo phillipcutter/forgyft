@@ -62,29 +62,29 @@ class ScraperInterestsForm(ModelForm):
 		fields = ("interests",)
 
 class SampleGiftIdeaForm(ModelForm):
-	idea = forms.CharField(widget=forms.Textarea(attrs={"rows": "2"}))
+	idea = forms.CharField(widget=forms.Textarea(attrs={"rows": "4"}))
 	explanation = forms.CharField(widget=forms.Textarea(attrs={"rows": "4"}))
 
-	link = forms.CharField(widget=forms.Textarea(attrs={"rows": "2"}))
-	image = forms.CharField(widget=forms.Textarea(attrs={"rows": "2"}), required=False)
+	link = forms.CharField(widget=forms.Textarea(attrs={"rows": "4"}))
+	image = forms.CharField(widget=forms.Textarea(attrs={"rows": "4"}), required=False)
 
 	class Meta:
 		model = SampleGiftIdea
-		fields = ("idea", "explanation", "link", "image", "published")
+		fields = ("idea", "explanation", "link", "image")
 
 SampleGiftIdeaFormSet = inlineformset_factory(SampleGiftRequest, SampleGiftIdea, form=SampleGiftIdeaForm, extra=1,
                                               can_delete=True)
 
 class GiftIdeaForm(ModelForm):
-	idea = forms.CharField(widget=forms.Textarea(attrs={"rows": "2"}))
+	idea = forms.CharField(widget=forms.Textarea(attrs={"rows": "4"}))
 	explanation = forms.CharField(widget=forms.Textarea(attrs={"rows": "4"}))
 
-	link = forms.CharField(widget=forms.Textarea(attrs={"rows": "2"}))
-	image = forms.CharField(widget=forms.Textarea(attrs={"rows": "2"}), required=False)
+	link = forms.CharField(widget=forms.Textarea(attrs={"rows": "4"}))
+	image = forms.CharField(widget=forms.Textarea(attrs={"rows": "4"}), required=False)
 
 	class Meta:
 		model = GiftIdea
-		fields = ("idea", "explanation", "link", "image", "published")
+		fields = ("idea", "explanation", "link", "image")
 
 GiftIdeaFormSet = inlineformset_factory(GifteeProfile, GiftIdea, form=GiftIdeaForm, extra=1, can_delete=True)
 
