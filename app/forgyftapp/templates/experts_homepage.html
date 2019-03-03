@@ -1,5 +1,13 @@
 {% extends "base/base.html" %}
 
+{% block extra_dependencies %}
+	<style type="text/css">
+		.bg1::after {
+			background-image: url("{% load static %}{% static "images/create.jpg" %}") !important;
+		}
+	</style>
+{% endblock %}
+
 {% block navbar %}
 	<div class="ui large top fixed hidden menu homepage" id="fixedMenu">
 		<div class="ui container">
@@ -40,11 +48,11 @@ font-weight: 900;
 
 					<h2 style="font-weight: 900;
 		text-shadow: 1px 0px 8px #000; color: #FFFFFF;">
-						Get that special gift for that special someone! Fill out a quick two
-						minute quiz about your friend, and we'll present you with the perfect gift ideas!
+						Do you love giving gift ideas? You would be perfect for a Forgift Expert! Just fill out a quick
+						signup with all your interests - start getting gift matches and start making money!
 					</h2>
-					<a class="ui big animated button" href="{% url "forgyftapp:gift_form" %}" tabindex="0">
-						<div class="visible content">Quiz Now</div>
+					<a class="ui big animated button" href="{% url "forgyftapp:experts_signup" %}" tabindex="0">
+						<div class="visible content">Join Now</div>
 						<div class="hidden content">
 							<i class="fas fa-arrow-right icon-5x"></i>
 						</div>
@@ -57,17 +65,42 @@ font-weight: 900;
 				<div class="ui vertical stripe segment">
 					<div class="ui middle aligned stackable grid container">
 						<div class="row">
+							<div class="ui three column grid">
+								<div class="row">
+									<div class="column">
+										<div class="ui center aligned container">
+											<i class="fas fa-pen fa-3x" style="text-align: center"></i>
+											<h2 style="padding-top: 4px">Sign up</h2>
+											<p>Click signup and fill in the quick form and tell us about yourself.</p>
+										</div>
+									</div>
+									<div class="column">
+										<div class="ui center aligned container">
+											<i class="fas fa-gift fa-3x" style="text-align: center"></i>
+											<h2 style="padding-top: 4px">Gift Request</h2>
+											<p>Fill out a test gift request to help us get to know your expertise.</p>
+										</div>
+									</div>
+									<div class="column">
+										<div class="ui center aligned container">
+											<i class="fas fa-dollar-sign fa-3x" style="text-align: center"></i>
+											<h2 style="padding-top: 4px">Start Gifting</h2>
+											<p>Start giving people amazing gift recommendations.</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
 							<div class="eight wide column">
 								<div>
+
 									<h3 class="ui header">
-										Sign Up for an Account
+										Do what you love – and get paid!
 									</h3>
 									<p>
-										Want to save your gift ideas? Just sign up for an account and they will always
-										be
-										saved
-										in
-										your account!
+										Doing what you love is the best thing in the world. But getting PAID to do it –
+										is out of this world!
 									</p>
 									<a class="ui big animated button" href="{% url "forgyftapp:experts_signup" %}"
 									   tabindex="0">
@@ -79,13 +112,11 @@ font-weight: 900;
 								</div>
 								<div style="margin-top: 32px">
 									<h3 class="ui header">
-										Take the quiz - Completely free!
+										Meet other experts!
 									</h3>
 									<p>
-										Just fill out a quick quiz about your friend and we'll give you three amazing
-										gift
-										ideas
-										completly free!
+										Once you sign up, you’ll have access to all our amazing experts! Meet new people
+										and team-up to create amazing gift ideas!
 									</p>
 								</div>
 
@@ -97,8 +128,8 @@ font-weight: 900;
 							</div>
 						</div>
 						<div class="row" style="padding-left: 14px">
-							<a class="ui big animated button" href="{% url "forgyftapp:gift_form" %}" tabindex="0">
-								<div class="visible content">Quiz Now</div>
+							<a class="ui big animated button" href="{% url "forgyftapp:experts_signup" %}" tabindex="0">
+								<div class="visible content">Join Now</div>
 								<div class="hidden content">
 									<i class="fas fa-gift icon-5x"></i>
 								</div>

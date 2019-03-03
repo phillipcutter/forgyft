@@ -25,6 +25,8 @@
 </style>
 <div>
 	<form action="" method="post" id="ideaForm">{% csrf_token %}
+		<input type="hidden" name="published"
+		       value="{{ gift_request.published|yesno:"true,false" }}">
 		<table class="ui table" style="margin-top: 0">
 			{{ gift_ideas.management_form }}
 			<!-- After management form -->
@@ -115,16 +117,23 @@
 		<div class="ui one column stackable center aligned page grid">
 			<div class="column sixteen wide">
 				<div class="ui fluid buttons">
-					<input class="ui positive button" name="gift_ideas" type="submit"
-					       value="Save"/>
+					<input class="ui primary button" name="gift_ideas" type="submit"
+					       value="Save" id="save"/>
 					<div class="or"></div>
-					<a class="ui negative button">Back</a>
+					{% if gift_request.published %}
+						<a class="ui positive button" id="publish">Unpublish</a>
+					{% else %}
+						<a class="ui positive button" id="publish">Publish</a>
+					{% endif %}
+
 
 				</div>
-{#				<a class="ui button" href="{{ giftee_profile.admin_url }}"#}
-{#				   style="margin-top: 8px">#}
-{#					View on Admin Site#}
-{#				</a>#}
+				{% if show_admin %}
+					<a class="ui button" href="{{ giftee_profile.admin_url }}"
+					   style="margin-top: 8px">
+						View on Admin Site
+					</a>
+				{% endif %}
 			</div>
 		</div>
 
@@ -148,41 +157,15 @@
 			{#$('#myForm tbody tr').formset({#}
 			addText: 'Add an Idea',
 			addCssClass: 'primary ui button add add-row',
-			deleteText: 'Remove',
-			deleteCssClass: 'ui fluid danger button delete-row',
-			added: function (row) {
-				setup();
-			},
+			deleteText: '<i class="trash alternate icon"></i>',
+			deleteCssClass: 'ui icon button delete-row',
 			prefix: '{{ gift_ideas.prefix }}'
 		});
-	});
 
-	function setup() {
-		{#alert("setup")#}
-		checkboxes = $('.ui.toggle.checkbox');
-		changing = false;
-		checkboxes.checkbox("setting", "onChange", function () {
-			if (changing) {
-				return null;
-			}
-			if (!checked) {
-				checkboxes.checkbox("check");
-				checked = true
-			} else {
-				checkboxes.checkbox("uncheck");
-				checked = false
-			}
+		$("#publish").click(function() {
+			published = ($("input[name='published']").val() === "true");
+			$("input[name='published']").val(!published);
+			$("input#save").click();
 		});
-		if (checked) {
-			changing = true;
-			checkboxes.checkbox("check");
-			changing = false;
-		} else {
-			changing = true;
-			checkboxes.checkbox("uncheck");
-			changing = false;
-		}
-	}
-
-
+	});
 </script>

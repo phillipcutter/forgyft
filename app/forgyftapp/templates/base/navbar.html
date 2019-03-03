@@ -49,7 +49,11 @@
 			<div class="dropdown menu" style="margin-top: 0">
 				<a class="item" href="{% url "forgyftapp:logout" %}">Sign out</a>
 				<a class="item" href="{% url "forgyftapp:request" %}">My gift requests</a>
-				<a class="item" href="{% url "forgyftapp:expert_profile" %}">My Expert Profile</a>
+				{% if request.user.is_expert %}
+					<a class="item" href="{% url "forgyftapp:expert_profile" %}">My Expert Profile</a>
+				{% else %}
+					<a class="item" href="{% url "forgyftapp:expert_profile" %}">Become an Expert</a>
+				{% endif %}
 			</div>
 		</div>
 	{% endif %}

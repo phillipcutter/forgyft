@@ -151,18 +151,10 @@ def fulfill(request, profile=None):
 			scrape_form = ScraperInterestsForm(request.POST, instance=giftee_profile.feedback, prefix="scrape_form")
 
 			if 'gift_ideas' in request.POST:
-				i = 0
-				for form in gift_ideas:
-					if len(form.changed_data) == 1 and form.changed_data[0] == "published":
-						form.changed_data = []
-					i += 1
 				if gift_ideas.is_valid():
 					gift_ideas.save()
 
-					published = False
-					for form in gift_ideas:
-						if len(gift_ideas.forms[0].cleaned_data) > 0 and gift_ideas.forms[0].cleaned_data["published"]:
-							published = True
+					published = (request.POST.get("published", 'false') == 'true')
 
 					if published:
 						giftee_profile.submit(request)
@@ -190,7 +182,7 @@ def fulfill(request, profile=None):
 		else:
 			scraper_status = "FORM"
 
-		published = giftee_profile.published or (hasattr(gift_ideas.forms[0], "cleaned_data") and gift_ideas.forms[0].cleaned_data["published"])
+		published = giftee_profile.published
 
 		return render(request, "fulfill.html", {
 			"giftee_profile": giftee_profile,

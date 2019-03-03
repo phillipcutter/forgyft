@@ -1,0 +1,17 @@
+<div class="item">
+	<div class="content">
+		<a class="header">{{ request.occasion }} Gift</a>
+		<div class="meta">
+			<span class="cinema">{{ request.interests }}</span>
+		</div>
+		<div class="description">
+			<p></p>
+		</div>
+		<div class="extra">
+			<div class="ui label">Max Price ${{ request.price_upper }}</div>
+			<a class="ui right floated primary button" href="
+	{% url "forgyftapp:expert_fulfill" slug=request.slug %}">
+				{{ item_text }}
+				<i class="right chevron icon"></i>
+			</a></div>
+	</div>
