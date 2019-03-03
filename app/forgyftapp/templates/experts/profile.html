@@ -11,77 +11,46 @@
 {% block content %}
 	<div class="ui main container">
 		<div class="ui two column doubling stackable grid">
-<<<<<<< HEAD
-		<div class="four wide column">
-			<div class="ui container segment" style="width: 100%">
-				{% if user.first_name %}
-					<h1>{{ user.first_name }} {{ user.last_name }}</h1>
-				{% else %}
-					<h1>{{ user.email }}</h1>
-				{% endif %}
-				<p>Joined {{ user.date_joined|date:"M d, Y" }}</p>
-			</div>
-			<div class="ui container" style="width: 100%">
-				<div class="ui card">
-					<div class="content">
-						<div class="header">
-							Average Gift Rating
-						</div>
-						<div class="meta">
-							<span class="date">
-								{{ user.rating_amount }} User Ratings
-							</span>
-						</div>
-					</div>
-					<div class="extra content">
-						<div class="ui rating disabled" data-rating="{{ user.average_rating }}"
-						     data-max-rating="5"></div>
-					</div>
-=======
 			<div class="four wide column">
 				<div class="ui container segment" style="width: 100%">
-					<h1>{{ user.first_name }} {{ user.last_name }}</h1>
+					{% if user.first_name %}
+						<h1>{{ user.first_name|capfirst }} {{ user.last_name|capfirst }}</h1>
+					{% else %}
+						<h1>{{ user.email }}</h1>
+					{% endif %}
 					<p>Joined {{ user.date_joined|date:"M d, Y" }}</p>
->>>>>>> 4e7c8a7b239fb2244830d4920ef7d7261bbe04a0
 				</div>
-				{#			<div class="ui container" style="width: 100%">#}
-				{#				<div class="ui card">#}
-				{#					<div class="content">#}
-				{#						<div class="header">#}
-				{#							Average Gift Rating#}
-				{#						</div>#}
-				{#						<div class="meta">#}
-				{#							<span class="date">#}
-				{#								{{ user.rating_amount }} User Ratings#}
-				{#							</span>#}
-				{#						</div>#}
-				{#					</div>#}
-				{#					<div class="extra content">#}
-				{#						<div class="ui rating disabled" data-rating="{{ user.average_rating }}"#}
-				{#						     data-max-rating="5"></div>#}
-				{#					</div>#}
-				{#				</div>#}
-				{#			</div>#}
+{#				<div class="ui container" style="width: 100%">#}
+{#					<div class="ui card">#}
+{#						<div class="content">#}
+{#							<div class="header">#}
+{#								Average Gift Rating#}
+{#							</div>#}
+{#							<div class="meta">#}
+{#							<span class="date">#}
+{#								{{ user.rating_amount }} User Ratings#}
+{#							</span>#}
+{#							</div>#}
+{#						</div>#}
+{#						<div class="extra content">#}
+{#							<div class="ui rating disabled" data-rating="{{ user.average_rating }}"#}
+{#							     data-max-rating="5"></div>#}
+{#						</div>#}
+{#					</div>#}
+{#				</div>#}
 			</div>
 			<div class="twelve wide column">
-				{% if expert_profile_form %}
-<<<<<<< HEAD
-					<h1>Hey{% if user.first_name %} {{ user.first_name }}{% endif %}, let's finish setting up your expert
-						account</h1>
-					<div class="ui divider"></div>
-					<div class="ui relaxed divided list">
-						{% include "base/form_template.html" with form=expert_profile_form action_text="Submit" %}
-=======
-					<div class="ui container segment" style="width: 100%;">
-						<h1>Hey {{ user.first_name }}, let's finish setting up your expert account</h1>
+				<div class="ui container segment" style="width: 100%;">
+					{% if expert_profile_form %}
+						<h1>Hey{% if user.first_name %} {{ user.first_name|capfirst }}{% endif %}, let's finish setting
+							up your
+							expert
+							account</h1>
 						<div class="ui divider"></div>
 						<div class="ui relaxed divided list">
 							{% include "base/form_template.html" with form=expert_profile_form action_text="Submit" %}
 						</div>
->>>>>>> 4e7c8a7b239fb2244830d4920ef7d7261bbe04a0
-					</div>
-				{% elif display_sample_request %}
-					<div class="ui container segment" style="width: 100%;">
+					{% elif display_sample_request %}
 						<h1>Last step, let's try filling out a sample gift request</h1>
 						<div class="ui divider"></div>
 						<p>When a use submits a gift request that matches your profile, you'll automatically get an
@@ -91,55 +60,51 @@
 						<div style="padding-bottom: 8px"></div>
 						<div class="ui relaxed divided list">
 							{% include "base/giftee_profile.html" with giftee_profile=sample_gift_request no_close=True no_open=True %}
+							{% include "base/form_template.html" with form=expert_profile_form action_text="Submit" %}
+							<div class="ui divider"></div>
 							<h1 style="text-align: center; padding-bottom: 4px">Enter Gift Ideas</h1>
 							<p>
 								When you are finished entering gift ideas and are ready to submit them, press the
-								publish button to save and publish all gift ideas.
+								published toggle to publish all gift ideas.
 							</p>
 							{% include "base/gift_ideas_form.html" %}
 						</div>
-					</div>
-				{% else %}
-					<div class="ui container segment" style="width: 100%">
+					{% else %}
 						<h1>Unfulfilled Gift Requests</h1>
 						<p>This is your main feed where all unfulfilled gift requests will show up, check here to see an
-							overview of your gift requests and work on fulfilling them. You'll also be notified via
-							email
-							when you are assigned a gift request to fulfill.
+							overview of your gift requests and work on fulfilling them.
 						</p>
 						<div class="ui divider"></div>
 						{% if unfulfilled_requests %}
 							<div class="ui divided items">
-								{% for request in unfulfilled_requests %}
-									{% include "base/request_card.html" with item_text="Fulfill Request" %}
-								{% endfor %}
+							{% for request in unfulfilled_requests %}
+								<div class="item">
+								<div class="content">
+									<a class="header">{{ request.occasion }} Gift</a>
+									<div class="meta">
+										<span class="cinema">{{ request.interests }}</span>
+									</div>
+									<div class="description">
+										<p></p>
+									</div>
+									<div class="extra">
+										<div class="ui label">${{ request.price_upper }}</div>
+										<a class="ui right floated primary button" href="
+{% url "forgyftapp:expert_fulfill" slug=request.slug %}">
+											Fulfill Request
+											<i class="right chevron icon"></i>
+										</a></div>
 								</div>
-							</div>
+							{% endfor %}
+						</div>
 						{% else %}
 							<div class="ui disabled header" style="text-align: center; margin-top: 16px; margin-bottom:
 						2px">
 								You currently have no unfulfilled gift requests, great job!
 							</div>
 						{% endif %}
-					</div>
-
-					{% if fulfilled_requests %}
-						<div class="ui container segment" style="width: 100%;">
-						<h1>Fulfilled Gift Requests</h1>
-						<p>This is your main feed where all unfulfilled gift requests will show up, check here to see an
-							overview of your gift requests and work on fulfilling them. You'll also be notified via
-							email
-							when you are assigned a gift request to fulfill.
-						</p>
-						<div class="ui divider"></div>
-						<div class="ui divided items">
-							{% for request in fulfilled_requests %}
-								{% include "base/request_card.html" with item_text="View Request" %}
-							{% endfor %}
-							</div>
-						</div>
 					{% endif %}
-				{% endif %}
+					</div>
 				</div>
 			</div>
 		</div>
