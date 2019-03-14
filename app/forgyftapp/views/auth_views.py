@@ -21,9 +21,11 @@ from forgyftapp.messaging import debug_log
 from forgyftapp.tokens import account_activation_token
 
 from forgyftapp.models import User
-
+from django.shortcuts import redirect
 
 def signup(request, expert=None):
+	if request.user.is_authenticated:
+		return redirect("forgyftapp:index")
 	redirectUrl = request.GET.get("next", None)
 	email = None
 	if redirectUrl and len(redirectUrl.split("?")) > 1 and redirectUrl.split("?")[1].startswith("email"):
@@ -77,6 +79,8 @@ def logout_view(request):
 	return HttpResponseRedirect(reverse("forgyftapp:index"))
 
 def login_view(request):
+	if request.user.is_authenticated:
+		return redirect("forgyftapp:index")
 	redirectUrl = request.GET.get("next", None)
 
 	if request.method == "POST":
