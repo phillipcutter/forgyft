@@ -49,6 +49,8 @@ def expert_fulfill(request, slug):
 				published = (request.POST.get("published", 'false') == 'true')
 
 				if published:
+					if len(gift_request.ideas.all()) <= 0:
+						return HttpResponseRedirect(reverse("forgyftapp:expert_fulfill", args=(slug,)))
 					gift_request.submit(request)
 				else:
 					gift_request.unsubmit()
@@ -105,6 +107,8 @@ def profile(request):
 						published = (request.POST.get("published", 'false') == 'true')
 
 						if published:
+							if len(sample_gift_request.ideas.all()) <= 0:
+								return redirect("forgyftapp:expert_profile")
 							sample_gift_request.submit()
 
 						return redirect("forgyftapp:expert_profile")
