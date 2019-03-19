@@ -184,7 +184,8 @@ Hey,
 
 You have a new gift request to fill out. Just sign in on www.forgift.org and head to the fulfill tab or just head over to {gift_request_link} to fulfill your new gift request. Please try to fill it out within the next 24 hours with at least three gift ideas.      
 
-Thanks for participating in the Forgift Expert Program,
+Thanks for participating in the Forgift Expert Program!
+
 The Forgift Team
 """,
 						"Forgift <support@forgift.org>",
