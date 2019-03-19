@@ -175,25 +175,26 @@ def fulfill(request, profile=None):
 				if expert_assign.is_valid():
 					expert_user = expert_assign.clean()["expert"]
 
-					gift_request_link = request.build_absolute_uri(reverse("forgyftapp:expert_fulfill",
-					                                                       kwargs={"slug": giftee_profile.slug}))
-					send_mail(
-						"You Have A New Gift Request",
-f"""
-Hey,
+					if expert_user != giftee_profile.expert:
+						gift_request_link = request.build_absolute_uri(reverse("forgyftapp:expert_fulfill",
+						                                                       kwargs={"slug": giftee_profile.slug}))
+						send_mail(
+							"You Have A New Gift Request",
+	f"""
+	Hey,
+	
+	You have a new gift request to fill out. Just sign in on www.forgift.org and head to the fulfill tab or just head over to {gift_request_link} to fulfill your new gift request. Please try to fill it out within the next 24 hours with at least three gift ideas.      
+	
+	Thanks for participating in the Forgift Expert Program!
+	
+	The Forgift Team
+	""",
+							"Forgift <support@forgift.org>",
+							[expert_user.email]
+						)
 
-You have a new gift request to fill out. Just sign in on www.forgift.org and head to the fulfill tab or just head over to {gift_request_link} to fulfill your new gift request. Please try to fill it out within the next 24 hours with at least three gift ideas.      
-
-Thanks for participating in the Forgift Expert Program!
-
-The Forgift Team
-""",
-						"Forgift <support@forgift.org>",
-						[expert_user.email]
-					)
-
-					giftee_profile.expert = expert_user
-					giftee_profile.save()
+						giftee_profile.expert = expert_user
+						giftee_profile.save()
 					return redirect("forgyftapp:fulfill", profile=giftee_profile.pk)
 		else:
 			gift_ideas = GiftIdeaFormSet(instance=giftee_profile, prefix="gift_ideas")
