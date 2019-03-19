@@ -39,6 +39,9 @@ def expert_fulfill(request, slug):
 
 	gift_request = GifteeProfile.fromSlug(slug)
 
+	if user != gift_request.expert:
+		return redirect("forgyftapp:index")
+
 	if request.method == "POST":
 		gift_ideas = GiftIdeaFormSet(request.POST, instance=gift_request, prefix="gift_ideas")
 
