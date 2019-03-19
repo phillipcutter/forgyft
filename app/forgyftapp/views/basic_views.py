@@ -180,17 +180,29 @@ def fulfill(request, profile=None):
 						                                                       kwargs={"slug": giftee_profile.slug}))
 						send_mail(
 							"You Have A New Gift Request",
-	f"""
-	Hey,
-	
-	You have a new gift request to fill out. Just sign in on www.forgift.org and head to the fulfill tab or just head over to {gift_request_link} to fulfill your new gift request. Please try to fill it out within the next 24 hours with at least three gift ideas.      
-	
-	Thanks for participating in the Forgift Expert Program!
-	
-	The Forgift Team
-	""",
+f"""
+Hey,
+
+You have a new gift request to fill out. Just sign in on www.forgift.org and head to the fulfill tab or just head over to {gift_request_link} to fulfill your new gift request. Please try to fill it out within the next 24 hours with at least three gift ideas.      
+
+Thanks for participating in the Forgift Expert Program!
+
+The Forgift Team
+""",
 							"Forgift <support@forgift.org>",
-							[expert_user.email]
+							[expert_user.email],
+							html_message=
+f"""
+<p>
+Hey,<br><br>
+
+You have a new gift request to fill out. Just sign in on www.forgift.org and head to the fulfill tab or just head over to {gift_request_link} to fulfill your new gift request. Please try to fill it out within the next 24 hours with at least three gift ideas.<br><br>    
+
+Thanks for participating in the Forgift Expert Program!<br><br>
+
+The Forgift Team<br>
+</p>
+"""
 						)
 
 						giftee_profile.expert = expert_user
