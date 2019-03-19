@@ -5,16 +5,14 @@ settings.ANYMAIL["SENDGRID_API_KEY"] = "***REMOVED***"
 
 recipients = [
     "mrfleap@gmail.com", 
-    "sanu.sohum@gmail.com"
+    "sanu.sohum@gmail.com",
     "onekinkstar@gmail.com",
     "maconlisha@gmail.com",
     "Knatashamilliken@gmail.com",
     "nanugen19@gmail.com",
-    "Moos2me@yahoo.com ",
     "mirandarider15@gmail.com",
     "Tanisha054jones@gmail.com",
     "melmanlee@hotmail.com",
-    "ilove2rt@aol.com",
     "Mandinka79@aol.com",
     "renovickx@gmail.com",
     "kevinlvsravens@yahoo.com",
@@ -29,11 +27,8 @@ recipients = [
     "Cstanfld79@gmail.com",
     "Kral.gabby@gmail.com",
     "Nancy.lewter@gmail.com",
-    "cristina.sanmartin@outlook.com",
     "jessicaonken18@gmail.com",
-    "dwilson2999@yahoo.com",
     "Pinkgirlicious776@aol.com",
-    "pixydust0529@gmail.com",
     "RachelleWesterman@hotmail.com",
     "tiffanylovespurple19@gmail.com",
     "gvikash293@gmail.com",
@@ -44,7 +39,6 @@ recipients = [
     "beckybrit1985@gmail.com",
     "phoebesnider5768@Gmail.com",
     "Kaylamalley24@yahoo.com",
-    "benandcrissy@gmail.com",
     "kendall1987.ka@gmail.com",
     "saundersannem@gmail.com",
     "lgodbout23@gmail.com",
@@ -58,62 +52,110 @@ recipients = [
     "Twistedhippy7@gmail.com",
     "02mom1216@gmail.com",
     "escatellol92@gmail.com",
-    "Ohkayso20@gmail.com",
-    "Detroitsteed@gmail.com ",
     "m.j171@yahoo.com",
-    "yahyaabdikadir2000@gmail.com",
     "energyrohan@gmail.com",
     "adityarao@gmail.com"
     ]
 
 # recipients = [
 #     "mrfleap@gmail.com", 
-#     "sanu.sohum@gmail.com"
+#     # "sanu.sohum@gmail.com"
 # ]
 
 for recipient in recipients:
 
+    # send_mail(
+    #     'Forgift Expert Program Opportunity',
+    # """
+    # Hi!
+
+    # Thanks for expressing interest in Forgift’s Expert Program!
+
+    # We are currently looking for gift “experts” or individuals who are creative and
+    # love giving gift recommendations as a hobby. Additionally, if you have
+    # knowledge about one particular interest such as: Sports, Art, Animals, Video
+    # Games, Music, Makeup, Clothes, Reading, and Movies; we would love to work
+    # with you!
+
+    # So, what do experts do?
+
+    # An expert is someone who helps fulfill gift requests for Forgift! A gift request consists of the gift receiver’s age, gender, occasion, and interests along with the gift givers budget and relationship to the gift receiver. We love creativity so everything unique and outside the box is perfect! To become an expert, all you have to do is go to www.forgift.org/experts, signup, and fill out an example gift request. It as easy as that!
+    # Reply to this email if you have any comments or questions!
+
+    # Thanks – The Forgift Team
+    # """,
+    #     'support@forgift.org',
+    #     [recipient],
+    #     fail_silently=False,
+    #     html_message="""
+    # <p>
+    # Hi!
+
+    # Thanks for expressing interest in Forgift’s Expert Program!<br><br>
+
+    # We are currently looking for gift “experts” or individuals who are creative and
+    # love giving gift recommendations as a hobby. Additionally, if you have
+    # knowledge about one particular interest such as: Sports, Art, Animals, Video
+    # Games, Music, Makeup, Clothes, Reading, and Movies; we would love to work
+    # with you!<br><br>
+
+    # So, what do experts do?<br><br>
+
+    # An expert is someone who helps fulfill gift requests for Forgift! A gift request consists of the gift receiver’s age, gender, occasion, and interests along with the gift givers budget and relationship to the gift receiver. We love creativity so everything unique and outside the box is perfect! To become an expert, all you have to do is go to www.forgift.org/experts, signup, and fill out an example gift request. It as easy as that!
+    # Reply to this email if you have any comments or questions!<br><br>
+
+    # Thanks – The Forgift Team
+    # </p>
+    # """
+    # )
+
     send_mail(
-        'Forgift Expert Program Opportunity',
-    """
-    Hi!
+        'Follow-up on Forgift\'s Expert Program',
+        """
+Hi!
+Forgift is following up on its expert program.
 
-    Thanks for expressing interest in Forgift’s Expert Program!
+We are currently looking for gift “experts” or people who are creative and love giving gift recommendations as a hobby.
 
-    We are currently looking for gift “experts” or individuals who are creative and
-    love giving gift recommendations as a hobby. Additionally, if you have
-    knowledge about one particular interest such as: Sports, Art, Animals, Video
-    Games, Music, Makeup, Clothes, Reading, and Movies; we would love to work
-    with you!
+What Experts do:
 
-    So, what do experts do?
+An expert is someone who helps fulfill gift requests for Forgift! A gift request
+will consist of the persons
+Age, Gender, Relationship, Occasion, Price,
+Interests, Items they own, extra information, and the receiver’s name. We
+love creativity so everything unique and outside the box is perfect!
+To get started, all you have to do is go to
+www.forgift.org/experts
+, signup,
+and fill out an example gift request and voila you’re an expert!
 
-    An expert is someone who helps fulfill gift requests for Forgift! A gift request consists of the gift receiver’s age, gender, occasion, and interests along with the gift givers budget and relationship to the gift receiver. We love creativity so everything unique and outside the box is perfect! To become an expert, all you have to do is go to www.forgift.org/experts, signup, and fill out an example gift request. It as easy as that!
-    Reply to this email if you have any comments or questions!
+Reply to this email if you have any comments or questions!
+Thanks – The Forgift Team
+""",
+    "Forgift <support@forgift.org>",
+    [recipient],
+    fail_silently=False,
+    html_message="""
+<p>
+Hi!<br>
+Forgift is following up on its expert program.<br><br>
 
-    Thanks – The Forgift Team
-    """,
-        'support@forgift.org',
-        [recipient],
-        fail_silently=False,
-        html_message="""
-    <p>
-    Hi!
+We are currently looking for gift “experts” or people who are creative and love giving gift recommendations as a hobby.<br><br>
 
-    Thanks for expressing interest in Forgift’s Expert Program!<br><br>
+What Experts do:<br><br>
 
-    We are currently looking for gift “experts” or individuals who are creative and
-    love giving gift recommendations as a hobby. Additionally, if you have
-    knowledge about one particular interest such as: Sports, Art, Animals, Video
-    Games, Music, Makeup, Clothes, Reading, and Movies; we would love to work
-    with you!<br><br>
+An expert is someone who helps fulfill gift requests for Forgift! A gift request
+will consist of the persons
+Age, Gender, Relationship, Occasion, Price,
+Interests, Items they own, extra information, and the receiver’s name. We
+love creativity so everything unique and outside the box is perfect!
+To get started, all you have to do is go to
+www.forgift.org/experts
+, signup,
+and fill out an example gift request and voila you’re an expert!<br><br>
 
-    So, what do experts do?<br><br>
-
-    An expert is someone who helps fulfill gift requests for Forgift! A gift request consists of the gift receiver’s age, gender, occasion, and interests along with the gift givers budget and relationship to the gift receiver. We love creativity so everything unique and outside the box is perfect! To become an expert, all you have to do is go to www.forgift.org/experts, signup, and fill out an example gift request. It as easy as that!
-    Reply to this email if you have any comments or questions!<br><br>
-
-    Thanks – The Forgift Team
-    </p>
-    """
+Reply to this email if you have any comments or questions!<br>
+Thanks – The Forgift Team
+</p>
+"""
     )

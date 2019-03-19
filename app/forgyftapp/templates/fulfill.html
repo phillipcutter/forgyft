@@ -6,6 +6,10 @@
 				for {{ giftee_profile.name }} by {{ giftee_profile.user.first_name }}'s request</h1>
 			{% include "base/gift_ideas_form.html" with show_admin=True gift_request=giftee_profile %}
 			<div style="padding-top: 16px"></div>
+			<div class="ui container segment">
+{#				{{ expert_assign }}#}
+				{% include "base/form_template.html" with action_text="Assign" form=expert_assign %}
+			</div>
 			<div class="ui styled accordion fluid">
 				<div class="active title">
 					<i class="dropdown icon"></i>

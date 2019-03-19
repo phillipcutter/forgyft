@@ -3,6 +3,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import redirect_to_login
+from django.core.mail import send_mail
 from django.db import transaction
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404, resolve_url
@@ -14,9 +15,10 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView, ListView
 
 from forgyft import settings
-from forgyftapp.forms import GifteeProfileForm, GiftIdeaForm, GiftIdeaFormSet, GiftFeedbackForm, ScraperInterestsForm
+from forgyftapp.forms import GifteeProfileForm, GiftIdeaForm, GiftIdeaFormSet, GiftFeedbackForm, ScraperInterestsForm, \
+	ExpertAssignForm
 from forgyftapp.messaging import broadcast_to_slack
-from forgyftapp.models import GifteeProfile, GiftIdea
+from forgyftapp.models import GifteeProfile, GiftIdea, User
 from scraper.tasks import add
 
 
@@ -149,6 +151,7 @@ def fulfill(request, profile=None):
 		if request.method == "POST":
 			gift_ideas = GiftIdeaFormSet(request.POST, instance=giftee_profile, prefix="gift_ideas")
 			scrape_form = ScraperInterestsForm(request.POST, instance=giftee_profile.feedback, prefix="scrape_form")
+			expert_assign = ExpertAssignForm(request.POST, prefix="expert_assign")
 
 			if 'gift_ideas' in request.POST:
 				if gift_ideas.is_valid():
@@ -168,9 +171,34 @@ def fulfill(request, profile=None):
 					giftee_profile.scraper_interests = scraper_interests
 					giftee_profile.save()
 					return redirect("forgyftapp:fulfill", profile=giftee_profile.pk)
+			elif 'expert_assign' in request.POST:
+				if expert_assign.is_valid():
+					expert_user = expert_assign.clean()["expert"]
+
+					gift_request_link = request.build_absolute_uri(reverse("forgyftapp:expert_fulfill",
+					                                                       kwargs={"slug": giftee_profile.slug}))
+					send_mail(
+						"You Have A New Gift Request",
+f"""
+Hey,
+
+You have a new gift request to fill out. Just sign in on www.forgift.org and head to the fulfill tab or just head over to {gift_request_link} to fulfill your new gift request. Please try to fill it out within the next 24 hours with at least three gift ideas.      
+
+Thanks for participating in the Forgift Expert Program,
+The Forgift Team
+""",
+						"Forgift <support@forgift.org>",
+						[expert_user.email]
+					)
+
+					giftee_profile.expert = expert_user
+					giftee_profile.save()
+					return redirect("forgyftapp:fulfill", profile=giftee_profile.pk)
 		else:
 			gift_ideas = GiftIdeaFormSet(instance=giftee_profile, prefix="gift_ideas")
 			scrape_form = ScraperInterestsForm(instance=giftee_profile.feedback, prefix="scrape_form")
+			expert_assign = ExpertAssignForm(prefix="expert_assign", initial={'expert': giftee_profile.expert})
+
 
 		scraper_status = ""
 		scraper_results = None
@@ -192,6 +220,7 @@ def fulfill(request, profile=None):
 			"scrape_form": scrape_form,
 			"scraper_status": scraper_status,
 			"scraper_results": scraper_results,
+			"expert_assign": expert_assign
 		})
 	else:
 		giftee_profiles_unpublished = GifteeProfile.objects.filter(published=False).order_by('created')

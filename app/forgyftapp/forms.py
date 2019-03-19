@@ -9,6 +9,20 @@ from forgyftapp.models import GifteeProfile, User, GiftIdea, GiftFeedback, Scrap
 from forgyftapp.util.django_utils import get_client_ip
 
 
+class ExpertQueryset():
+	@staticmethod
+	def all():
+		print("Getting experts")
+		experts = []
+		for expert in User.objects.filter(is_expert=True).all():
+			if expert.expert_setup_finished:
+				experts.append(expert)
+		return experts
+
+class ExpertAssignForm(forms.Form):
+	expert = forms.ModelChoiceField(queryset=User.objects.filter(is_expert=True,
+	                                                             _expert_sample_gift_request__published=True))
+
 class ExpertProfileForm(forms.Form):
 	age = forms.IntegerField(label="Age", help_text="We need your approximate age to best understand what gift "
 	                                                "requests you can fulfill.", required=True)

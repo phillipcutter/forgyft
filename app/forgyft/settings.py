@@ -92,8 +92,8 @@ else:
 	CELERY_BROKER_URL = "amqp://guest:guest@localhost:5672//"
 
 
-# if DEBUG:
-# 	EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+if DEBUG:
+	EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ABSOLUTE_URI = "https://www.forgift.org"
 

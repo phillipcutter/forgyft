@@ -137,6 +137,13 @@ class User(AbstractUser, Slug):
 	_expert_sample_gift_request = models.OneToOneField(SampleGiftRequest, on_delete = models.SET_NULL, null=True,
 	                                                  blank=True)
 
+	@property
+	def expert_setup_finished(self):
+		return self.is_expert and self.expert_sample_gift_request.published
+
+	@classmethod
+	def expert_list(cls):
+		return cls.objects.filter(is_expert=True)
 
 	@property
 	def expert_sample_gift_request(self):
