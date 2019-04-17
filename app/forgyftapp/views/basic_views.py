@@ -164,7 +164,7 @@ def gift_form(request):
 					            "every fan.",
 					giftee_profile=giftee_profile
 				)
-				giftee_profile.submit()
+				giftee_profile.submit(request)
 
 			return redirect("forgyftapp:gift_form_submitted")
 	else:
