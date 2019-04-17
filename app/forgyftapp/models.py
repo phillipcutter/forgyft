@@ -209,6 +209,7 @@ class GifteeProfile(Slug):
 	existing_related_items = models.TextField(max_length=6000)
 	extra_info = models.TextField(max_length=6000, blank=True, null=True)
 	occasion = models.TextField(max_length=6000)
+	personality_traits = models.TextField(max_length=6000, blank=True, null=True)
 
 	published = models.BooleanField(default=False)
 

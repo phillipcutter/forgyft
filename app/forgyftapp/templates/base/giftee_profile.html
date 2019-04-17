@@ -35,6 +35,12 @@
 	<div class="ui dividing sub header">Extra Info</div>
 	<p>{{ giftee_profile.extra_info }}</p>
 {% endif %}
+
+{% if giftee_profile.personality_traits %}
+	<div class="ui dividing sub header">Personality Traits</div>
+	<p>{{ giftee_profile.personality_traits }}</p>
+{% endif %}
+
 {% if not no_close %}
   </div>
 </div>

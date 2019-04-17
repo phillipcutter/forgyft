@@ -116,12 +116,15 @@ class GifteeProfileForm(ModelForm):
 	                                 help_text="What is the most you are willing to spend on a gift? Please enter a number.", min_value=5)
 	interests = forms.CharField(help_text="What are their main interests/hobbies? Please be as specific as possible.",
 	                            required=True, widget=forms.Textarea(attrs={"rows": "2"}))
-	existing_related_items = forms.CharField(label="Items They Own",
-	                                         help_text="What items do they already have that are"
-	                                                   " related to their main interests/hobbies?")
-	extra_info = forms.CharField(label="Special Information", help_text="Is there any other information you would like "
-	                                                                    "us to know while finding the perfect gift?",
-	                             required=False)
+	# existing_related_items = forms.CharField(label="Items They Own",
+	#                                          help_text="What items do they already have that are"
+	#                                                    " related to their main interests/hobbies?")
+	# extra_info = forms.CharField(label="Special Information", help_text="Is there any other information you would like "
+	#                                                                     "us to know while finding the perfect gift?",
+	#                              required=False)
+	personality_traits = forms.CharField(label="Personality Traits",
+	                                         help_text="What are some of their personality traits?", required=False)
+
 
 	def __init__(self, *args, **kwargs):
 		account = kwargs.pop("account", False)
@@ -150,7 +153,9 @@ class GifteeProfileForm(ModelForm):
 	class Meta:
 		model = GifteeProfile
 		fields = ("age", "gender", "relationship", "occasion", "price_upper",
-		          "interests", "existing_related_items", "extra_info", "name")
+	          "interests", "personality_traits", "name")
+		# fields = ("age", "gender", "relationship", "occasion", "price_upper",
+		#           "interests", "existing_related_items", "extra_info", "name")
 
 class LoginForm(ModelForm):
 	password = forms.CharField(label="Password", widget=forms.PasswordInput, min_length=6)
