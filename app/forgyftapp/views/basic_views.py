@@ -133,7 +133,39 @@ def gift_form(request):
 	if request.method == "POST":
 		form = GifteeProfileForm(request.POST, account=has_account)
 		if form.is_valid():
-			form.save(user=request.user, request=request)
+			giftee_profile = form.save(user=request.user, request=request)
+
+			if has_account and request.user.demo_fulfill:
+				GiftIdea.objects.create(
+					idea="Professional Art Set",
+					link="https://www.amazon.com/Professional-Art-Set-Sketching-included/dp/B07813KBTY/ref=sr_1_3"
+					     "?keywords=Drawing+pack&qid=1555462975&s=gateway&sr=8-3",
+					image="https://images-na.ssl-images-amazon.com/images/I/9181ZPSMDAL._SL1500_.jpg",
+					explanation="Start sketching as soon as you open the drawing kit! Complete drawing supplies "
+					            "set with a sketch pad, art pencils, kneaded eraser, pencil sharpeners, and more.",
+					giftee_profile=giftee_profile
+                ),
+				GiftIdea.objects.create(
+					idea="Wilson Federer Adult Tennis Racket",
+					link="https://www.amazon.com/Wilson-WRT30400U3-Federer-Tennis-Racquet/dp/B01AWLHRSO/ref"
+					     "=sr_1_3?keywords=Tennis+racket&qid=1555463059&s=gateway&sr=8-3",
+					image="https://images-na.ssl-images-amazon.com/images/I/71urDuVkQ5L._SL1477_.jpg",
+					explanation="Wilson continues its heritage of takedown frames with the Federer Adult Racket. "
+					            "Made with the consumer in mind, its 11.5oz (strung) weight makes it capable of hitting with power and depth from anywhere on the court. ",
+					giftee_profile=giftee_profile
+				),
+				GiftIdea.objects.create(
+					idea="Dwight Schrute Bobblehead",
+					link="https://www.amazon.com/Zzzen-Dwight-Schrute-Bobblehead-bobblehead/dp/B07MDNW4G5/ref"
+					     "=sr_1_1?keywords=the+office+bobblehead&qid=1555463137&s=gateway&sr=8-10",
+					image="https://images-na.ssl-images-amazon.com/images/I/516zhQ16-kL._SL1000_.jpg",
+					explanation="A Dwight Schrute Bobblehead is the perfect gift for anyone who loves the office! "
+					            "The iconic statue of the crucial character will be immediately recognizable by "
+					            "every fan.",
+					giftee_profile=giftee_profile
+				)
+				giftee_profile.submit()
+
 			return redirect("forgyftapp:gift_form_submitted")
 	else:
 		form = GifteeProfileForm(account=has_account)
