@@ -166,7 +166,7 @@ class GiftFeedback(models.Model, OnCreate):
 
 	rating = models.IntegerField()
 	feedback = models.TextField(max_length=6000)
-	bought = models.BooleanField()
+	bought = models.BooleanField(null=True, blank=True)
 
 	def onCreate(self):
 		super().onCreate()

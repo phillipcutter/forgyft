@@ -45,7 +45,7 @@ class GiftFeedbackForm(ModelForm):
 	                            required=True)
 	feedback = forms.CharField(help_text="What did you think of the gift ideas, how can we improve in the future?",
 	                           required=True, widget=forms.Textarea(attrs={"rows": "4"}))
-	bought = forms.BooleanField(label="Bought", help_text="Did you buy one of the gift ideas?", required=False)
+	# bought = forms.BooleanField(label="Bought", help_text="Did you buy one of the gift ideas?", required=False)
 
 	def save(self, giftee_profile=None, commit=True):
 		if not giftee_profile:
@@ -58,7 +58,7 @@ class GiftFeedbackForm(ModelForm):
 
 	class Meta:
 		model = GiftFeedback
-		fields = ("rating", "feedback", "bought")
+		fields = ("rating", "feedback")
 
 class ScraperInterestsForm(ModelForm):
 
@@ -122,8 +122,8 @@ class GifteeProfileForm(ModelForm):
 	# extra_info = forms.CharField(label="Special Information", help_text="Is there any other information you would like "
 	#                                                                     "us to know while finding the perfect gift?",
 	#                              required=False)
-	personality_traits = forms.CharField(label="Personality Traits",
-	                                         help_text="What are some of their personality traits?", required=False)
+	# personality_traits = forms.CharField(label="Personality Traits",
+	#                                          help_text="What are some of their personality traits?", required=False)
 
 
 	def __init__(self, *args, **kwargs):
@@ -153,7 +153,7 @@ class GifteeProfileForm(ModelForm):
 	class Meta:
 		model = GifteeProfile
 		fields = ("age", "gender", "relationship", "occasion", "price_upper",
-	          "interests", "personality_traits", "name")
+	          "interests", "name")
 		# fields = ("age", "gender", "relationship", "occasion", "price_upper",
 		#           "interests", "existing_related_items", "extra_info", "name")
 

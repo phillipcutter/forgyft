@@ -103,8 +103,10 @@
 						<p>{{ giftee_profile.feedback.rating }}/5</p>
 						<div class="ui dividing sub header">Feedback</div>
 						<p>{{ giftee_profile.feedback.feedback }}</p>
-						<div class="ui dividing sub header">Purchased</div>
-						<p>{{ giftee_profile.feedback.bought|yesno:"Purchased,Not Purchased" }}</p>
+						{% if giftee_profile.feedback.bought %}
+							<div class="ui dividing sub header">Purchased</div>
+							<p>{{ giftee_profile.feedback.bought|yesno:"Purchased,Not Purchased" }}</p>
+						{% endif %}
 					</div>
 				</div>
 			{% endif %}
