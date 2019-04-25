@@ -122,8 +122,8 @@ class GifteeProfileForm(ModelForm):
 	# extra_info = forms.CharField(label="Special Information", help_text="Is there any other information you would like "
 	#                                                                     "us to know while finding the perfect gift?",
 	#                              required=False)
-	# personality_traits = forms.CharField(label="Personality Traits",
-	#                                          help_text="What are some of their personality traits?", required=False)
+	personality_traits = forms.CharField(label="Personality Traits",
+	                                         help_text="What are some of their personality traits?", required=False)
 
 
 	def __init__(self, *args, **kwargs):
@@ -153,7 +153,7 @@ class GifteeProfileForm(ModelForm):
 	class Meta:
 		model = GifteeProfile
 		fields = ("age", "gender", "relationship", "occasion", "price_upper",
-	          "interests", "name")
+	          "interests", "personality_traits", "name")
 		# fields = ("age", "gender", "relationship", "occasion", "price_upper",
 		#           "interests", "existing_related_items", "extra_info", "name")
 
