@@ -137,31 +137,24 @@ def gift_form(request):
 
 			if has_account and request.user.demo_fulfill:
 				GiftIdea.objects.create(
-					idea="Professional Art Set",
-					link="https://www.amazon.com/Professional-Art-Set-Sketching-included/dp/B07813KBTY/ref=sr_1_3"
-					     "?keywords=Drawing+pack&qid=1555462975&s=gateway&sr=8-3",
-					image="https://images-na.ssl-images-amazon.com/images/I/9181ZPSMDAL._SL1500_.jpg",
-					explanation="Start sketching as soon as you open the drawing kit! Complete drawing supplies "
-					            "set with a sketch pad, art pencils, kneaded eraser, pencil sharpeners, and more.",
+					idea="3D Origami Starter Kit",
+					link="https://www.etsy.com/listing/654042850/3d-origami-triangle-starter-pack-with-7?ga_order=most_relevant&ga_search_type=all&ga_view_type=gallery&ga_search_query=origami&ref=sr_gallery-3-16&organic_search_click=1&sca=1",
+					image="https://i.etsystatic.com/16367318/r/il/8c18d2/1720551816/il_794xN.1720551816_jjhe.jpg",
+					explanation="This gift is PERFECT for your friend Sarah! This 3D origami kit factors in her love for Origami while elevating it to a new experience. This kit has over 1000 pieces in it so she'll be able to make hundreds of origami just from this box!",
 					giftee_profile=giftee_profile
                 ),
 				GiftIdea.objects.create(
-					idea="Wilson Federer Adult Tennis Racket",
-					link="https://www.amazon.com/Wilson-WRT30400U3-Federer-Tennis-Racquet/dp/B01AWLHRSO/ref"
-					     "=sr_1_3?keywords=Tennis+racket&qid=1555463059&s=gateway&sr=8-3",
-					image="https://images-na.ssl-images-amazon.com/images/I/71urDuVkQ5L._SL1477_.jpg",
-					explanation="Wilson continues its heritage of takedown frames with the Federer Adult Racket. "
-					            "Made with the consumer in mind, its 11.5oz (strung) weight makes it capable of hitting with power and depth from anywhere on the court. ",
+					idea="Scrapbook + Bowtie",
+					link="https://www.amazon.com/gp/product/B075F5T61Z/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=forgift06-20&creative=9325&linkCode=as2&creativeASIN=B075F5T61Z&linkId=266a774d8f271fbf69301743b85392a7",
+					image="https://images-na.ssl-images-amazon.com/images/I/71sGq4PojJL._SL1500_.jpg",
+					explanation="This is SUPER creative because it’ll show Sarah that Phillip cares about her so much! He can put hundreds of different pictures of them together, and it’ll make Sarah feel really special and loved.",
 					giftee_profile=giftee_profile
 				),
 				GiftIdea.objects.create(
-					idea="Dwight Schrute Bobblehead",
-					link="https://www.amazon.com/Zzzen-Dwight-Schrute-Bobblehead-bobblehead/dp/B07MDNW4G5/ref"
-					     "=sr_1_1?keywords=the+office+bobblehead&qid=1555463137&s=gateway&sr=8-10",
-					image="https://images-na.ssl-images-amazon.com/images/I/516zhQ16-kL._SL1000_.jpg",
-					explanation="A Dwight Schrute Bobblehead is the perfect gift for anyone who loves the office! "
-					            "The iconic statue of the crucial character will be immediately recognizable by "
-					            "every fan.",
+					idea="Personalized + Quirky Makeup Bag",
+					link="https://www.etsy.com/listing/521080058/best-friend-gift-makeup-case?ga_order=most_relevant&ga_search_type=all&ga_view_type=gallery&ga_search_query=personalized+gifts&ref=sr_gallery-2-14&organic_search_click=1&frs=1",
+					image="https://i.etsystatic.com/9389727/r/il/f33fda/1296251237/il_794xN.1296251237_f3la.jpg",
+					explanation="This gift is the BEST for Sarah! It's perfect for her interest in makeup because she'll be able to store all her makeup in that bag! And we'll personalize the gift just for Sarah!",
 					giftee_profile=giftee_profile
 				)
 				giftee_profile.submit(request)
