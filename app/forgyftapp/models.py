@@ -132,7 +132,7 @@ class User(AbstractUser, Slug):
 
 	is_expert = models.BooleanField(default=False)
 	expert_age = models.IntegerField(null=True, blank=True)
-	expert_gender = models.CharField(max_length=80, choices=gender.GENDER_CHOICES)
+	expert_gender = models.CharField(max_length=80, choices=gender.GENDER_CHOICES, null=True, blank=True)
 	expert_interests = models.TextField(null=True, blank=True)
 	_expert_sample_gift_request = models.OneToOneField(SampleGiftRequest, on_delete = models.SET_NULL, null=True,
 	                                                  blank=True)

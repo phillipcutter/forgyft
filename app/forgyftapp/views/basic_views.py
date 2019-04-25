@@ -162,7 +162,20 @@ def gift_form(request):
 
 			return redirect("forgyftapp:gift_form_submitted")
 	else:
-		form = GifteeProfileForm(account=has_account)
+		if has_account and request.user.demo_fulfill:
+			form = GifteeProfileForm({
+				"name": "Sarah",
+				"gender": "FEMALE",
+				"age": 15,
+				"relationship": "Close Friend",
+				"occasion": "Birthday",
+				"price_upper": 50,
+				"interests": "Makeup, Flowers, Origami",
+				"personality_traits": "Creative, Outgoing, Sweet"
+
+			}, account=has_account)
+		else:
+			form = GifteeProfileForm(account=has_account)
 
 	return render(request, "gift_form.html", {"form": form, "page": "quiz"})
 

@@ -1,4 +1,4 @@
-Django==2.1.2
+Django==2.2
 social-auth-app-django==2.1.0
 django-anymail==4.3
 gunicorn==19.9.0
