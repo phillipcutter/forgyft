@@ -147,7 +147,8 @@ def gift_form(request):
 					idea="Scrapbook + Bowtie",
 					link="https://www.amazon.com/gp/product/B075F5T61Z/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=forgift06-20&creative=9325&linkCode=as2&creativeASIN=B075F5T61Z&linkId=266a774d8f271fbf69301743b85392a7",
 					image="https://images-na.ssl-images-amazon.com/images/I/71sGq4PojJL._SL1500_.jpg",
-					explanation="This is SUPER creative because it’ll show Sarah that Phillip cares about her so much! He can put hundreds of different pictures of them together, and it’ll make Sarah feel really special and loved.",
+					explanation="This is SUPER creative because it’ll show Sarah that you care about her so much! He "
+					            "can put hundreds of different pictures of them together, and it’ll make Sarah feel really special and loved.",
 					giftee_profile=giftee_profile
 				),
 				GiftIdea.objects.create(
